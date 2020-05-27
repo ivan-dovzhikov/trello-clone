@@ -1,7 +1,41 @@
-body {
+@import './utils';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 150%;
+  color: get-color(light);
+}
+
+a,
+button,
+textarea,
+:visited {
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#app {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #28313b no-repeat linear-gradient(135deg, #28313b, #485461 74%);
 }
