@@ -1,0 +1,17 @@
+$colors: (
+  accent: #0083b7,
+  light: #f0f0f0,
+  dark: #000000,
+  danger: #de1f23,
+);
+
+@function get-color($key, $opacity: 1, $lighten: 0) {
+  $color: map-get($colors, $key);
+  $color: rgba($color, $opacity);
+  $color: call(
+    if($lighten >= 0, get-function('lighten'), get-function('darken')),
+    $color,
+    abs($lighten)
+  );
+  @return $color;
+}
