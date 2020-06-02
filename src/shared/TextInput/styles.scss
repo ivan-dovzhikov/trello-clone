@@ -1,0 +1,68 @@
+@import '../../utils';
+$padding: 0.25em 0.5em;
+
+.textarea-container {
+  position: relative;
+
+  .textarea {
+    display: block;
+    resize: none;
+    width: 100%;
+    padding: $padding;
+    border: none;
+    background-color: get-color(dark, 0.3);
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus,
+    &:hover {
+      & ~ .underline {
+        width: 100%;
+      }
+    }
+
+    &.invalid ~ .underline {
+      background-color: get-color(danger);
+    }
+
+    &.disabled {
+      border-color: transparent;
+      background-color: transparent;
+
+      & .textarea {
+        cursor: pointer;
+      }
+
+      & ~ .underline {
+        display: none;
+      }
+    }
+  }
+}
+
+.label {
+  display: block;
+}
+
+.label-value {
+  position: absolute;
+  display: block;
+  padding: $padding;
+  color: get-color(light, 0.7);
+
+  &.hide {
+    display: none;
+  }
+}
+
+.underline {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: get-color(accent);
+  transition: width 0.2s ease, background-color 0.4s ease;
+  pointer-events: none;
+}
