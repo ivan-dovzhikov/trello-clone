@@ -1,0 +1,21 @@
+.field-editor {
+  $min-height: 1.5em;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  .textarea-container {
+    min-height: $min-height;
+    width: 100%;
+  }
+
+  .buttons {
+    display: flex;
+
+    .button {
+      height: $min-height;
+      width: $min-height;
+    }
+  }
+}
