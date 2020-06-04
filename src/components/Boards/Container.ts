@@ -1,25 +1,30 @@
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
-import { BoardsState } from './types';
+import { Board } from './types';
 import { AppState } from 'utils';
 import { createBoard, deleteBoard, changeBoard } from './actions';
-import List from './Presentational';
+import BoardsNavigation from './Presentational';
 
-const mapState: MapStateToProps<BoardsState, {}, AppState> = ({ boards }) =>
-  boards;
+const mapState: MapStateToProps<{ boards: Board[] }, {}, AppState> = ({
+  boards,
+}) => {
+  return { boards: boards.allIds.map(id => boards.byId[id]) };
+};
 
 interface DispatchProps {
   onCreate: typeof createBoard;
   onDelete: typeof deleteBoard;
-  onChange: typeof changeBoard;
+  onEdit: typeof changeBoard;
 }
 const mapDispatch: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
   onCreate: title => dispatch(createBoard(title)),
   onDelete: boardId => dispatch(deleteBoard(boardId)),
-  onChange: (boardId, title) => dispatch(changeBoard(boardId, title)),
+  onEdit: (boardId, title) => dispatch(changeBoard(boardId, title)),
 });
 
-export const connector = connect<BoardsState, DispatchProps, {}, AppState>(
-  mapState,
-  mapDispatch
-);
-export default connector(List);
+export const connector = connect<
+  { boards: Board[] },
+  DispatchProps,
+  {},
+  AppState
+>(mapState, mapDispatch);
+export default connector(BoardsNavigation);

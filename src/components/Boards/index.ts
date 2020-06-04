@@ -1,2 +1,2 @@
-import BoardsList from './Container';
-export default BoardsList;
+import BoardsNavigation from './Container';
+export default BoardsNavigation;
