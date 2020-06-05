@@ -17,10 +17,12 @@ describe('Test board reducer', () => {
       [boardIds[0]]: {
         id: boardIds[0],
         title: 'board #1',
+        lists: [],
       },
       [boardIds[1]]: {
         id: boardIds[1],
         title: 'board #2',
+        lists: [],
       },
     },
     allIds: [boardIds[0], boardIds[1]],
@@ -37,7 +39,7 @@ describe('Test board reducer', () => {
       },
     };
     const expected = cloneDeep(testingState);
-    expected.byId[boardId] = { id: boardId, title };
+    expected.byId[boardId] = { id: boardId, title, lists: [] };
     expected.allIds.push(boardId);
 
     const actual = boardReducer(testingState, action);

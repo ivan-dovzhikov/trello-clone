@@ -37,6 +37,7 @@ export type BoardActions =
 export interface Board {
   id: string;
   title: string;
+  lists: string[];
 }
 
 export interface BoardsState {
