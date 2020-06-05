@@ -24,10 +24,9 @@ export const deleteList = (
 });
 
 export const changeList = (
-  boardId: string,
   listId: string,
   title: string
 ): ChangeListAction => ({
   type: CHANGE_LIST,
-  payload: { boardId, listId, title },
+  payload: { listId, title },
 });

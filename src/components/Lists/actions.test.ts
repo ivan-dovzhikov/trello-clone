@@ -35,16 +35,15 @@ describe('board action creators', () => {
   });
 
   it(`should create ${CHANGE_LIST} action`, () => {
-    const boardId = 'some-board-id';
     const listId = 'some-list-id';
     const title = 'New title';
 
     const expected: ChangeListAction = {
       type: CHANGE_LIST,
-      payload: { boardId, listId, title },
+      payload: { listId, title },
     };
 
-    const actual = changeList(boardId, listId, title);
+    const actual = changeList(listId, title);
     expect(actual).toEqual(expected);
   });
 });

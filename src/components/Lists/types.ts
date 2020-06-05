@@ -25,7 +25,6 @@ export interface DeleteListAction {
 export interface ChangeListAction {
   type: typeof CHANGE_LIST;
   payload: {
-    boardId: string;
     listId: string;
     title: string;
   };

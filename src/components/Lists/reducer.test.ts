@@ -75,7 +75,7 @@ describe('Test list reducer', () => {
     const listId = listIds[1];
     const action: ChangeListAction = {
       type: CHANGE_LIST,
-      payload: { boardId, listId, title },
+      payload: { listId, title },
     };
 
     const expected = cloneDeep(testingState);
