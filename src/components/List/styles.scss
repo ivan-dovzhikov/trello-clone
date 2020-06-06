@@ -1,0 +1,20 @@
+@import '../../utils/';
+
+.list {
+  min-height: 87px;
+  width: 350px;
+  margin: 0 1rem;
+  padding: 1rem;
+  background-color: get-color(dark, 0.2);
+}
+
+button.list {
+  width: auto;
+  border: 0;
+  transition: 0.2s ease;
+
+  &:focus {
+    outline: none;
+    @include accent-shadow();
+  }
+}
