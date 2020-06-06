@@ -38,6 +38,7 @@ export type ListActions =
 export interface List {
   id: string;
   title: string;
+  cards: string[];
 }
 
 export interface ListsState {
