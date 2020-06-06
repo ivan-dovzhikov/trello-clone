@@ -12,10 +12,12 @@ describe('Test presentational boards navigation component', () => {
         {
           id: '1',
           title: 'first board',
+          lists: [],
         },
         {
           id: '2',
           title: 'second board',
+          lists: [],
         },
       ],
       onDelete: jest.fn(),
