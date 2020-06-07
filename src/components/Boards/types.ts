@@ -1,4 +1,7 @@
-// Constants
+import { ThunkAction } from 'redux-thunk';
+import { AppState } from 'utils';
+import { ActionCreator } from 'redux';
+
 export enum BoardActionTypes {
   CREATE_BOARD = 'CREATE_BOARD',
   DELETE_BOARD = 'DELETE_BOARD',
@@ -13,13 +16,17 @@ export interface CreateBoardAction {
     title: string;
   };
 }
-
 export interface DeleteBoardAction {
   type: typeof DELETE_BOARD;
   payload: {
     boardId: string;
+    listsIds: string[];
   };
 }
+
+export type DeleteBoardThunk = ActionCreator<
+  ThunkAction<DeleteBoardAction, AppState, void, DeleteBoardAction>
+>;
 
 export interface ChangeBoardAction {
   type: typeof CHANGE_BOARD;

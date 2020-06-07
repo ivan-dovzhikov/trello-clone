@@ -5,6 +5,7 @@ import {
   ChangeBoardAction,
 } from './types';
 import { createBoard, deleteBoard, changeBoard } from './actions';
+import { v4 } from 'uuid';
 const { CREATE_BOARD, DELETE_BOARD, CHANGE_BOARD } = BoardActionTypes;
 
 describe('board action creators', () => {
@@ -20,16 +21,28 @@ describe('board action creators', () => {
     expect(actual).toEqual(expected);
   });
 
-  it(`should create ${DELETE_BOARD} action`, () => {
-    const boardId = 'some-id';
+  it(`should create ${DELETE_BOARD} thunk`, () => {
+    const boardId = v4();
+    const listsIds = [v4(), v4()];
+    const dispatch = jest.fn();
 
     const expected: DeleteBoardAction = {
       type: DELETE_BOARD,
-      payload: { boardId },
+      payload: { boardId, listsIds },
     };
 
-    const actual = deleteBoard(boardId);
-    expect(actual).toEqual(expected);
+    deleteBoard(boardId)(dispatch, () => ({
+      boards: {
+        byId: {
+          [boardId]: { id: boardId, title: '', lists: listsIds },
+        },
+        allIds: [boardId],
+      },
+      lists: {},
+      cards: {},
+    }));
+
+    expect(dispatch).toBeCalledWith(expected);
   });
 
   it(`should create ${CHANGE_BOARD} action`, () => {
