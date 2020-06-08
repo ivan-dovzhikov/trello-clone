@@ -69,7 +69,7 @@ describe('Test list reducer', () => {
     const listId = testingListsIds[0];
     const action: DeleteListAction = {
       type: DELETE_LIST,
-      payload: { boardId, listId },
+      payload: { boardId, listId, cardsIds: [] },
     };
 
     const expected = cloneDeep(testingState);
@@ -157,7 +157,7 @@ describe('Test list reducer', () => {
     const listsIds = [testingListsIds[0], testingListsIds[1]];
     const action: DeleteBoardAction = {
       type: DELETE_BOARD,
-      payload: { boardId, listsIds },
+      payload: { boardId, listsIds, cardsIds: [] },
     };
 
     const expected = cloneDeep(testingState);

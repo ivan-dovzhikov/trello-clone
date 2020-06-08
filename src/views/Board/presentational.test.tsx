@@ -10,9 +10,9 @@ describe('Test presentational board page component', () => {
     const props = {
       boardExist,
       lists: [
-        { id: '1', title: 'first list' },
-        { id: '2', title: 'second list' },
-        { id: '3', title: 'third list' },
+        { id: '1', title: 'first list', cards: [] },
+        { id: '2', title: 'second list', cards: [] },
+        { id: '3', title: 'third list', cards: [] },
       ],
       onCreate: jest.fn(),
       onDelete: jest.fn(),

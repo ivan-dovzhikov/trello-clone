@@ -2,8 +2,8 @@ import { v4 } from 'uuid';
 import {
   ListActionTypes,
   CreateListAction,
-  DeleteListAction,
   ChangeListAction,
+  DeleteListThunk,
 } from './types';
 const { CREATE_LIST, DELETE_LIST, CHANGE_LIST } = ListActionTypes;
 
@@ -15,13 +15,22 @@ export const createList = (
   payload: { boardId, listId: v4(), title },
 });
 
-export const deleteList = (
+export const deleteList: DeleteListThunk = (
   boardId: string,
   listId: string
-): DeleteListAction => ({
-  type: DELETE_LIST,
-  payload: { boardId, listId },
-});
+) => (dispatch, getState) => {
+  const { lists } = getState();
+  const cardsIds = lists[listId].cards;
+
+  return dispatch({
+    type: DELETE_LIST,
+    payload: {
+      boardId,
+      listId,
+      cardsIds,
+    },
+  });
+};
 
 export const changeList = (
   listId: string,
