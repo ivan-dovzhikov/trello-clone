@@ -3,6 +3,9 @@ import BoardPage from './Presentational';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
+import { createStore, combineReducers } from 'redux';
+import { AppState } from 'utils';
+import { Provider } from 'react-redux';
 
 describe('Test presentational board page component', () => {
   const setup = (boardExist: boolean) => {
@@ -19,9 +22,19 @@ describe('Test presentational board page component', () => {
       onEdit: jest.fn(),
     };
 
+    const store = createStore<AppState, any, void, void>(
+      combineReducers({
+        cards: (state: any = {}) => state,
+        lists: (state: any = {}) => state,
+        boards: (state: any = {}) => state,
+      })
+    );
+
     render(
       <Router history={history}>
-        <BoardPage {...props} />
+        <Provider store={store}>
+          <BoardPage {...props} />
+        </Provider>
       </Router>
     );
 
@@ -31,7 +44,7 @@ describe('Test presentational board page component', () => {
   describe('board exist', () => {
     it('should render list', () => {
       setup(true);
-      expect(screen.getByRole('list')).toBeInTheDocument();
+      expect(screen.getAllByRole('list')[0]).toBeInTheDocument();
     });
 
     it('should not render 404 message', () => {

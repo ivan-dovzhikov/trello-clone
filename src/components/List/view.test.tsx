@@ -4,20 +4,34 @@ import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import { AppState } from 'utils';
 
 describe('Test board link', () => {
   const setup = () => {
     const history = createMemoryHistory();
+
     const props = {
-      id: '1234-5678',
+      id: '1',
       title: 'list title',
       onDelete: jest.fn(),
       onEdit: jest.fn(),
     };
 
+    const store = createStore<AppState, any, void, void>(
+      combineReducers({
+        cards: (state: any = {}) => state,
+        lists: (state: any = {}) => state,
+        boards: (state: any = {}) => state,
+      })
+    );
+
     render(
       <Router history={history}>
-        <ListView {...props} />
+        <Provider store={store}>
+          <ListView {...props} />
+        </Provider>
       </Router>
     );
 
@@ -56,17 +70,23 @@ describe('Test board link', () => {
     it('should call onDelete', () => {
       const { id, onDelete, getDeleteButton } = setup();
       userEvent.click(getDeleteButton());
-      expect(onDelete).toBeCalled();
+      expect(onDelete).toBeCalledWith(id);
     });
 
     it('should call onEdit with typed value', () => {
-      const { onEdit, getEditButton, getTextarea, getSubmitButton } = setup();
+      const {
+        id,
+        onEdit,
+        getEditButton,
+        getTextarea,
+        getSubmitButton,
+      } = setup();
 
       userEvent.click(getEditButton());
       const typedValue = 'shh...';
       userEvent.type(getTextarea(), typedValue);
       userEvent.click(getSubmitButton());
-      expect(onEdit).toBeCalledWith(typedValue);
+      expect(onEdit).toBeCalledWith(id, typedValue);
     });
   });
 });

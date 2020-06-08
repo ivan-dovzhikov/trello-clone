@@ -15,14 +15,13 @@ const Lists: FC<ListsProps> = ({ lists, onCreate, onDelete, onEdit }) => {
   return (
     <ul className="lists">
       {lists.map(({ id, title }) => {
-        const handleDelete = () => onDelete(id);
-        const handleEdit = (newTitle: string) => onEdit(id, newTitle);
         return (
           <li key={id}>
             <ListView
+              id={id}
               title={title}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
+              onEdit={onEdit}
+              onDelete={onDelete}
             />
           </li>
         );
