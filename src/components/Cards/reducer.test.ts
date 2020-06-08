@@ -8,19 +8,25 @@ import {
 import { v4 } from 'uuid';
 import cardReducer from './reducer';
 import { cloneDeep } from 'utils';
+import { ListActionTypes, DeleteListAction } from 'components/Lists/types';
 const { CREATE_CARD, DELETE_CARD, CHANGE_CARD } = CardActionTypes;
+const { DELETE_LIST } = ListActionTypes;
 
 describe('Test card reducer', () => {
   const listId = "doesn't matter";
-  const cardIds: string[] = [v4(), v4()];
+  const testingCardsIds: string[] = [v4(), v4(), v4()];
   const testingState: CardsState = {
-    [cardIds[0]]: {
-      id: cardIds[0],
+    [testingCardsIds[0]]: {
+      id: testingCardsIds[0],
       content: 'card #1',
     },
-    [cardIds[1]]: {
-      id: cardIds[1],
+    [testingCardsIds[1]]: {
+      id: testingCardsIds[1],
       content: 'card #2',
+    },
+    [testingCardsIds[2]]: {
+      id: testingCardsIds[3],
+      content: 'card #3',
     },
   };
 
@@ -50,7 +56,7 @@ describe('Test card reducer', () => {
   });
 
   describe('Delete card action', () => {
-    const cardId = cardIds[0];
+    const cardId = testingCardsIds[0];
     const action: DeleteCardAction = {
       type: DELETE_CARD,
       payload: { listId, cardId },
@@ -72,7 +78,7 @@ describe('Test card reducer', () => {
 
   describe('Change card action', () => {
     const content = 'New content';
-    const cardId = cardIds[1];
+    const cardId = testingCardsIds[1];
     const action: ChangeCardAction = {
       type: CHANGE_CARD,
       payload: { cardId, content },
@@ -84,6 +90,30 @@ describe('Test card reducer', () => {
     const actual = cardReducer(testingState, action);
 
     it('should change card', () => {
+      expect(actual).toEqual(expected);
+    });
+
+    it('should not mutate state', () => {
+      expect(actual).not.toBe(testingState);
+    });
+  });
+
+  describe('Delete list cards', () => {
+    const boardId = v4();
+    const listId = v4();
+    const cardsIds = [testingCardsIds[0], testingCardsIds[1]];
+    const action: DeleteListAction = {
+      type: DELETE_LIST,
+      payload: { boardId, listId, cardsIds },
+    };
+
+    const expected = cloneDeep(testingState);
+    delete expected[cardsIds[0]];
+    delete expected[cardsIds[1]];
+
+    const actual = cardReducer(testingState, action);
+
+    it('should remove given cards ids', () => {
       expect(actual).toEqual(expected);
     });
 
