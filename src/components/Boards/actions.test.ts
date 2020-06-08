@@ -24,11 +24,12 @@ describe('board action creators', () => {
   it(`should create ${DELETE_BOARD} thunk`, () => {
     const boardId = v4();
     const listsIds = [v4(), v4()];
+    const cardsIds = [v4()];
     const dispatch = jest.fn();
 
     const expected: DeleteBoardAction = {
       type: DELETE_BOARD,
-      payload: { boardId, listsIds },
+      payload: { boardId, listsIds, cardsIds },
     };
 
     deleteBoard(boardId)(dispatch, () => ({
@@ -38,8 +39,11 @@ describe('board action creators', () => {
         },
         allIds: [boardId],
       },
-      lists: {},
-      cards: {},
+      lists: {
+        [listsIds[0]]: { id: listsIds[0], title: '', cards: [cardsIds[0]] },
+        [listsIds[1]]: { id: listsIds[1], title: '', cards: [] },
+      },
+      cards: { [cardsIds[0]]: { id: cardsIds[0], content: '' } },
     }));
 
     expect(dispatch).toBeCalledWith(expected);

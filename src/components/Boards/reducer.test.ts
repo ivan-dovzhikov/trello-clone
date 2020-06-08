@@ -57,7 +57,7 @@ describe('Test board reducer', () => {
     const boardId = boardIds[0];
     const action: DeleteBoardAction = {
       type: DELETE_BOARD,
-      payload: { boardId },
+      payload: { boardId, listsIds: [], cardsIds: [] },
     };
 
     const expected = cloneDeep(testingState);

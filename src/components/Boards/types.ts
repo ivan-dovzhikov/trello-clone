@@ -21,6 +21,7 @@ export interface DeleteBoardAction {
   payload: {
     boardId: string;
     listsIds: string[];
+    cardsIds: string[];
   };
 }
 

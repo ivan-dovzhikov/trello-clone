@@ -19,9 +19,17 @@ export const deleteBoard: DeleteBoardThunk = (boardId: string) => (
   dispatch,
   getState
 ) => {
+  const { boards, lists } = getState();
+  const listsIds = boards.byId[boardId].lists;
+  const cardsIds = listsIds.map(id => lists[id].cards).flat();
+
   return dispatch({
     type: DELETE_BOARD,
-    payload: { boardId, listsIds: getState().boards.byId[boardId].lists },
+    payload: {
+      boardId,
+      listsIds,
+      cardsIds,
+    },
   });
 };
 
