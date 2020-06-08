@@ -8,15 +8,17 @@ import {
   ChangeCardAction,
 } from './types';
 import { ListActionTypes, DeleteListAction } from 'components/Lists/types';
+import { BoardActionTypes, DeleteBoardAction } from 'components/Boards/types';
 const { CREATE_CARD, DELETE_CARD, CHANGE_CARD } = CardActionTypes;
 const { DELETE_LIST } = ListActionTypes;
+const { DELETE_BOARD } = BoardActionTypes;
 
 const initialState: CardsState = {};
 
-const listReducer: Reducer<CardsState, CardActions | DeleteListAction> = (
-  state = initialState,
-  { type, payload }
-): CardsState => {
+const listReducer: Reducer<
+  CardsState,
+  CardActions | DeleteListAction | DeleteBoardAction
+> = (state = initialState, { type, payload }): CardsState => {
   switch (type) {
     case CREATE_CARD: {
       const { cardId, content } = payload as CreateCardAction['payload'];
@@ -48,6 +50,19 @@ const listReducer: Reducer<CardsState, CardActions | DeleteListAction> = (
 
     case DELETE_LIST: {
       const { cardsIds } = payload as DeleteListAction['payload'];
+
+      const newState: CardsState = {};
+      for (const id in state) {
+        if (state.hasOwnProperty(id) && !cardsIds.includes(id)) {
+          newState[id] = state[id];
+        }
+      }
+
+      return newState;
+    }
+
+    case DELETE_BOARD: {
+      const { cardsIds } = payload as DeleteBoardAction['payload'];
 
       const newState: CardsState = {};
       for (const id in state) {

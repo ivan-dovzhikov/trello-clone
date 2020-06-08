@@ -121,4 +121,28 @@ describe('Test card reducer', () => {
       expect(actual).not.toBe(testingState);
     });
   });
+
+  describe('Delete board cards', () => {
+    const boardId = v4();
+    const listId = v4();
+    const cardsIds = [testingCardsIds[0], testingCardsIds[1]];
+    const action: DeleteListAction = {
+      type: DELETE_LIST,
+      payload: { boardId, listId, cardsIds },
+    };
+
+    const expected = cloneDeep(testingState);
+    delete expected[cardsIds[0]];
+    delete expected[cardsIds[1]];
+
+    const actual = cardReducer(testingState, action);
+
+    it('should remove given cards ids', () => {
+      expect(actual).toEqual(expected);
+    });
+
+    it('should not mutate state', () => {
+      expect(actual).not.toBe(testingState);
+    });
+  });
 });
