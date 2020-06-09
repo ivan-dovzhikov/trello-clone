@@ -4,6 +4,7 @@ import {
   CreateListAction,
   DeleteListAction,
   ChangeListAction,
+  MoveCardAction,
 } from './types';
 import { v4 } from 'uuid';
 import listReducer from './reducer';
@@ -14,13 +15,13 @@ import {
   CreateCardAction,
   DeleteCardAction,
 } from 'components/Cards/types';
-const { CREATE_LIST, DELETE_LIST, CHANGE_LIST } = ListActionTypes;
+const { CREATE_LIST, DELETE_LIST, CHANGE_LIST, MOVE_CARD } = ListActionTypes;
 const { CREATE_CARD, DELETE_CARD } = CardActionTypes;
 const { DELETE_BOARD } = BoardActionTypes;
 
 describe('Test list reducer', () => {
   const boardId = "doesn't matter";
-  const testingListsIds: string[] = [v4(), v4()];
+  const testingListsIds: string[] = [v4(), v4(), v4()];
   const cardIds: string[] = [v4(), v4(), v4(), v4()];
   const testingState: ListsState = {
     [testingListsIds[0]]: {
@@ -172,6 +173,60 @@ describe('Test list reducer', () => {
 
     it('should not mutate state', () => {
       expect(actual).not.toBe(testingState);
+    });
+  });
+
+  describe('Move card', () => {
+    describe('move in same list', () => {
+      const fromListId = testingListsIds[1];
+      const toListId = fromListId;
+      const fromIndex = 2;
+      const toIndex = 1;
+
+      const action: MoveCardAction = {
+        type: MOVE_CARD,
+        payload: { fromListId, toListId, fromIndex, toIndex },
+      };
+
+      const expected = cloneDeep(testingState);
+      const card = expected[fromListId].cards.splice(fromIndex, 1);
+      expected[toListId].cards.splice(toIndex, 0, ...card);
+
+      const actual = listReducer(testingState, action);
+
+      it('should move card from one index to another', () => {
+        expect(actual).toEqual(expected);
+      });
+
+      it('should not mutate state', () => {
+        expect(actual).not.toBe(testingState);
+      });
+    });
+
+    describe('move in another list', () => {
+      const fromListId = testingListsIds[1];
+      const toListId = testingListsIds[0];
+      const fromIndex = 2;
+      const toIndex = 0;
+
+      const action: MoveCardAction = {
+        type: MOVE_CARD,
+        payload: { fromListId, toListId, fromIndex, toIndex },
+      };
+
+      const expected = cloneDeep(testingState);
+      const card = expected[fromListId].cards.splice(fromIndex, 1);
+      expected[toListId].cards.splice(toIndex, 0, ...card);
+
+      const actual = listReducer(testingState, action);
+
+      it('should move card from one index to another', () => {
+        expect(actual).toEqual(expected);
+      });
+
+      it('should not mutate state', () => {
+        expect(actual).not.toBe(testingState);
+      });
     });
   });
 });

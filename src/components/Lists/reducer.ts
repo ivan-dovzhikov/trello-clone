@@ -5,6 +5,7 @@ import {
   CreateListAction,
   DeleteListAction,
   ChangeListAction,
+  MoveCardAction,
 } from './types';
 import { Reducer } from 'react';
 import { BoardActionTypes, DeleteBoardAction } from 'components/Boards/types';
@@ -13,7 +14,7 @@ import {
   CreateCardAction,
   DeleteCardAction,
 } from 'components/Cards/types';
-const { CREATE_LIST, DELETE_LIST, CHANGE_LIST } = ListActionTypes;
+const { CREATE_LIST, DELETE_LIST, CHANGE_LIST, MOVE_CARD } = ListActionTypes;
 const { CREATE_CARD, DELETE_CARD } = CardActionTypes;
 const { DELETE_BOARD } = BoardActionTypes;
 
@@ -74,6 +75,29 @@ const listReducer: Reducer<
         ...state,
         [listId]: list,
       };
+    }
+
+    case MOVE_CARD: {
+      const {
+        fromListId,
+        toListId,
+        fromIndex,
+        toIndex,
+      } = payload as MoveCardAction['payload'];
+
+      const newState = { ...state };
+
+      const fromList = { ...newState[fromListId] };
+      fromList.cards = [...fromList.cards];
+      const card = fromList.cards.splice(fromIndex, 1);
+      newState[fromListId] = fromList;
+
+      const toList = { ...newState[toListId] };
+      toList.cards = [...toList.cards];
+      toList.cards.splice(toIndex, 0, ...card);
+      newState[toListId] = toList;
+
+      return newState;
     }
 
     case DELETE_BOARD: {
