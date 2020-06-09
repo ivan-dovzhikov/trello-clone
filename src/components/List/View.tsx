@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import { Droppable } from 'react-beautiful-dnd';
 import { FieldEditor } from 'shared';
 import './styles.scss';
 import CardsList from 'components/Cards/';
@@ -33,7 +34,14 @@ export const ListView: FC<ListViewProps> = ({
           onEditToggle={toggleEdit}
         />
       </header>
-      <CardsList listId={id} />
+      <Droppable droppableId={id}>
+        {provided => (
+          <div {...provided.droppableProps} ref={provided.innerRef}>
+            <CardsList listId={id} />
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </div>
   );
 };

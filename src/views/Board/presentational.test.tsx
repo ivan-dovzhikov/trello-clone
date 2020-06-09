@@ -6,6 +6,7 @@ import { render, screen } from '@testing-library/react';
 import { createStore, combineReducers } from 'redux';
 import { AppState } from 'utils';
 import { Provider } from 'react-redux';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 describe('Test presentational board page component', () => {
   const setup = (boardExist: boolean) => {
@@ -20,6 +21,7 @@ describe('Test presentational board page component', () => {
       onCreate: jest.fn(),
       onDelete: jest.fn(),
       onEdit: jest.fn(),
+      onMove: jest.fn(),
     };
 
     const store = createStore<AppState, any, void, void>(
@@ -33,7 +35,9 @@ describe('Test presentational board page component', () => {
     render(
       <Router history={history}>
         <Provider store={store}>
-          <BoardPage {...props} />
+          <DragDropContext onDragEnd={() => {}}>
+            <BoardPage {...props} />
+          </DragDropContext>
         </Provider>
       </Router>
     );

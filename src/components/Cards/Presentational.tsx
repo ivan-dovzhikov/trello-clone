@@ -12,9 +12,10 @@ const CardsList: FC<CardsListProps> = ({
 }) => {
   return (
     <ul className="cards-list">
-      {cards.map(({ id, content }) => (
+      {cards.map(({ id, content }, index) => (
         <li key={id}>
           <CardView
+            index={index}
             id={id}
             content={content}
             onDelete={onDelete}

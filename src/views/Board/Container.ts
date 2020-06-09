@@ -3,7 +3,12 @@ import { RouteComponentProps } from 'react-router-dom';
 import { ThunkDispatch, ThunkAction } from 'redux-thunk';
 import { AppState } from 'utils';
 import BoardPage from './Presentational';
-import { createList, deleteList, changeList } from 'components/Lists/actions';
+import {
+  createList,
+  deleteList,
+  changeList,
+  moveCard,
+} from 'components/Lists/actions';
 import { CreateListAction, DeleteListAction } from 'components/Lists/types';
 
 interface OwnProps extends RouteComponentProps<{ id: string }> {}
@@ -19,6 +24,7 @@ interface DispatchProps {
     listId: string
   ) => ThunkAction<DeleteListAction, AppState, void, DeleteListAction>;
   onEdit: typeof changeList;
+  onMove: typeof moveCard;
 }
 
 const mapDispatch = (
@@ -28,6 +34,8 @@ const mapDispatch = (
   onCreate: title => dispatch(createList(match.params.id, title)),
   onDelete: listId => dispatch(deleteList(match.params.id, listId)),
   onEdit: (listId, title) => dispatch(changeList(listId, title)),
+  onMove: (fromListId, toListId, fromIndex, toIndex) =>
+    dispatch(moveCard(fromListId, toListId, fromIndex, toIndex)),
 });
 
 export const connector = connect(mapState, mapDispatch);

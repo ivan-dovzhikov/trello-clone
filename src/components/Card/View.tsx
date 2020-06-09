@@ -1,7 +1,9 @@
 import React, { FC, useState } from 'react';
 import { FieldEditor } from 'shared';
+import { Draggable } from 'react-beautiful-dnd';
 
 interface CardViewProps {
+  index: number;
   id: string;
   content: string;
   onDelete: (id: string) => any;
@@ -9,6 +11,7 @@ interface CardViewProps {
 }
 
 export const CardView: FC<CardViewProps> = ({
+  index,
   id,
   content,
   onDelete,
@@ -20,15 +23,24 @@ export const CardView: FC<CardViewProps> = ({
   const handleSubmit = (newContent: string) => onEdit(id, newContent);
 
   return (
-    <div className={editMode ? 'card edit' : 'card'}>
-      <FieldEditor
-        fieldName="Text"
-        value={content}
-        editMode={editMode}
-        onEditToggle={toggleEdit}
-        onSubmit={handleSubmit}
-        onDelete={handleDelete}
-      />
-    </div>
+    <Draggable draggableId={id} index={index}>
+      {provided => (
+        <div
+          className={editMode ? 'card edit' : 'card'}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
+          <FieldEditor
+            fieldName="Text"
+            value={content}
+            editMode={editMode}
+            onEditToggle={toggleEdit}
+            onSubmit={handleSubmit}
+            onDelete={handleDelete}
+          />
+        </div>
+      )}
+    </Draggable>
   );
 };

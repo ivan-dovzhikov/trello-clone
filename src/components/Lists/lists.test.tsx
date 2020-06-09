@@ -6,6 +6,7 @@ import { Router } from 'react-router-dom';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { AppState } from 'utils';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 describe('Test list of lists component', () => {
   const setup = () => {
@@ -40,7 +41,9 @@ describe('Test list of lists component', () => {
     render(
       <Router history={history}>
         <Provider store={store}>
-          <BoardPage {...props} />
+          <DragDropContext onDragEnd={() => {}}>
+            <BoardPage {...props} />
+          </DragDropContext>
         </Provider>
       </Router>
     );

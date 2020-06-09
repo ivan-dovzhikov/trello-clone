@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { AppState } from 'utils';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 describe('Test board link', () => {
   const setup = () => {
@@ -30,7 +31,9 @@ describe('Test board link', () => {
     render(
       <Router history={history}>
         <Provider store={store}>
-          <ListView {...props} />
+          <DragDropContext onDragEnd={() => {}}>
+            <ListView {...props} />
+          </DragDropContext>
         </Provider>
       </Router>
     );
