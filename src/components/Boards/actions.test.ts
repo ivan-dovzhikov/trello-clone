@@ -3,10 +3,16 @@ import {
   CreateBoardAction,
   DeleteBoardAction,
   ChangeBoardAction,
+  MoveListAction,
 } from './types';
-import { createBoard, deleteBoard, changeBoard } from './actions';
+import { createBoard, deleteBoard, changeBoard, moveList } from './actions';
 import { v4 } from 'uuid';
-const { CREATE_BOARD, DELETE_BOARD, CHANGE_BOARD } = BoardActionTypes;
+const {
+  CREATE_BOARD,
+  DELETE_BOARD,
+  CHANGE_BOARD,
+  MOVE_LIST,
+} = BoardActionTypes;
 
 describe('board action creators', () => {
   it(`should create ${CREATE_BOARD} action with generated ID`, () => {
@@ -59,6 +65,20 @@ describe('board action creators', () => {
     };
 
     const actual = changeBoard(boardId, title);
+    expect(actual).toEqual(expected);
+  });
+
+  it(`should create ${MOVE_LIST} action`, () => {
+    const boardId = v4();
+    const fromIndex = 2;
+    const toIndex = 4;
+
+    const expected: MoveListAction = {
+      type: MOVE_LIST,
+      payload: { boardId, fromIndex, toIndex },
+    };
+
+    const actual = moveList(boardId, fromIndex, toIndex);
     expect(actual).toEqual(expected);
   });
 });

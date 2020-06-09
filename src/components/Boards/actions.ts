@@ -3,9 +3,15 @@ import {
   CreateBoardAction,
   ChangeBoardAction,
   DeleteBoardThunk,
+  MoveListAction,
 } from './types';
 import { v4 } from 'uuid';
-const { CREATE_BOARD, DELETE_BOARD, CHANGE_BOARD } = BoardActionTypes;
+const {
+  CREATE_BOARD,
+  DELETE_BOARD,
+  CHANGE_BOARD,
+  MOVE_LIST,
+} = BoardActionTypes;
 
 export const createBoard = (title: string): CreateBoardAction => ({
   type: CREATE_BOARD,
@@ -39,4 +45,17 @@ export const changeBoard = (
 ): ChangeBoardAction => ({
   type: CHANGE_BOARD,
   payload: { boardId, title },
+});
+
+export const moveList = (
+  boardId: string,
+  fromIndex: number,
+  toIndex: number
+): MoveListAction => ({
+  type: MOVE_LIST,
+  payload: {
+    boardId,
+    fromIndex,
+    toIndex,
+  },
 });

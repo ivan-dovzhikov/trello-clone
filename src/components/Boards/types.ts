@@ -6,8 +6,14 @@ export enum BoardActionTypes {
   CREATE_BOARD = 'CREATE_BOARD',
   DELETE_BOARD = 'DELETE_BOARD',
   CHANGE_BOARD = 'CHANGE_BOARD',
+  MOVE_LIST = 'MOVE_LIST',
 }
-const { CREATE_BOARD, CHANGE_BOARD, DELETE_BOARD } = BoardActionTypes;
+const {
+  CREATE_BOARD,
+  CHANGE_BOARD,
+  DELETE_BOARD,
+  MOVE_LIST,
+} = BoardActionTypes;
 
 export interface CreateBoardAction {
   type: typeof CREATE_BOARD;
@@ -37,10 +43,20 @@ export interface ChangeBoardAction {
   };
 }
 
+export interface MoveListAction {
+  type: typeof MOVE_LIST;
+  payload: {
+    boardId: string;
+    fromIndex: number;
+    toIndex: number;
+  };
+}
+
 export type BoardActions =
   | CreateBoardAction
   | DeleteBoardAction
-  | ChangeBoardAction;
+  | ChangeBoardAction
+  | MoveListAction;
 
 export interface Board {
   id: string;
