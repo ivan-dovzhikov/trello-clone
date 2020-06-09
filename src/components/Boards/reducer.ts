@@ -5,6 +5,7 @@ import {
   CreateBoardAction,
   DeleteBoardAction,
   ChangeBoardAction,
+  MoveListAction,
 } from './types';
 import { Reducer } from 'react';
 import {
@@ -12,7 +13,12 @@ import {
   CreateListAction,
   DeleteListAction,
 } from 'components/Lists/types';
-const { CREATE_BOARD, DELETE_BOARD, CHANGE_BOARD } = BoardActionTypes;
+const {
+  CREATE_BOARD,
+  DELETE_BOARD,
+  CHANGE_BOARD,
+  MOVE_LIST,
+} = BoardActionTypes;
 const { CREATE_LIST, DELETE_LIST } = ListActionTypes;
 
 const initialState: BoardsState = {
@@ -60,6 +66,29 @@ const boardReducer: Reducer<
         ...state.byId,
         [boardId]: { ...state.byId[boardId], title },
       };
+
+      return {
+        ...state,
+        byId,
+      };
+    }
+
+    case MOVE_LIST: {
+      const {
+        boardId,
+        fromIndex,
+        toIndex,
+      } = payload as MoveListAction['payload'];
+
+      const byId = { ...state.byId };
+      const board = { ...byId[boardId] };
+      const lists = [...board.lists];
+
+      const list = lists.splice(fromIndex, 1);
+      lists.splice(toIndex, 0, ...list);
+
+      board.lists = lists;
+      byId[boardId] = board;
 
       return {
         ...state,

@@ -4,28 +4,40 @@ import {
   CreateBoardAction,
   DeleteBoardAction,
   ChangeBoardAction,
+  MoveListAction,
 } from './types';
 import { v4 } from 'uuid';
 import boardReducer from './reducer';
 import { cloneDeep } from 'utils';
-const { CREATE_BOARD, DELETE_BOARD, CHANGE_BOARD } = BoardActionTypes;
+const {
+  CREATE_BOARD,
+  DELETE_BOARD,
+  CHANGE_BOARD,
+  MOVE_LIST,
+} = BoardActionTypes;
 
 describe('Test board reducer', () => {
-  const boardIds: string[] = [v4(), v4()];
+  const testingBoardsIds = [v4(), v4(), v4()];
+  const testingListsIds = [v4(), v4(), v4()];
   const testingState: BoardsState = {
     byId: {
-      [boardIds[0]]: {
-        id: boardIds[0],
+      [testingBoardsIds[0]]: {
+        id: testingBoardsIds[0],
         title: 'board #1',
-        lists: [],
+        lists: testingListsIds,
       },
-      [boardIds[1]]: {
-        id: boardIds[1],
+      [testingBoardsIds[1]]: {
+        id: testingBoardsIds[1],
         title: 'board #2',
         lists: [],
       },
+      [testingBoardsIds[2]]: {
+        id: testingBoardsIds[2],
+        title: 'board #3',
+        lists: [],
+      },
     },
-    allIds: [boardIds[0], boardIds[1]],
+    allIds: [testingBoardsIds[0], testingBoardsIds[1], testingBoardsIds[2]],
   };
 
   describe('Create board action', () => {
@@ -54,7 +66,7 @@ describe('Test board reducer', () => {
   });
 
   describe('Delete board action', () => {
-    const boardId = boardIds[0];
+    const boardId = testingBoardsIds[0];
     const action: DeleteBoardAction = {
       type: DELETE_BOARD,
       payload: { boardId, listsIds: [], cardsIds: [] },
@@ -77,7 +89,7 @@ describe('Test board reducer', () => {
 
   describe('Change board action', () => {
     const title = 'New title';
-    const boardId = boardIds[1];
+    const boardId = testingBoardsIds[1];
     const action: ChangeBoardAction = {
       type: CHANGE_BOARD,
       payload: { boardId, title },
@@ -92,6 +104,31 @@ describe('Test board reducer', () => {
 
     const actual = boardReducer(testingState, action);
     it('should change board', () => {
+      expect(actual).toEqual(expected);
+    });
+
+    it('should not mutate state', () => {
+      expect(actual).not.toBe(testingState);
+    });
+  });
+
+  describe('Move list action', () => {
+    const boardId = testingBoardsIds[0];
+    const fromIndex = 2;
+    const toIndex = 1;
+
+    const action: MoveListAction = {
+      type: MOVE_LIST,
+      payload: { boardId, fromIndex, toIndex },
+    };
+
+    const expected = cloneDeep(testingState);
+    const list = expected.byId[boardId].lists.splice(fromIndex, 1);
+    expected.byId[boardId].lists.splice(toIndex, 0, ...list);
+
+    const actual = boardReducer(testingState, action);
+
+    it('should move list from one index to another', () => {
       expect(actual).toEqual(expected);
     });
 
