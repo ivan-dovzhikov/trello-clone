@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { ConnectedProps } from 'react-redux';
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import Lists from 'components/Lists/';
+import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd';
+import './styles.scss';
 import { connector } from './Container';
+import Lists from 'components/Lists/';
 
 type BoardProps = ConnectedProps<typeof connector>;
 
@@ -12,31 +13,47 @@ const Board: FC<BoardProps> = ({
   onCreate,
   onDelete,
   onEdit,
-  onMove,
+  onCardMove,
+  onListMove,
 }) => {
   if (boardExist) {
     const onDragEnd = (result: DropResult) => {
-      const { destination, source } = result;
-
+      const { destination, source, type } = result;
       if (!destination) return;
-      const { droppableId: fromListId, index: fromIndex } = source;
-      const { droppableId: toListId, index: toIndex } = destination;
 
-      if (fromListId === toListId && fromIndex === toIndex) {
-        return;
+      if (type === 'card') {
+        const { droppableId: fromListId, index: fromIndex } = source;
+        const { droppableId: toListId, index: toIndex } = destination;
+
+        if (fromListId === toListId && fromIndex === toIndex) {
+          return;
+        }
+
+        onCardMove(fromListId, toListId, fromIndex, toIndex);
+      } else if (type === 'list') {
+        onListMove(source.index, destination.index);
       }
-
-      onMove(fromListId, toListId, fromIndex, toIndex);
     };
 
     return (
       <DragDropContext onDragEnd={onDragEnd}>
-        <Lists
-          lists={lists}
-          onCreate={onCreate}
-          onDelete={onDelete}
-          onEdit={onEdit}
-        />
+        <Droppable droppableId="lists" direction="horizontal" type="list">
+          {provided => (
+            <div
+              className="board-page"
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              <Lists
+                lists={lists}
+                onCreate={onCreate}
+                onDelete={onDelete}
+                onEdit={onEdit}
+              />
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
       </DragDropContext>
     );
   } else return <h2>No such board</h2>;

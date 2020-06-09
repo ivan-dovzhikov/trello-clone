@@ -21,7 +21,8 @@ describe('Test presentational board page component', () => {
       onCreate: jest.fn(),
       onDelete: jest.fn(),
       onEdit: jest.fn(),
-      onMove: jest.fn(),
+      onCardMove: jest.fn(),
+      onListMove: jest.fn(),
     };
 
     const store = createStore<AppState, any, void, void>(

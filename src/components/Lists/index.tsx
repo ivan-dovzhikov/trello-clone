@@ -13,23 +13,24 @@ interface ListsProps {
 
 const Lists: FC<ListsProps> = ({ lists, onCreate, onDelete, onEdit }) => {
   return (
-    <ul className="lists">
-      {lists.map(({ id, title }) => {
-        return (
-          <li key={id}>
-            <ListView
-              id={id}
-              title={title}
-              onEdit={onEdit}
-              onDelete={onDelete}
-            />
-          </li>
-        );
-      })}
-      <li>
-        <ListCreate onCreate={onCreate} />
-      </li>
-    </ul>
+    <>
+      <ul className="lists">
+        {lists.map(({ id, title }, index) => {
+          return (
+            <li key={id}>
+              <ListView
+                index={index}
+                id={id}
+                title={title}
+                onEdit={onEdit}
+                onDelete={onDelete}
+              />
+            </li>
+          );
+        })}
+      </ul>
+      <ListCreate onCreate={onCreate} />
+    </>
   );
 };
 

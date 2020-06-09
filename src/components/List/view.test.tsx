@@ -7,13 +7,14 @@ import userEvent from '@testing-library/user-event';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { AppState } from 'utils';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-describe('Test board link', () => {
+describe('Test list view', () => {
   const setup = () => {
     const history = createMemoryHistory();
 
     const props = {
+      index: 0,
       id: '1',
       title: 'list title',
       onDelete: jest.fn(),
@@ -32,7 +33,9 @@ describe('Test board link', () => {
       <Router history={history}>
         <Provider store={store}>
           <DragDropContext onDragEnd={() => {}}>
-            <ListView {...props} />
+            <Droppable droppableId="">
+              {() => <ListView {...props} />}
+            </Droppable>
           </DragDropContext>
         </Provider>
       </Router>

@@ -10,6 +10,8 @@ import {
   moveCard,
 } from 'components/Lists/actions';
 import { CreateListAction, DeleteListAction } from 'components/Lists/types';
+import { MoveListAction } from 'components/Boards/types';
+import { moveList } from 'components/Boards/actions';
 
 interface OwnProps extends RouteComponentProps<{ id: string }> {}
 
@@ -24,7 +26,8 @@ interface DispatchProps {
     listId: string
   ) => ThunkAction<DeleteListAction, AppState, void, DeleteListAction>;
   onEdit: typeof changeList;
-  onMove: typeof moveCard;
+  onCardMove: typeof moveCard;
+  onListMove: (fromIndex: number, toIndex: number) => MoveListAction;
 }
 
 const mapDispatch = (
@@ -34,8 +37,10 @@ const mapDispatch = (
   onCreate: title => dispatch(createList(match.params.id, title)),
   onDelete: listId => dispatch(deleteList(match.params.id, listId)),
   onEdit: (listId, title) => dispatch(changeList(listId, title)),
-  onMove: (fromListId, toListId, fromIndex, toIndex) =>
+  onCardMove: (fromListId, toListId, fromIndex, toIndex) =>
     dispatch(moveCard(fromListId, toListId, fromIndex, toIndex)),
+  onListMove: (fromIndex, toIndex) =>
+    dispatch(moveList(match.params.id, fromIndex, toIndex)),
 });
 
 export const connector = connect(mapState, mapDispatch);
