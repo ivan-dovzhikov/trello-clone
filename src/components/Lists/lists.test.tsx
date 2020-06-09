@@ -1,5 +1,5 @@
 import React from 'react';
-import BoardPage from '.';
+import Lists from '.';
 import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
@@ -42,7 +42,7 @@ describe('Test list of lists component', () => {
       <Router history={history}>
         <Provider store={store}>
           <DragDropContext onDragEnd={() => {}}>
-            <BoardPage {...props} />
+            <Lists {...props} />
           </DragDropContext>
         </Provider>
       </Router>
