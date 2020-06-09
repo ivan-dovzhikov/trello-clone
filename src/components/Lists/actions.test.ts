@@ -3,10 +3,11 @@ import {
   CreateListAction,
   DeleteListAction,
   ChangeListAction,
+  MoveCardAction,
 } from './types';
-import { createList, deleteList, changeList } from './actions';
+import { createList, deleteList, changeList, moveCard } from './actions';
 import { v4 } from 'uuid';
-const { CREATE_LIST, DELETE_LIST, CHANGE_LIST } = ListActionTypes;
+const { CREATE_LIST, DELETE_LIST, CHANGE_LIST, MOVE_CARD } = ListActionTypes;
 
 describe('board action creators', () => {
   it(`should create ${CREATE_LIST} action with generated ID`, () => {
@@ -72,6 +73,21 @@ describe('board action creators', () => {
     };
 
     const actual = changeList(listId, title);
+    expect(actual).toEqual(expected);
+  });
+
+  it(`should create ${MOVE_CARD} action`, () => {
+    const fromListId = v4();
+    const toListId = v4();
+    const fromIndex = 5;
+    const toIndex = 1;
+
+    const expected: MoveCardAction = {
+      type: MOVE_CARD,
+      payload: { fromListId, toListId, fromIndex, toIndex },
+    };
+
+    const actual = moveCard(fromListId, toListId, fromIndex, toIndex);
     expect(actual).toEqual(expected);
   });
 });

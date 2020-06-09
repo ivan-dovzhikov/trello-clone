@@ -4,8 +4,9 @@ import {
   CreateListAction,
   ChangeListAction,
   DeleteListThunk,
+  MoveCardAction,
 } from './types';
-const { CREATE_LIST, DELETE_LIST, CHANGE_LIST } = ListActionTypes;
+const { CREATE_LIST, DELETE_LIST, CHANGE_LIST, MOVE_CARD } = ListActionTypes;
 
 export const createList = (
   boardId: string,
@@ -38,4 +39,19 @@ export const changeList = (
 ): ChangeListAction => ({
   type: CHANGE_LIST,
   payload: { listId, title },
+});
+
+export const moveCard = (
+  fromListId: string,
+  toListId: string,
+  fromIndex: number,
+  toIndex: number
+): MoveCardAction => ({
+  type: MOVE_CARD,
+  payload: {
+    fromListId,
+    toListId,
+    fromIndex,
+    toIndex,
+  },
 });
