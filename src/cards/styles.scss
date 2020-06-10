@@ -1,0 +1,29 @@
+@import '../utils';
+
+.cards-list {
+  margin-top: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: none;
+  background-color: get-color(light, 0.3);
+
+  &:active,
+  &:focus {
+    outline: none;
+    @include accent-shadow();
+  }
+}
+
+button.card {
+  position: absolute;
+  bottom: 0;
+  width: calc(100% - 2rem);
+}

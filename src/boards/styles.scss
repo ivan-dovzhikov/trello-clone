@@ -1,0 +1,43 @@
+@import '../utils';
+
+.boards-navigation {
+  margin: 1rem 0 2rem;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.board-panel {
+  display: block;
+  height: 100%;
+  width: 350px;
+  margin: 0 1rem;
+  padding: 1rem;
+  background-color: get-color(dark, 0.2);
+  text-decoration: none;
+  transition: 0.2s ease;
+
+  &:focus {
+    outline: none;
+    @include accent-shadow;
+  }
+
+  .textarea {
+    cursor: initial;
+
+    &:disabled {
+      cursor: pointer;
+    }
+  }
+}
+
+button.board-panel {
+  border: none;
+  width: auto;
+}

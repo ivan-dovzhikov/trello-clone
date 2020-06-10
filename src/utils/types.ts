@@ -1,6 +1,6 @@
-import { BoardsState, BoardActions } from 'components/Boards/types';
-import { ListsState, ListActions } from 'components/Lists/types';
-import { CardsState, CardActions } from 'components/Cards/types';
+import { BoardsState, BoardActions } from 'boards/types';
+import { ListsState, ListActions } from 'lists/types';
+import { CardsState, CardActions } from 'cards/types';
 
 export interface AppState {
   boards: BoardsState;

@@ -1,0 +1,30 @@
+@import '../utils';
+
+.lists {
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list {
+  position: relative;
+  min-height: 87px;
+  width: 350px;
+  margin: 0 1rem;
+  padding: 1rem 1rem calc(1rem + 51px);
+  background-color: get-color(dark, 0.2);
+}
+
+button.list {
+  width: auto;
+  padding: 1rem;
+  border: 0;
+  transition: 0.2s ease;
+
+  &:focus {
+    outline: none;
+    @include accent-shadow();
+  }
+}
