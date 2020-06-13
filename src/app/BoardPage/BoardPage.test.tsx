@@ -1,15 +1,13 @@
 import React from 'react';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { AppState } from 'utils';
 import BoardPage, { BoardPageProps } from './BoardPage';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Test presentational board page component', () => {
   const setup = (boardExist: boolean) => {
-    const history = createMemoryHistory();
     const props: BoardPageProps = {
       boardExist,
       lists: [
@@ -33,11 +31,11 @@ describe('Test presentational board page component', () => {
     );
 
     render(
-      <Router history={history}>
+      <BrowserRouter>
         <Provider store={store}>
           <BoardPage {...props} />
         </Provider>
-      </Router>
+      </BrowserRouter>
     );
 
     return props;

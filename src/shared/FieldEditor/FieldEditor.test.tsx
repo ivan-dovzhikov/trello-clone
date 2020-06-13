@@ -1,14 +1,11 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 import { FieldEditor, FieldEditorProps } from '.';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Test FieldEditor component', () => {
   const setup = (editMode: boolean) => {
-    const history = createMemoryHistory();
-
     const props: FieldEditorProps = {
       editMode,
       fieldName: 'test',
@@ -19,9 +16,9 @@ describe('Test FieldEditor component', () => {
     };
 
     render(
-      <Router history={history}>
+      <BrowserRouter>
         <FieldEditor {...props} />
-      </Router>
+      </BrowserRouter>
     );
 
     return {

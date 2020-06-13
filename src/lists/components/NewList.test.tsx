@@ -1,22 +1,19 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import NewList, { NewListProps } from './NewList';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Test list create button', () => {
   const setup = () => {
-    const history = createBrowserHistory();
-
     const props: NewListProps = {
       onCreate: jest.fn(),
     };
 
     render(
-      <Router history={history}>
+      <BrowserRouter>
         <NewList {...props} />
-      </Router>
+      </BrowserRouter>
     );
 
     return {

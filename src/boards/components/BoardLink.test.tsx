@@ -1,13 +1,11 @@
 import React from 'react';
-import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
-import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import BoardLink, { BoardLinkProps } from './BoardLink';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Test board link', () => {
   const setup = () => {
-    const history = createMemoryHistory();
     const props: BoardLinkProps = {
       id: '1234-5678',
       title: 'board title',
@@ -16,9 +14,9 @@ describe('Test board link', () => {
     };
 
     render(
-      <Router history={history}>
+      <BrowserRouter>
         <BoardLink {...props} />
-      </Router>
+      </BrowserRouter>
     );
 
     return {

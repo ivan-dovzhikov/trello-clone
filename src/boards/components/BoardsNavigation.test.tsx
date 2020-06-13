@@ -1,12 +1,10 @@
 import React from 'react';
 import BoardsNavigation, { BoardsNavigationProps } from './BoardsNavigation';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Test presentational boards navigation component', () => {
   const setup = () => {
-    const history = createMemoryHistory();
     const props: BoardsNavigationProps = {
       boards: [
         {
@@ -26,9 +24,9 @@ describe('Test presentational boards navigation component', () => {
     };
 
     render(
-      <Router history={history}>
+      <BrowserRouter>
         <BoardsNavigation {...props} />
-      </Router>
+      </BrowserRouter>
     );
 
     return {

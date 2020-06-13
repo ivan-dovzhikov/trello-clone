@@ -1,13 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { BrowserRouter } from 'react-router-dom';
 import { Button, ButtonProps } from '.';
 
 describe('Test button component', () => {
-  const setup = (derivedProps?: {}) => {
-    const history = createMemoryHistory();
+  const setup = (derivedProps?: ButtonProps) => {
     const text = '12345';
 
     const props: ButtonProps = {
@@ -15,11 +13,11 @@ describe('Test button component', () => {
     };
 
     render(
-      <Router history={history}>
+      <BrowserRouter>
         <Button {...props} {...derivedProps}>
           {text}
         </Button>
-      </Router>
+      </BrowserRouter>
     );
 
     return {

@@ -1,16 +1,14 @@
 import React from 'react';
 import HomePage from './HomePage';
 import { render, screen } from '@testing-library/react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Test home page component', () => {
   beforeEach(() => {
-    const history = createMemoryHistory();
     render(
-      <Router history={history}>
+      <BrowserRouter>
         <HomePage />
-      </Router>
+      </BrowserRouter>
     );
   });
 

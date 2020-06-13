@@ -1,16 +1,14 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { render, screen } from '@testing-library/react';
 import { AppState } from 'utils';
 import ListOfLists, { ListOfListsProps } from './ListOfLists';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Test list of lists component', () => {
   const setup = () => {
-    const history = createMemoryHistory();
     const lists = [
       {
         id: '1',
@@ -39,13 +37,13 @@ describe('Test list of lists component', () => {
     );
 
     render(
-      <Router history={history}>
+      <BrowserRouter>
         <Provider store={store}>
           <DragDropContext onDragEnd={() => {}}>
             <ListOfLists {...props} />
           </DragDropContext>
         </Provider>
-      </Router>
+      </BrowserRouter>
     );
 
     return {

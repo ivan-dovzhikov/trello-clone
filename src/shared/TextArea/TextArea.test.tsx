@@ -1,18 +1,15 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 import { TextArea, TextAreaProps } from '.';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Test TextInput component', () => {
   const setup = (props?: TextAreaProps) => {
-    const history = createMemoryHistory();
-
     render(
-      <Router history={history}>
+      <BrowserRouter>
         <TextArea {...props} />
-      </Router>
+      </BrowserRouter>
     );
 
     return {

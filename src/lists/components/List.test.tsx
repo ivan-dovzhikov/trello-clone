@@ -1,18 +1,15 @@
 import React from 'react';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AppState } from 'utils';
 import List, { ListProps } from './List';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Test list view', () => {
   const setup = () => {
-    const history = createMemoryHistory();
-
     const props: ListProps = {
       index: 0,
       id: '1',
@@ -30,7 +27,7 @@ describe('Test list view', () => {
     );
 
     render(
-      <Router history={history}>
+      <BrowserRouter>
         <Provider store={store}>
           <DragDropContext onDragEnd={() => {}}>
             {/* Have to provide droppable and parent element with provided ref to avoid errors */}
@@ -43,7 +40,7 @@ describe('Test list view', () => {
             </Droppable>
           </DragDropContext>
         </Provider>
-      </Router>
+      </BrowserRouter>
     );
 
     return {
