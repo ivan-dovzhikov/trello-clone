@@ -5,7 +5,7 @@ import { connector } from './ListOfCardsContainer';
 import Card from './Card';
 import NewCard from './NewCard';
 
-type ListOfCardsProps = ConnectedProps<typeof connector>;
+export type ListOfCardsProps = ConnectedProps<typeof connector>;
 
 const ListOfCards: FC<ListOfCardsProps> = ({
   droppableId,

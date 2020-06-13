@@ -1,11 +1,11 @@
 import React, { FC, useState } from 'react';
 import { FieldEditor } from 'shared';
 
-interface CardCreateProps {
+export interface NewCardProps {
   onCreate: (content: string) => any;
 }
 
-const NewCard: FC<CardCreateProps> = ({ onCreate }) => {
+const NewCard: FC<NewCardProps> = ({ onCreate }) => {
   const [editMode, setEditMode] = useState(false);
   const toggleEditMode = () => setEditMode(!editMode);
 

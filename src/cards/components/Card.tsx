@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { FieldEditor } from 'shared';
 
-interface CardViewProps {
+export interface CardProps {
   index: number;
   id: string;
   content: string;
@@ -10,7 +10,7 @@ interface CardViewProps {
   onEdit: (id: string, newContent: string) => any;
 }
 
-const Card: FC<CardViewProps> = ({ index, id, content, onDelete, onEdit }) => {
+const Card: FC<CardProps> = ({ index, id, content, onDelete, onEdit }) => {
   const [editMode, setEditMode] = useState(false);
   const toggleEdit = () => setEditMode(!editMode);
   const handleDelete = () => onDelete(id);
