@@ -13,7 +13,7 @@ const BoardLink: FC<BoardLinkProps> = ({ id, title, onEdit, onDelete }) => {
   const [editMode, setEditMode] = useState(false);
   const toggleEdit = () => setEditMode(!editMode);
 
-  const props = {
+  const FieldEditProps = {
     fieldName: 'Title',
     value: title,
     editMode,
@@ -24,11 +24,11 @@ const BoardLink: FC<BoardLinkProps> = ({ id, title, onEdit, onDelete }) => {
 
   return editMode ? (
     <div className="board-panel">
-      <FieldEditor {...props} />
+      <FieldEditor {...FieldEditProps} />
     </div>
   ) : (
     <NavLink to={`/boards/${id}`} className="board-panel">
-      <FieldEditor {...props} />
+      <FieldEditor {...FieldEditProps} />
     </NavLink>
   );
 };

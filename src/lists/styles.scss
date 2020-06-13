@@ -1,11 +1,15 @@
 @import '../utils';
 
-.lists {
+.list-of-lists {
   display: flex;
   align-items: flex-start;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+
+  & > ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 }
 
 .list {
@@ -13,7 +17,7 @@
   min-height: 87px;
   width: 350px;
   margin: 0 1rem;
-  padding: 1rem 1rem calc(1rem + 51px);
+  padding: 1rem 1rem 1rem; //calc(1rem + 51px);
   background-color: get-color(dark, 0.2);
 }
 

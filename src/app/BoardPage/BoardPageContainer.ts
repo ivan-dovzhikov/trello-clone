@@ -1,26 +1,34 @@
-import { connect } from 'react-redux';
+import { connect, MapStateToProps } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { ThunkDispatch, ThunkAction } from 'redux-thunk';
-import { AppState } from 'utils';
-import BoardPage from './BoardPage';
 import { createList, deleteList, changeList, moveCard } from 'lists/actions';
-import { CreateListAction, DeleteListAction } from 'lists/types';
+import { CreateListAction, DeleteListAction, ListData } from 'lists/types';
 import { MoveListAction } from 'boards/types';
 import { moveList } from 'boards/actions';
+import { AppState } from 'utils';
+import BoardPage from './BoardPage';
+
+interface StateProps {
+  boardExist: boolean;
+  lists: ListData[];
+}
 
 interface OwnProps extends RouteComponentProps<{ id: string }> {}
 
-const mapState = ({ boards, lists }: AppState, { match }: OwnProps) => ({
+const mapState: MapStateToProps<StateProps, OwnProps, AppState> = (
+  { boards, lists },
+  { match }
+) => ({
   boardExist: !!boards.byId[match.params.id],
-  lists: boards.byId[match.params.id]?.lists.map(listId => lists[listId]),
+  lists: boards.byId[match.params.id]?.lists.map(listId => lists[listId]) || [],
 });
 
 interface DispatchProps {
-  onCreate: (title: string) => CreateListAction;
-  onDelete: (
+  onListCreate: (title: string) => CreateListAction;
+  onListDelete: (
     listId: string
   ) => ThunkAction<DeleteListAction, AppState, void, DeleteListAction>;
-  onEdit: typeof changeList;
+  onListEdit: typeof changeList;
   onCardMove: typeof moveCard;
   onListMove: (fromIndex: number, toIndex: number) => MoveListAction;
 }
@@ -29,9 +37,9 @@ const mapDispatch = (
   dispatch: ThunkDispatch<AppState, void, any>,
   { match }: OwnProps
 ): DispatchProps => ({
-  onCreate: title => dispatch(createList(match.params.id, title)),
-  onDelete: listId => dispatch(deleteList(match.params.id, listId)),
-  onEdit: (listId, title) => dispatch(changeList(listId, title)),
+  onListCreate: title => dispatch(createList(match.params.id, title)),
+  onListDelete: listId => dispatch(deleteList(match.params.id, listId)),
+  onListEdit: (listId, title) => dispatch(changeList(listId, title)),
   onCardMove: (fromListId, toListId, fromIndex, toIndex) =>
     dispatch(moveCard(fromListId, toListId, fromIndex, toIndex)),
   onListMove: (fromIndex, toIndex) =>

@@ -8,6 +8,7 @@ interface NewBoardProps {
 const NewBoard: FC<NewBoardProps> = ({ onCreate }) => {
   const [showEdit, setShowEdit] = useState(false);
   const toggleShowEdit = () => setShowEdit(!showEdit);
+
   return showEdit ? (
     <div className="board-panel">
       <FieldEditor

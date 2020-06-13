@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import { ListState } from '../types';
+import { Droppable } from 'react-beautiful-dnd';
+import { ListData } from '../types';
 import List from './List';
 import NewList from './NewList';
 
 interface ListOfListsProps {
-  lists: ListState[];
+  lists: ListData[];
   onCreate: (title: string) => any;
   onDelete: (id: string) => any;
   onEdit: (id: string, newTitle: string) => any;
@@ -17,24 +18,27 @@ const ListOfLists: FC<ListOfListsProps> = ({
   onEdit,
 }) => {
   return (
-    <>
-      <ul className="lists">
-        {lists.map(({ id, title }, index) => {
-          return (
-            <li key={id}>
-              <List
-                index={index}
-                id={id}
-                title={title}
-                onEdit={onEdit}
-                onDelete={onDelete}
-              />
-            </li>
-          );
-        })}
-      </ul>
+    <div className="list-of-lists">
+      <Droppable droppableId="lists" direction="horizontal" type="list">
+        {provided => (
+          <ul {...provided.droppableProps} ref={provided.innerRef}>
+            {lists.map(({ id, title }, index) => (
+              <li key={id}>
+                <List
+                  index={index}
+                  id={id}
+                  title={title}
+                  onEdit={onEdit}
+                  onDelete={onDelete}
+                />
+              </li>
+            ))}
+            {provided.placeholder}
+          </ul>
+        )}
+      </Droppable>
       <NewList onCreate={onCreate} />
-    </>
+    </div>
   );
 };
 

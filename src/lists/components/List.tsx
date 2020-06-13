@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
-import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { Draggable } from 'react-beautiful-dnd';
 import { FieldEditor } from 'shared';
-import CardsList from 'cards/';
+import ListOfCard from 'cards';
 
 interface ListProps {
   index: number;
@@ -36,14 +36,7 @@ const List: FC<ListProps> = ({ index, id, title, onEdit, onDelete }) => {
               onEditToggle={toggleEdit}
             />
           </header>
-          <Droppable droppableId={id} type="card">
-            {provided => (
-              <div {...provided.droppableProps} ref={provided.innerRef}>
-                <CardsList listId={id} />
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
+          <ListOfCard listId={id} />
         </div>
       )}
     </Draggable>

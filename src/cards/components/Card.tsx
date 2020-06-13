@@ -20,7 +20,7 @@ const Card: FC<CardViewProps> = ({ index, id, content, onDelete, onEdit }) => {
     <Draggable draggableId={id} index={index}>
       {provided => (
         <div
-          className={editMode ? 'card edit' : 'card'}
+          className={`card${editMode ? ' edit' : ''}`}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}

@@ -1,11 +1,17 @@
 import { connect, MapStateToProps } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AppState } from 'utils';
-import { Board } from '../types';
+import { BoardData } from '../types';
 import { createBoard, deleteBoard, changeBoard } from '../actions';
 import BoardsNavigation from './BoardsNavigation';
 
-const mapState: MapStateToProps<{ boards: Board[] }, {}, AppState> = ({
+interface StateProps {
+  boards: BoardData[];
+}
+
+interface OwnProps {}
+
+const mapState: MapStateToProps<StateProps, OwnProps, AppState> = ({
   boards,
 }) => {
   return { boards: boards.allIds.map(id => boards.byId[id]) };
@@ -16,6 +22,7 @@ interface DispatchProps {
   onDelete: typeof deleteBoard;
   onEdit: typeof changeBoard;
 }
+
 const mapDispatch = (
   dispatch: ThunkDispatch<AppState, void, any>
 ): DispatchProps => ({
@@ -24,10 +31,8 @@ const mapDispatch = (
   onEdit: (boardId, title) => dispatch(changeBoard(boardId, title)),
 });
 
-export const connector = connect<
-  { boards: Board[] },
-  DispatchProps,
-  {},
-  AppState
->(mapState, mapDispatch);
+export const connector = connect<StateProps, DispatchProps, OwnProps, AppState>(
+  mapState,
+  mapDispatch
+);
 export default connector(BoardsNavigation);

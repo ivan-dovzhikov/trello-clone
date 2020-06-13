@@ -1,6 +1,6 @@
 @import '../utils';
 
-.cards-list {
+.list-of-cards {
   margin-top: 1rem;
   padding: 0;
   list-style: none;
@@ -23,7 +23,7 @@
 }
 
 button.card {
-  position: absolute;
   bottom: 0;
-  width: calc(100% - 2rem);
+  width: 100%;
+  margin: 0;
 }

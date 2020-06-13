@@ -56,12 +56,12 @@ export type ListActions =
   | ChangeListAction
   | MoveCardAction;
 
-export interface ListState {
+export interface ListData {
   id: string;
   title: string;
   cards: string[];
 }
 
 export interface ListsState {
-  [prop: string]: ListState;
+  [prop: string]: ListData;
 }

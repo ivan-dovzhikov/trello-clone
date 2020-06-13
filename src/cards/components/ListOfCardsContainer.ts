@@ -1,11 +1,12 @@
 import { connect, MapStateToProps, MapDispatchToProps } from 'react-redux';
-import { Card, CreateCardAction, DeleteCardAction } from '../types';
+import { CardData, CreateCardAction, DeleteCardAction } from '../types';
 import { createCard, deleteCard, changeCard } from '../actions';
 import { AppState } from 'utils';
-import CardsList from './ListOfCards';
+import ListOfCards from './ListOfCards';
 
 interface StateProps {
-  cards: Card[];
+  droppableId: string;
+  cards: CardData[];
 }
 
 interface OwnProps {
@@ -15,9 +16,10 @@ interface OwnProps {
 const mapState: MapStateToProps<StateProps, OwnProps, AppState> = (
   { cards, lists },
   { listId }
-) => {
-  return { cards: lists[listId]?.cards.map(id => cards[id]) };
-};
+) => ({
+  droppableId: listId,
+  cards: lists[listId]?.cards.map(id => cards[id]) || [],
+});
 
 interface DispatchProps {
   onCreate: (content: string) => CreateCardAction;
@@ -35,4 +37,4 @@ const mapDispatch: MapDispatchToProps<DispatchProps, OwnProps> = (
 });
 
 export const connector = connect(mapState, mapDispatch);
-export default connector(CardsList);
+export default connector(ListOfCards);

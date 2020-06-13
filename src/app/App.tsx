@@ -23,10 +23,10 @@ const App: FC = () => {
           <Route
             path="/boards"
             render={() => (
-              <main>
+              <>
                 <BoardsNavigation />
                 <Route path="/boards/:id" component={BoardPage} />
-              </main>
+              </>
             )}
           />
           <Route path="*" render={() => <h2>No such page</h2>} />

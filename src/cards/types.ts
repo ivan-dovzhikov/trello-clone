@@ -35,11 +35,11 @@ export type CardActions =
   | DeleteCardAction
   | ChangeCardAction;
 
-export interface Card {
+export interface CardData {
   id: string;
   content: string;
 }
 
 export interface CardsState {
-  [prop: string]: Card;
+  [prop: string]: CardData;
 }

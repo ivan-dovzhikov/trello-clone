@@ -3,7 +3,6 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
-import { DragDropContext } from 'react-beautiful-dnd';
 import { render, screen } from '@testing-library/react';
 import { AppState } from 'utils';
 import BoardPage from './BoardPage';
@@ -18,9 +17,9 @@ describe('Test presentational board page component', () => {
         { id: '2', title: 'second list', cards: [] },
         { id: '3', title: 'third list', cards: [] },
       ],
-      onCreate: jest.fn(),
-      onDelete: jest.fn(),
-      onEdit: jest.fn(),
+      onListCreate: jest.fn(),
+      onListDelete: jest.fn(),
+      onListEdit: jest.fn(),
       onCardMove: jest.fn(),
       onListMove: jest.fn(),
     };
@@ -36,9 +35,7 @@ describe('Test presentational board page component', () => {
     render(
       <Router history={history}>
         <Provider store={store}>
-          <DragDropContext onDragEnd={() => {}}>
-            <BoardPage {...props} />
-          </DragDropContext>
+          <BoardPage {...props} />
         </Provider>
       </Router>
     );

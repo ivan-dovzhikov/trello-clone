@@ -3,7 +3,7 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd';
 import { render, screen } from '@testing-library/react';
 import { AppState } from 'utils';
 import ListOfLists from './ListOfLists';
@@ -42,9 +42,7 @@ describe('Test list of lists component', () => {
       <Router history={history}>
         <Provider store={store}>
           <DragDropContext onDragEnd={() => {}}>
-            <Droppable droppableId="">
-              {() => <ListOfLists {...props} />}
-            </Droppable>
+            <ListOfLists {...props} />
           </DragDropContext>
         </Provider>
       </Router>

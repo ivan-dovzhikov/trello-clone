@@ -33,7 +33,14 @@ describe('Test list view', () => {
       <Router history={history}>
         <Provider store={store}>
           <DragDropContext onDragEnd={() => {}}>
-            <Droppable droppableId="">{() => <List {...props} />}</Droppable>
+            {/* Have to provide droppable and parent element with provided ref to avoid errors */}
+            <Droppable droppableId="lists" direction="horizontal" type="list">
+              {provided => (
+                <div ref={provided.innerRef}>
+                  <List {...props} />
+                </div>
+              )}
+            </Droppable>
           </DragDropContext>
         </Provider>
       </Router>

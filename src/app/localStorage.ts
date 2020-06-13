@@ -4,7 +4,7 @@ import store from './store';
 export const loadState = () => {
   try {
     const serializedState = localStorage.getItem('state');
-    if (serializedState === null) return;
+    if (!serializedState) return;
     return JSON.parse(serializedState);
   } catch (err) {
     return;

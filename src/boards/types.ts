@@ -58,7 +58,7 @@ export type BoardActions =
   | ChangeBoardAction
   | MoveListAction;
 
-export interface Board {
+export interface BoardData {
   id: string;
   title: string;
   lists: string[];
@@ -66,7 +66,7 @@ export interface Board {
 
 export interface BoardsState {
   byId: {
-    [prop: string]: Board;
+    [prop: string]: BoardData;
   };
   allIds: string[];
 }
