@@ -6,39 +6,49 @@ import { createMemoryHistory } from 'history';
 import { Button } from '.';
 
 describe('Test button component', () => {
-  const history = createMemoryHistory();
+  const setup = (derivedProps?: {}) => {
+    const history = createMemoryHistory();
+    const text = '12345';
 
-  it('should render button', () => {
+    const props = {
+      onClick: jest.fn(),
+    };
+
     render(
       <Router history={history}>
-        <Button />
+        <Button {...props} {...derivedProps}>
+          {text}
+        </Button>
       </Router>
     );
 
-    expect(screen.getByRole('button')).toBeInTheDocument();
+    return {
+      ...props,
+      button: screen.getByRole('button'),
+      text,
+    };
+  };
+
+  it('should render button', () => {
+    const { button } = setup();
+    expect(button).toBeInTheDocument();
   });
 
-  describe('button component should act like HTML button', () => {
+  describe('should act like HTML button', () => {
     it('should call passed onClick function', () => {
-      const func = jest.fn();
-      render(
-        <Router history={history}>
-          <Button onClick={func} />
-        </Router>
-      );
-
-      userEvent.click(screen.getByRole('button'));
-      expect(func).toBeCalled();
+      const { button, onClick } = setup();
+      userEvent.click(button);
+      expect(onClick).toBeCalled();
     });
 
     it('should have disabled attribute', () => {
-      render(
-        <Router history={history}>
-          <Button disabled={true} />
-        </Router>
-      );
+      const { button } = setup({ disabled: true });
+      expect(button).toHaveAttribute('disabled');
+    });
 
-      expect(screen.getByRole('button')).toHaveAttribute('disabled');
+    it('should container given text', () => {
+      const { button, text } = setup();
+      expect(button).toHaveTextContent(text);
     });
   });
 });
