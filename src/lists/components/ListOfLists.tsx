@@ -4,7 +4,7 @@ import { ListData } from '../types';
 import List from './List';
 import NewList from './NewList';
 
-interface ListOfListsProps {
+export interface ListOfListsProps {
   lists: ListData[];
   onCreate: (title: string) => any;
   onDelete: (id: string) => any;

@@ -3,7 +3,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { FieldEditor } from 'shared';
 import ListOfCard from 'cards';
 
-interface ListProps {
+export interface ListProps {
   index: number;
   id: string;
   title: string;

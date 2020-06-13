@@ -1,5 +1,5 @@
 import React from 'react';
-import BoardsNavigation from './BoardsNavigation';
+import BoardsNavigation, { BoardsNavigationProps } from './BoardsNavigation';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
@@ -7,7 +7,7 @@ import { render, screen } from '@testing-library/react';
 describe('Test presentational boards navigation component', () => {
   const setup = () => {
     const history = createMemoryHistory();
-    const props = {
+    const props: BoardsNavigationProps = {
       boards: [
         {
           id: '1',
@@ -24,6 +24,7 @@ describe('Test presentational boards navigation component', () => {
       onCreate: jest.fn(),
       onEdit: jest.fn(),
     };
+
     render(
       <Router history={history}>
         <BoardsNavigation {...props} />

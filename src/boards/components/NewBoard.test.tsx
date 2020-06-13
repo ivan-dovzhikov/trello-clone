@@ -1,5 +1,5 @@
 import React from 'react';
-import NewBoard from './NewBoard';
+import NewBoard, { NewBoardProps } from './NewBoard';
 import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
@@ -8,15 +8,19 @@ import userEvent from '@testing-library/user-event';
 describe('Test board create button', () => {
   const setup = () => {
     const history = createBrowserHistory();
-    const onCreate = jest.fn();
+
+    const props: NewBoardProps = {
+      onCreate: jest.fn(),
+    };
+
     render(
       <Router history={history}>
-        <NewBoard onCreate={onCreate} />
+        <NewBoard {...props} />
       </Router>
     );
     return {
       button: screen.getByRole('button', { name: 'New Board' }),
-      onCreate,
+      ...props,
     };
   };
 

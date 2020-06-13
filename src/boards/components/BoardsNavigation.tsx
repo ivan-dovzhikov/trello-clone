@@ -5,7 +5,7 @@ import BoardLink from './BoardLink';
 import NewBoard from './NewBoard';
 import { useHistory } from 'react-router-dom';
 
-type BoardsNavigationProps = ConnectedProps<typeof connector>;
+export type BoardsNavigationProps = ConnectedProps<typeof connector>;
 
 const BoardsNavigation: FC<BoardsNavigationProps> = ({
   boards,

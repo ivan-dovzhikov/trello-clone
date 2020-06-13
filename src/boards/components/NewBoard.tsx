@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { FieldEditor } from 'shared';
 
-interface NewBoardProps {
+export interface NewBoardProps {
   onCreate: (title: string) => any;
 }
 

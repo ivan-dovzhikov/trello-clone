@@ -3,22 +3,25 @@ import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import NewList from './NewList';
+import NewList, { NewListProps } from './NewList';
 
 describe('Test list create button', () => {
   const setup = () => {
     const history = createBrowserHistory();
-    const onCreate = jest.fn();
+
+    const props: NewListProps = {
+      onCreate: jest.fn(),
+    };
 
     render(
       <Router history={history}>
-        <NewList onCreate={onCreate} />
+        <NewList {...props} />
       </Router>
     );
 
     return {
       button: screen.getByRole('button', { name: 'New List' }),
-      onCreate,
+      ...props,
     };
   };
 

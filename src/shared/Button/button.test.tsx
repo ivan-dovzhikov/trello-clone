@@ -3,14 +3,14 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { Button } from '.';
+import { Button, ButtonProps } from '.';
 
 describe('Test button component', () => {
   const setup = (derivedProps?: {}) => {
     const history = createMemoryHistory();
     const text = '12345';
 
-    const props = {
+    const props: ButtonProps = {
       onClick: jest.fn(),
     };
 

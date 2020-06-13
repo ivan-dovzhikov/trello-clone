@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { FieldEditor } from 'shared';
 
-interface NewListProps {
+export interface NewListProps {
   onCreate: (title: string) => any;
 }
 

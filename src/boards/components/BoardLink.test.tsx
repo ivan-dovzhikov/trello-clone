@@ -3,12 +3,12 @@ import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import BoardLink from './BoardLink';
+import BoardLink, { BoardLinkProps } from './BoardLink';
 
 describe('Test board link', () => {
   const setup = () => {
     const history = createMemoryHistory();
-    const props = {
+    const props: BoardLinkProps = {
       id: '1234-5678',
       title: 'board title',
       onDelete: jest.fn(),

@@ -5,7 +5,7 @@ import { connector } from './BoardPageContainer';
 import './styles.scss';
 import ListOfLists from 'lists';
 
-type BoardPageProps = ConnectedProps<typeof connector>;
+export type BoardPageProps = ConnectedProps<typeof connector>;
 
 const BoardPage: FC<BoardPageProps> = ({
   boardExist,

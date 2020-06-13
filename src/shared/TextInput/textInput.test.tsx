@@ -3,10 +3,10 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { TextArea } from '.';
+import { TextArea, TextAreaProps } from '.';
 
 describe('Test TextInput component', () => {
-  const setup = (props?: {}) => {
+  const setup = (props?: TextAreaProps) => {
     const history = createMemoryHistory();
 
     render(
@@ -33,8 +33,8 @@ describe('Test TextInput component', () => {
 
   it('should render label on demand', () => {
     const label = 'label';
-    const { textarea } = setup({ label });
-    expect(textarea).toHaveAttribute('label', label);
+    setup({ labelValue: label });
+    expect(screen.getByText(label)).toBeInTheDocument();
   });
 
   it('should call passed passed function on change', () => {

@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { render, screen } from '@testing-library/react';
 import { AppState } from 'utils';
-import ListOfLists from './ListOfLists';
+import ListOfLists, { ListOfListsProps } from './ListOfLists';
 
 describe('Test list of lists component', () => {
   const setup = () => {
@@ -23,7 +23,7 @@ describe('Test list of lists component', () => {
         cards: [],
       },
     ];
-    const props = {
+    const props: ListOfListsProps = {
       lists,
       onDelete: jest.fn(),
       onCreate: jest.fn(),

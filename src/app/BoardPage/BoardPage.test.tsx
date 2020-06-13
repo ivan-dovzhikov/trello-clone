@@ -5,12 +5,12 @@ import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import { AppState } from 'utils';
-import BoardPage from './BoardPage';
+import BoardPage, { BoardPageProps } from './BoardPage';
 
 describe('Test presentational board page component', () => {
   const setup = (boardExist: boolean) => {
     const history = createMemoryHistory();
-    const props = {
+    const props: BoardPageProps = {
       boardExist,
       lists: [
         { id: '1', title: 'first list', cards: [] },

@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FieldEditor } from 'shared';
 
-interface BoardLinkProps {
+export interface BoardLinkProps {
   id: string;
   title: string;
   onEdit: (id: string, newTitle: string) => any;

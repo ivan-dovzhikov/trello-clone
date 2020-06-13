@@ -7,13 +7,13 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AppState } from 'utils';
-import List from './List';
+import List, { ListProps } from './List';
 
 describe('Test list view', () => {
   const setup = () => {
     const history = createMemoryHistory();
 
-    const props = {
+    const props: ListProps = {
       index: 0,
       id: '1',
       title: 'list title',

@@ -3,13 +3,14 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { FieldEditor } from '.';
+import { FieldEditor, FieldEditorProps } from '.';
 
 describe('Test FieldEditor component', () => {
   const setup = (editMode: boolean) => {
     const history = createMemoryHistory();
 
-    const props = {
+    const props: FieldEditorProps = {
+      editMode,
       fieldName: 'test',
       value: 'something',
       onSubmit: jest.fn(),
@@ -19,7 +20,7 @@ describe('Test FieldEditor component', () => {
 
     render(
       <Router history={history}>
-        <FieldEditor {...props} editMode={editMode} />
+        <FieldEditor {...props} />
       </Router>
     );
 

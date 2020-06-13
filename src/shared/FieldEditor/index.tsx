@@ -16,7 +16,7 @@ import {
 } from '@material-ui/icons';
 import './styles.scss';
 
-interface FieldEditorProps {
+export interface FieldEditorProps {
   fieldName: string;
   value?: string;
   editMode: boolean;
