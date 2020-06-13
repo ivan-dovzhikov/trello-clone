@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, forwardRef } from 'react';
+import React, { useState, forwardRef, useEffect } from 'react';
 import { TextareaAutosize, TextareaAutosizeProps } from '@material-ui/core';
 import './styles.scss';
 
@@ -13,22 +13,20 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       labelValue = false,
       isInvalid = false,
       className: derivedClassName,
-      onChange,
       value,
       ...attributes
     },
     ref
   ) => {
     const [hideLabel, setHideLabel] = useState(!!value);
-    const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-      setHideLabel(!!event.target.value);
-      if (typeof onChange === 'function') onChange(event);
-    };
+    useEffect(() => {
+      setHideLabel(!!value);
+    }, [value]);
 
     let textAreaClassName = 'textarea';
-    if (labelValue && hideLabel) textAreaClassName += ' hide-label';
     if (isInvalid) textAreaClassName += ' invalid';
     if (attributes.disabled) textAreaClassName += ' disabled';
+    if (labelValue && hideLabel) textAreaClassName += ' hide-label';
     if (derivedClassName) textAreaClassName += ' ' + derivedClassName;
 
     const textAreaProps = {
@@ -36,7 +34,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       spellCheck: false,
       value,
       ...attributes,
-      onChange: handleChange,
       ref,
     };
 
@@ -47,12 +44,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             <span className={`label-value${hideLabel ? ' hide' : ''}`}>
               {labelValue}
             </span>
-            <TextareaAutosize {...textAreaProps} />
+            <TextareaAutosize {...textAreaProps} ref={ref} />
             <div className="underline" />
           </label>
         ) : (
           <>
-            <TextareaAutosize {...textAreaProps} />
+            <TextareaAutosize {...textAreaProps} ref={ref} />
             <div className="underline" />
           </>
         )}
