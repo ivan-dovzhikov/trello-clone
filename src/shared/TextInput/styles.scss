@@ -40,29 +40,29 @@ $padding: 0.25em 0.5em;
       }
     }
   }
-}
 
-.label {
-  display: block;
-}
-
-.label-value {
-  position: absolute;
-  display: block;
-  padding: $padding;
-  color: get-color(light, 0.7);
-
-  &.hide {
-    display: none;
+  .label {
+    display: block;
   }
-}
 
-.underline {
-  position: absolute;
-  bottom: 0;
-  height: 2px;
-  width: 0;
-  background-color: get-color(accent);
-  transition: width 0.2s ease, background-color 0.4s ease;
-  pointer-events: none;
+  .label-value {
+    position: absolute;
+    display: block;
+    padding: $padding;
+    color: get-color(light, 0.7);
+
+    &.hide {
+      display: none;
+    }
+  }
+
+  .underline {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background-color: get-color(accent);
+    transition: width 0.2s ease, background-color 0.4s ease;
+    pointer-events: none;
+  }
 }

@@ -25,14 +25,14 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       if (typeof onChange === 'function') onChange(event);
     };
 
-    let containerClassName = 'textarea';
-    if (labelValue && hideLabel) containerClassName += ' hide-label';
-    if (isInvalid) containerClassName += ' invalid';
-    if (attributes.disabled) containerClassName += ' disabled';
-    if (derivedClassName) containerClassName += ' ' + derivedClassName;
+    let textAreaClassName = 'textarea';
+    if (labelValue && hideLabel) textAreaClassName += ' hide-label';
+    if (isInvalid) textAreaClassName += ' invalid';
+    if (attributes.disabled) textAreaClassName += ' disabled';
+    if (derivedClassName) textAreaClassName += ' ' + derivedClassName;
 
     const textAreaProps = {
-      className: containerClassName,
+      className: textAreaClassName,
       spellCheck: false,
       value,
       ...attributes,

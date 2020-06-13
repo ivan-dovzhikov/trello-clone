@@ -6,55 +6,44 @@ import { createMemoryHistory } from 'history';
 import { TextArea } from '.';
 
 describe('Test TextInput component', () => {
-  const history = createMemoryHistory();
+  const setup = (props?: {}) => {
+    const history = createMemoryHistory();
 
-  it('should render textarea element', () => {
     render(
       <Router history={history}>
-        <TextArea />
+        <TextArea {...props} />
       </Router>
     );
 
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    return {
+      textarea: screen.getByRole('textbox'),
+    };
+  };
+
+  it('should render textarea element', () => {
+    const { textarea } = setup();
+    expect(textarea).toBeInTheDocument();
   });
 
   it('should render textarea with given value', () => {
     const value = 'test';
-    render(
-      <Router history={history}>
-        <TextArea value={value} />
-      </Router>
-    );
-
-    expect(screen.getByRole('textbox') as HTMLTextAreaElement).toHaveValue(
-      value
-    );
+    const { textarea } = setup({ value });
+    expect(textarea).toHaveValue(value);
   });
 
   it('should render label on demand', () => {
     const label = 'label';
-    render(
-      <Router history={history}>
-        <TextArea labelValue={label} />
-      </Router>
-    );
-
-    // Component renders a material-ui TextareaAutosize component which creates two elements.
-    // Therefore this test have to query array of both to not get error
-    expect(screen.getAllByLabelText(label)[0]).toBeInTheDocument();
+    const { textarea } = setup({ label });
+    expect(textarea).toHaveAttribute('label', label);
   });
 
-  it('should call passed passed function on change', async () => {
-    const func = jest.fn();
-    render(
-      <Router history={history}>
-        <TextArea disabled={false} onChange={func} />
-      </Router>
-    );
+  it('should call passed passed function on change', () => {
+    const onChange = jest.fn();
+    setup({ onChange });
 
     const typedValue = 'typedValue';
-    await userEvent.type(screen.getByRole('textbox'), typedValue);
+    userEvent.type(screen.getByRole('textbox'), typedValue);
 
-    expect(func).toBeCalledTimes(typedValue.length);
+    expect(onChange).toBeCalledTimes(typedValue.length);
   });
 });
