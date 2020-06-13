@@ -6,29 +6,30 @@ import { createMemoryHistory } from 'history';
 import { FieldEditor } from '.';
 
 describe('Test FieldEditor component', () => {
-  const setup = (editMode: boolean, initialValue: string = '') => {
+  const setup = (editMode: boolean) => {
     const history = createMemoryHistory();
-    const onSubmit = jest.fn();
-    const onDelete = jest.fn();
-    const onEditToggle = jest.fn();
+
+    const props = {
+      fieldName: 'test',
+      value: 'something',
+      onSubmit: jest.fn(),
+      onDelete: jest.fn(),
+      onEditToggle: jest.fn(),
+    };
+
     render(
       <Router history={history}>
-        <FieldEditor
-          fieldName="test"
-          value={initialValue}
-          onSubmit={onSubmit}
-          onDelete={onDelete}
-          editMode={editMode}
-          onEditToggle={onEditToggle}
-        />
+        <FieldEditor {...props} editMode={editMode} />
       </Router>
     );
 
     return {
-      textarea: screen.getByRole('textbox') as HTMLTextAreaElement,
-      onSubmit,
-      onDelete,
-      onEditToggle,
+      ...props,
+      textarea: screen.getByRole('textbox'),
+      getSubmitButton: () => screen.getByRole('button', { name: 'Submit' }),
+      getCancelButton: () => screen.getByRole('button', { name: 'Cancel' }),
+      getEditButton: () => screen.getByRole('button', { name: 'Edit' }),
+      getDeleteButton: () => screen.getByRole('button', { name: 'Delete' }),
     };
   };
 
@@ -38,65 +39,60 @@ describe('Test FieldEditor component', () => {
   });
 
   it('should render textarea with given initial value', () => {
-    const initialValue = 'initial';
-    const { textarea } = setup(true, initialValue);
-    expect(textarea).toHaveValue(initialValue);
+    const { textarea, value } = setup(true);
+    expect(textarea).toHaveValue(value);
   });
 
   describe('test submit button', () => {
     it('should render button', () => {
-      setup(true);
-      expect(screen.getByTitle('Submit')).toBeInTheDocument();
+      const { getSubmitButton } = setup(true);
+      expect(getSubmitButton()).toBeInTheDocument();
     });
 
     it('should call onSubmit when clicked', () => {
-      const { textarea, onSubmit } = setup(true);
-      const submitButton = screen.getByTitle('Submit');
+      const { textarea, getSubmitButton, onSubmit } = setup(true);
       const typedValue = 'whatever';
       userEvent.type(textarea, typedValue);
-      userEvent.click(submitButton);
+      userEvent.click(getSubmitButton());
       expect(onSubmit).toBeCalledWith(typedValue);
     });
   });
 
   describe('test cancel button', () => {
     it('should render button', () => {
-      setup(true);
-      expect(screen.getByTitle('Cancel')).toBeInTheDocument();
+      const { getCancelButton } = setup(true);
+      expect(getCancelButton()).toBeInTheDocument();
     });
 
     it('should call onEdit toggle when clicked', () => {
-      const { onEditToggle } = setup(true);
-      const cancelButton = screen.getByTitle('Cancel');
-      userEvent.click(cancelButton);
+      const { onEditToggle, getCancelButton } = setup(true);
+      userEvent.click(getCancelButton());
       expect(onEditToggle).toBeCalled();
     });
   });
 
   describe('test edit button', () => {
     it('should render button', () => {
-      setup(false);
-      expect(screen.getByTitle('Edit')).toBeInTheDocument();
+      const { getEditButton } = setup(false);
+      expect(getEditButton()).toBeInTheDocument();
     });
 
     it('should call onEdit toggle when clicked', () => {
-      const { onEditToggle } = setup(false);
-      const editButton = screen.getByTitle('Edit');
-      userEvent.click(editButton);
+      const { onEditToggle, getEditButton } = setup(false);
+      userEvent.click(getEditButton());
       expect(onEditToggle).toBeCalled();
     });
   });
 
   describe('test delete button', () => {
     it('should render button', () => {
-      setup(false);
-      expect(screen.getByTitle('Delete')).toBeInTheDocument();
+      const { getDeleteButton } = setup(false);
+      expect(getDeleteButton()).toBeInTheDocument();
     });
 
     it('should call onDelete when clicked', () => {
-      const { onDelete } = setup(false);
-      const deleteButton = screen.getByTitle('Delete');
-      userEvent.click(deleteButton);
+      const { onDelete, getDeleteButton } = setup(false);
+      userEvent.click(getDeleteButton());
       expect(onDelete).toBeCalled();
     });
   });
@@ -104,23 +100,19 @@ describe('Test FieldEditor component', () => {
   describe('test typing behavior', () => {
     it('should have typed value', () => {
       const { textarea } = setup(true);
-
       const typedValue = 'whatever';
       userEvent.type(textarea, typedValue);
-
       expect(textarea).toHaveValue(typedValue);
     });
 
     it('should prevent typing line break and put whitespace instead', () => {
       const { textarea } = setup(true);
-
       userEvent.type(textarea, 'line\nbreak');
-
       expect(textarea).toHaveValue('line break');
     });
 
     it('should call onSubmit on Enter', () => {
-      const { textarea, onSubmit } = setup(true, 'placeholder');
+      const { textarea, onSubmit } = setup(true);
 
       const typedValue = 'TypedValue';
       userEvent.type(textarea, typedValue);
@@ -135,7 +127,7 @@ describe('Test FieldEditor component', () => {
     });
 
     it('should exit edit mode on Escape', () => {
-      const { textarea, onEditToggle } = setup(true, 'placeholder');
+      const { textarea, onEditToggle } = setup(true);
 
       fireEvent.keyDown(textarea, {
         charCode: 27,
