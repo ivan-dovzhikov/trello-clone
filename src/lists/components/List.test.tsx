@@ -47,7 +47,7 @@ describe('Test list view', () => {
     );
 
     return {
-      getTextarea: () => screen.getByRole('textbox'),
+      textarea: screen.getByRole('textbox'),
       getEditButton: () => screen.getByRole('button', { name: 'Edit' }),
       getDeleteButton: () => screen.getByRole('button', { name: 'Delete' }),
       getSubmitButton: () => screen.getByRole('button', { name: 'Submit' }),
@@ -57,20 +57,19 @@ describe('Test list view', () => {
   };
 
   it('should render disabled textarea with given title', () => {
-    const { getTextarea } = setup();
-    expect(getTextarea()).toBeInTheDocument();
+    const { textarea } = setup();
+    expect(textarea).toBeInTheDocument();
   });
 
   it('should enable textarea on edit click', () => {
-    const { getTextarea, getEditButton } = setup();
+    const { textarea, getEditButton } = setup();
     userEvent.click(getEditButton());
-    expect(getTextarea()).toBeEnabled();
+    expect(textarea).toBeEnabled();
   });
 
   it('should reset typed title and disable textarea on cancel click', () => {
-    const { title, getTextarea, getEditButton, getCancelButton } = setup();
+    const { title, textarea, getEditButton, getCancelButton } = setup();
     userEvent.click(getEditButton());
-    const textarea = getTextarea();
     userEvent.type(textarea, ' something that should be reset');
     userEvent.click(getCancelButton());
     expect(textarea).toHaveValue(title);
@@ -85,17 +84,11 @@ describe('Test list view', () => {
     });
 
     it('should call onEdit with typed value', () => {
-      const {
-        id,
-        onEdit,
-        getEditButton,
-        getTextarea,
-        getSubmitButton,
-      } = setup();
+      const { id, onEdit, textarea, getEditButton, getSubmitButton } = setup();
 
       userEvent.click(getEditButton());
       const typedValue = 'shh...';
-      userEvent.type(getTextarea(), typedValue);
+      userEvent.type(textarea, typedValue);
       userEvent.click(getSubmitButton());
       expect(onEdit).toBeCalledWith(id, typedValue);
     });
