@@ -1,4 +1,10 @@
+@import '../../utils/';
+
 .board-page {
+  overflow-x: auto;
   display: flex;
   align-items: flex-start;
+  height: $board-page-height;
+  padding-bottom: 1rem;
+  @include scrollbar;
 }

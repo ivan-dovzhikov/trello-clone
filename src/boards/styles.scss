@@ -1,9 +1,13 @@
 @import '../utils';
 
 .boards-navigation {
+  overflow-x: auto;
+  overflow-y: hidden;
   display: flex;
   align-items: flex-start;
+  height: $boards-navigation-height;
   margin: 1rem 0 2rem;
+  @include scrollbar;
 
   ul {
     display: flex;
@@ -15,7 +19,6 @@
 
 .board-panel {
   display: block;
-  height: 100%;
   width: 350px;
   margin: 0 1rem;
   padding: 1rem;

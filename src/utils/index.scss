@@ -19,3 +19,30 @@ $colors: (
 @mixin accent-shadow() {
   box-shadow: 0 0 1px 2px get-color(accent, 0.5);
 }
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: get-color(dark);
+    }
+  }
+}
+
+$site-header-height: 50px;
+$boards-navigation-height: 150px;
+$board-page-height: calc(
+  100vh - #{$site-header-height + $boards-navigation-height}
+);

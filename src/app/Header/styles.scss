@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  height: $site-header-height;
   width: 100%;
   background-color: get-color(dark, 0.4);
 

@@ -3,6 +3,11 @@
 .list-of-lists {
   display: flex;
   align-items: flex-start;
+  height: 100%;
+
+  & * {
+    max-height: 100%;
+  }
 
   & > ul {
     display: flex;
@@ -13,11 +18,12 @@
 }
 
 .list {
-  position: relative;
+  display: flex;
+  flex-direction: column;
   min-height: 87px;
   width: 350px;
   margin: 0 1rem;
-  padding: 1rem 1rem 1rem; //calc(1rem + 51px);
+  padding: 1rem;
   background-color: get-color(dark, 0.2);
 }
 

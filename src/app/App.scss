@@ -32,6 +32,10 @@ body {
   height: 100%;
 }
 
+button {
+  white-space: nowrap;
+}
+
 #app {
   overflow: hidden;
   display: flex;
