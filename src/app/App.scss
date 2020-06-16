@@ -41,5 +41,6 @@ button {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #28313b no-repeat linear-gradient(135deg, #28313b, #485461 74%);
+  background: #ffcc33 no-repeat url('../assets/bg/light.jpg');
+  background-size: cover;
 }
