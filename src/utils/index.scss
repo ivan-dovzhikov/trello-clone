@@ -1,3 +1,9 @@
+$site-header-height: 50px;
+$boards-navigation-height: 150px;
+$board-page-height: calc(
+  100vh - #{$site-header-height + $boards-navigation-height}
+);
+
 $colors: (
   accent: #0083b7,
   light: #f0f0f0,
@@ -40,9 +46,3 @@ $colors: (
     }
   }
 }
-
-$site-header-height: 50px;
-$boards-navigation-height: 150px;
-$board-page-height: calc(
-  100vh - #{$site-header-height + $boards-navigation-height}
-);
