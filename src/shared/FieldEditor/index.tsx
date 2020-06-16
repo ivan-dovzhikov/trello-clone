@@ -69,7 +69,7 @@ export const FieldEditor: FC<FieldEditorProps> = ({
   }, [editMode]);
 
   return (
-    <form className="field-editor">
+    <form className={`field-editor${editMode ? ' edit' : ''}`}>
       <TextArea
         labelValue={fieldName}
         title={fieldName}
@@ -102,17 +102,22 @@ export const FieldEditor: FC<FieldEditorProps> = ({
             >
               <CancelIcon />
             </Button>
+            {onDelete && (
+              <Button
+                title="Delete"
+                styleType={'fill'}
+                icon={true}
+                onClick={onDelete}
+              >
+                <DeleteIcon />
+              </Button>
+            )}
           </>
         ) : (
           <>
             <Button title="Edit" icon={true} onClick={toggleEdit}>
               <EditIcon />
             </Button>
-            {onDelete && (
-              <Button title="Delete" icon={true} onClick={onDelete}>
-                <DeleteIcon />
-              </Button>
-            )}
           </>
         )}
       </div>

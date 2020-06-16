@@ -26,8 +26,8 @@ describe('Test FieldEditor component', () => {
       textarea: screen.getByRole('textbox'),
       getSubmitButton: () => screen.getByRole('button', { name: 'Submit' }),
       getCancelButton: () => screen.getByRole('button', { name: 'Cancel' }),
-      getEditButton: () => screen.getByRole('button', { name: 'Edit' }),
       getDeleteButton: () => screen.getByRole('button', { name: 'Delete' }),
+      getEditButton: () => screen.getByRole('button', { name: 'Edit' }),
     };
   };
 
@@ -84,12 +84,12 @@ describe('Test FieldEditor component', () => {
 
   describe('test delete button', () => {
     it('should render button', () => {
-      const { getDeleteButton } = setup(false);
+      const { getDeleteButton } = setup(true);
       expect(getDeleteButton()).toBeInTheDocument();
     });
 
     it('should call onDelete when clicked', () => {
-      const { onDelete, getDeleteButton } = setup(false);
+      const { onDelete, getDeleteButton } = setup(true);
       userEvent.click(getDeleteButton());
       expect(onDelete).toBeCalled();
     });

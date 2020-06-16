@@ -60,7 +60,8 @@ describe('Test board link', () => {
 
   describe('test passed functions to be called on events', () => {
     it('should call onDelete with id', () => {
-      const { id, onDelete, getDeleteButton } = setup();
+      const { id, onDelete, getEditButton, getDeleteButton } = setup();
+      userEvent.click(getEditButton());
       userEvent.click(getDeleteButton());
       expect(onDelete).toBeCalledWith(id);
     });
