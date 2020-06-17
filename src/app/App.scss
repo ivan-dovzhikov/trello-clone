@@ -24,16 +24,15 @@ textarea,
 }
 
 button {
+  white-space: nowrap;
   cursor: pointer;
 }
 
 html,
-body {
+body,
+#app {
+  overflow: hidden;
   height: 100%;
-}
-
-button {
-  white-space: nowrap;
 }
 
 :focus {
@@ -41,10 +40,8 @@ button {
 }
 
 #app {
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 100%;
   background: #32639c no-repeat url('../assets/bg.jpg');
   background-size: cover;
 }
