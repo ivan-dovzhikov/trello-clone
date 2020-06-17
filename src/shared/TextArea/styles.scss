@@ -1,7 +1,7 @@
 @import '../../utils';
-$padding: 0.25em 0.5em;
 
 .textarea-container {
+  $padding: 0.25em 0.5em;
   position: relative;
 
   .textarea {
@@ -11,6 +11,8 @@ $padding: 0.25em 0.5em;
     padding: $padding;
     border: none;
     background-color: get-color(dark, 0.3);
+
+    @include scrollbar(get-color(dark, 0.8));
 
     &:focus {
       outline: none;

@@ -10,7 +10,7 @@ const NewList: FC<NewListProps> = ({ onCreate }) => {
   const toggleEdit = () => setEditMode(!editMode);
 
   return editMode ? (
-    <div className="list">
+    <div className="new-list">
       <FieldEditor
         editMode={true}
         fieldName="Title"
@@ -19,7 +19,7 @@ const NewList: FC<NewListProps> = ({ onCreate }) => {
       />
     </div>
   ) : (
-    <button className="list" onClick={toggleEdit}>
+    <button className="new-list" onClick={toggleEdit}>
       New List
     </button>
   );

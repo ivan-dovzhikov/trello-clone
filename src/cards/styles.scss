@@ -1,34 +1,33 @@
 @import '../utils';
 
 .list-of-cards {
-  flex-basis: 100%;
-  overflow-y: auto;
-  @include scrollbar;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 
-  & ul {
-    padding: 0;
-    list-style: none;
-  }
+  overflow-y: auto;
+  overflow-x: hidden;
+  @include scrollbar(get-color(dark, 0.8), true);
+  padding: 0.5rem 0.5rem 1px;
+  list-style: none;
 }
+
+$card-y-margin: 0.25rem;
 
 .card {
   position: relative;
   display: block;
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border: none;
-  background-color: get-color(light, 0.3);
+  margin: $card-y-margin 0;
+  padding: 0.25rem;
+  border: 0;
+  background-color: get-color(light, 0.8);
+  box-shadow: -1px 2px 2px 0 rgba(get-color(dark), 0.5);
 
-  &:active,
-  &:focus {
-    outline: none;
-    @include accent-shadow();
-  }
+  @include focus;
 }
 
-button.card {
-  bottom: 0;
-  width: 100%;
-  margin: 0;
+.new-card {
+  @extend .card;
+  margin: $card-y-margin 0.5rem 0.5rem;
 }

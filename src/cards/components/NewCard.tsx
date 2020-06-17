@@ -10,7 +10,7 @@ const NewCard: FC<NewCardProps> = ({ onCreate }) => {
   const toggleEditMode = () => setEditMode(!editMode);
 
   return editMode ? (
-    <div className="card">
+    <div className="new-card">
       <FieldEditor
         fieldName="text"
         editMode={editMode}
@@ -19,7 +19,7 @@ const NewCard: FC<NewCardProps> = ({ onCreate }) => {
       />
     </div>
   ) : (
-    <button className="card" onClick={toggleEditMode}>
+    <button className="new-card" onClick={toggleEditMode}>
       New Card
     </button>
   );

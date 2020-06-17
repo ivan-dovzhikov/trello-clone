@@ -18,12 +18,16 @@ const ListOfLists: FC<ListOfListsProps> = ({
   onEdit,
 }) => {
   return (
-    <div className="list-of-lists">
+    <>
       <Droppable droppableId="lists" direction="horizontal" type="list">
         {provided => (
-          <ul {...provided.droppableProps} ref={provided.innerRef}>
+          <ul
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            className="list-of-lists"
+          >
             {lists.map(({ id, title }, index) => (
-              <li key={id}>
+              <li key={id} className="column">
                 <List
                   index={index}
                   id={id}
@@ -38,7 +42,7 @@ const ListOfLists: FC<ListOfListsProps> = ({
         )}
       </Droppable>
       <NewList onCreate={onCreate} />
-    </div>
+    </>
   );
 };
 

@@ -13,7 +13,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 150%;
-  color: get-color(light);
+  color: get-color(dark);
 }
 
 a,
@@ -36,11 +36,23 @@ button {
   white-space: nowrap;
 }
 
+:focus {
+  outline: none;
+}
+
 #app {
   overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #ffcc33 no-repeat url('../assets/bg/light.jpg');
+  background: #32639c no-repeat url('../assets/bg.jpg');
   background-size: cover;
+}
+
+#draggable {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
 }

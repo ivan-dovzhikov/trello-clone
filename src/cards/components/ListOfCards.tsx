@@ -15,10 +15,14 @@ const ListOfCards: FC<ListOfCardsProps> = ({
   onEdit,
 }) => {
   return (
-    <div className="list-of-cards">
+    <>
       <Droppable droppableId={droppableId} type="card">
         {provided => (
-          <ul {...provided.droppableProps} ref={provided.innerRef}>
+          <ul
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            className="list-of-cards"
+          >
             {cards.map(({ id, content }, index) => (
               <li key={id}>
                 <Card
@@ -35,7 +39,7 @@ const ListOfCards: FC<ListOfCardsProps> = ({
         )}
       </Droppable>
       <NewCard onCreate={onCreate} />
-    </div>
+    </>
   );
 };
 

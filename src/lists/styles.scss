@@ -1,40 +1,61 @@
 @import '../utils';
+@import '../app/BoardPage/styles';
+
+$list-x-margin: 0.25rem;
 
 .list-of-lists {
   display: flex;
   align-items: flex-start;
   height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 
-  & * {
-    max-height: 100%;
-  }
-
-  & > ul {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  & > li {
+    height: 100%;
   }
 }
 
 .list {
+  $number-of-columns: 6;
+
+  width: calc(
+    (
+        100vw - #{$board-page-x-margin * 2 + $list-x-margin * 2 *
+          $number-of-columns}
+      ) / #{$number-of-columns}
+  );
+
+  margin: 0 $list-x-margin;
   display: flex;
   flex-direction: column;
-  min-height: 87px;
-  width: 350px;
-  margin: 0 1rem;
-  padding: 1rem;
-  background-color: get-color(dark, 0.2);
+  max-height: 100%;
+  @include window;
+  border-radius: 8px;
+
+  @include focus;
+
+  &:focus .new-card,
+  &:focus .card {
+    background-color: get-color(light);
+    color: get-color(dark);
+  }
+
+  header {
+    line-height: 1;
+    text-align: center;
+    padding: 0.25rem 0.25rem 0;
+
+    .textarea {
+      text-align: center;
+    }
+  }
 }
 
-button.list {
-  width: auto;
-  padding: 1rem;
+.new-list {
+  @extend .list;
+  margin: 0;
+  padding: 0.5rem;
   border: 0;
   transition: 0.2s ease;
-
-  &:focus {
-    outline: none;
-    @include accent-shadow();
-  }
 }

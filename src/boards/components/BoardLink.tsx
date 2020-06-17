@@ -23,11 +23,11 @@ const BoardLink: FC<BoardLinkProps> = ({ id, title, onEdit, onDelete }) => {
   };
 
   return editMode ? (
-    <div className="board-panel">
+    <div className="board-link">
       <FieldEditor {...FieldEditProps} />
     </div>
   ) : (
-    <NavLink to={`/boards/${id}`} className="board-panel">
+    <NavLink to={`/boards/${id}`} className="board-link">
       <FieldEditor {...FieldEditProps} />
     </NavLink>
   );

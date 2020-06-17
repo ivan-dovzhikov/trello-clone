@@ -22,11 +22,32 @@ $colors: (
   @return $color;
 }
 
-@mixin accent-shadow() {
-  box-shadow: 0 0 1px 2px get-color(accent, 0.5);
+@mixin window($opacity: 0.6, $shadow-color: get-color(dark)) {
+  background-color: get-color(light, $opacity);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 3px 2px -2px $shadow-color, -1px 0 2px -2px $shadow-color;
 }
 
-@mixin scrollbar {
+@mixin focus {
+  &:focus {
+    background-color: get-color(accent, 1, 5%);
+    color: get-color(light);
+  }
+}
+
+@mixin scrollbar($color, $disappearing: false) {
+  @if $disappearing {
+    & {
+      background-color: transparent;
+      background-clip: text;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $color;
+      }
+    }
+  }
+
   &::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -37,12 +58,17 @@ $colors: (
   }
 
   &::-webkit-scrollbar-thumb {
-    border-radius: 5px;
+    @if $disappearing {
+      background-color: inherit;
+    } @else {
+      visibility: hidden;
+      background-color: $color;
+    }
+
+    border-radius: 4px;
   }
 
-  &:hover {
-    &::-webkit-scrollbar-thumb {
-      background-color: get-color(dark);
-    }
+  &:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
   }
 }

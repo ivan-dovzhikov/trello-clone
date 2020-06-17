@@ -10,7 +10,7 @@ const NewBoard: FC<NewBoardProps> = ({ onCreate }) => {
   const toggleShowEdit = () => setShowEdit(!showEdit);
 
   return showEdit ? (
-    <div className="board-panel">
+    <div className="new-board">
       <FieldEditor
         fieldName="Title"
         editMode={true}
@@ -19,7 +19,7 @@ const NewBoard: FC<NewBoardProps> = ({ onCreate }) => {
       />
     </div>
   ) : (
-    <button className="board-panel" onClick={toggleShowEdit}>
+    <button className="new-board" onClick={toggleShowEdit}>
       New Board
     </button>
   );

@@ -6,7 +6,7 @@
   justify-content: space-evenly;
   height: $site-header-height;
   width: 100%;
-  background-color: get-color(dark, 0.4);
+  @include window;
 
   ul {
     display: flex;
@@ -25,13 +25,9 @@
     transition: 0.2s ease;
 
     &.active {
-      border-color: get-color(light, 0.5);
-      background-color: get-color(light, 0.1);
+      border-color: get-color(dark, 0.5);
     }
 
-    &:focus {
-      border-color: get-color(accent);
-      outline: none;
-    }
+    @include focus;
   }
 }
