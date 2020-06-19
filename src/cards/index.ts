@@ -1,2 +1,2 @@
 import './styles.scss';
-export { default } from './components/ListOfCardsContainer';
+export { default } from './components/ListOfCards';

@@ -1,12 +1,13 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement, useState, memo } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { FieldEditor } from 'shared';
 import { createPortal } from 'react-dom';
+import { useSelector } from 'react-redux';
+import { AppState } from 'utils';
 
 export interface CardProps {
   index: number;
   id: string;
-  content: string;
   onDelete: (id: string) => any;
   onEdit: (id: string, newContent: string) => any;
 }
@@ -16,20 +17,24 @@ const optionalPortal = (style: any, element: ReactElement): ReactElement => {
   return createPortal(element, document.getElementById('draggable')!);
 };
 
-const Card: FC<CardProps> = ({ index, id, content, onDelete, onEdit }) => {
+const Card: FC<CardProps> = ({ index, id, onDelete, onEdit }) => {
+  const content = useSelector<AppState, string>(
+    ({ cards }) => cards[id].content
+  );
+
   const handleDelete = () => onDelete(id);
   const handleSubmit = (newContent: string) => onEdit(id, newContent);
 
   // Caret insert in edit mode won't work if disableInteractiveElementBlocking
   // will be enabled
-  const [textareaDrag, setTextareaDrag] = useState(true);
-  const toggleTextareaDrag = () => setTextareaDrag(!textareaDrag);
+  const [shouldDrag, setShouldDrag] = useState(true);
+  const toggleShouldDrag = () => setShouldDrag(!shouldDrag);
 
   return (
     <Draggable
       draggableId={id}
       index={index}
-      disableInteractiveElementBlocking={textareaDrag}
+      disableInteractiveElementBlocking={shouldDrag}
     >
       {provided =>
         optionalPortal(
@@ -45,7 +50,7 @@ const Card: FC<CardProps> = ({ index, id, content, onDelete, onEdit }) => {
               value={content}
               onSubmit={handleSubmit}
               onDelete={handleDelete}
-              onEditToggle={toggleTextareaDrag}
+              onEditToggle={toggleShouldDrag}
             />
           </div>
         )
@@ -54,4 +59,4 @@ const Card: FC<CardProps> = ({ index, id, content, onDelete, onEdit }) => {
   );
 };
 
-export default Card;
+export default memo(Card);

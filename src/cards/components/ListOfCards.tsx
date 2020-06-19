@@ -1,34 +1,51 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback, memo } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
-import { ConnectedProps } from 'react-redux';
-import { connector } from './ListOfCardsContainer';
+import { useSelector, useDispatch } from 'react-redux';
+import { createCard, deleteCard, changeCard } from '../actions';
 import Card from './Card';
 import NewCard from './NewCard';
+import { AppState } from 'utils';
 
-export type ListOfCardsProps = ConnectedProps<typeof connector>;
+export interface ListOfCardsProps {
+  listId: string;
+}
 
-const ListOfCards: FC<ListOfCardsProps> = ({
-  droppableId,
-  cards = [],
-  onCreate,
-  onDelete,
-  onEdit,
-}) => {
+const ListOfCards: FC<ListOfCardsProps> = ({ listId }) => {
+  const dispatch = useDispatch();
+
+  const cardsIds = useSelector<AppState, string[]>(
+    ({ lists }) => lists[listId]?.cards || []
+  );
+
+  const onCreate = useCallback(
+    (content: string) => dispatch(createCard(listId, content)),
+    [dispatch, listId]
+  );
+
+  const onDelete = useCallback(
+    (cardId: string) => dispatch(deleteCard(listId, cardId)),
+    [dispatch, listId]
+  );
+
+  const onEdit = useCallback(
+    (cardId: string, content: string) => dispatch(changeCard(cardId, content)),
+    [dispatch]
+  );
+
   return (
     <>
-      <Droppable droppableId={droppableId} type="card">
+      <Droppable droppableId={listId} type="card">
         {provided => (
           <ul
             {...provided.droppableProps}
             ref={provided.innerRef}
             className="list-of-cards"
           >
-            {cards.map(({ id, content }, index) => (
+            {cardsIds.map((id, index) => (
               <li key={id}>
                 <Card
                   index={index}
                   id={id}
-                  content={content}
                   onDelete={onDelete}
                   onEdit={onEdit}
                 />
@@ -43,4 +60,4 @@ const ListOfCards: FC<ListOfCardsProps> = ({
   );
 };
 
-export default ListOfCards;
+export default memo(ListOfCards);

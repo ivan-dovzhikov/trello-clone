@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, memo } from 'react';
 import { FieldEditor } from 'shared';
 
 export interface NewCardProps {
@@ -22,4 +22,4 @@ const NewCard: FC<NewCardProps> = ({ onCreate }) => {
   );
 };
 
-export default NewCard;
+export default memo(NewCard);
