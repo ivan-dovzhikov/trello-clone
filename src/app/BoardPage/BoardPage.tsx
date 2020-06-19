@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, WheelEvent } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { ConnectedProps } from 'react-redux';
+import { HORIZONTAL_SCROLLING_SPEED_FACTOR } from 'utils';
 import { connector } from './BoardPageContainer';
 import './styles.scss';
 import ListOfLists from 'lists';
@@ -17,6 +18,19 @@ const BoardPage: FC<BoardPageProps> = ({
   onListMove,
 }) => {
   if (boardExist) {
+    const onWheel = ({
+      target,
+      currentTarget,
+      deltaY,
+    }: WheelEvent<HTMLDivElement>) => {
+      if ((target as HTMLElement)?.closest('.list')) return;
+      currentTarget.scrollTo({
+        left: currentTarget.scrollLeft +=
+          deltaY * HORIZONTAL_SCROLLING_SPEED_FACTOR,
+        behavior: 'smooth',
+      });
+    };
+
     const onDragEnd = (result: DropResult) => {
       const { destination, source, type } = result;
 
@@ -39,7 +53,7 @@ const BoardPage: FC<BoardPageProps> = ({
     };
 
     return (
-      <main className="board-page">
+      <main className="board-page" onWheel={onWheel}>
         <DragDropContext onDragEnd={onDragEnd}>
           <ListOfLists
             lists={lists}

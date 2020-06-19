@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, WheelEvent } from 'react';
 import { ConnectedProps } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { HORIZONTAL_SCROLLING_SPEED_FACTOR } from 'utils';
 import { connector } from './BoardsNavigationContainer';
 import BoardLink from './BoardLink';
 import NewBoard from './NewBoard';
-import { useHistory } from 'react-router-dom';
 
 export type BoardsNavigationProps = ConnectedProps<typeof connector>;
 
@@ -19,8 +20,20 @@ const BoardsNavigation: FC<BoardsNavigationProps> = ({
     onDelete(id);
   };
 
+  const onWheel = ({
+    target,
+    currentTarget,
+    deltaY,
+  }: WheelEvent<HTMLDivElement>) => {
+    if ((target as HTMLElement)?.closest('.field-editor.edit')) return;
+    currentTarget.scrollTo({
+      left: currentTarget.scrollLeft +=
+        deltaY * HORIZONTAL_SCROLLING_SPEED_FACTOR,
+    });
+  };
+
   return (
-    <nav className="boards-navigation">
+    <nav className="boards-navigation" onWheel={onWheel}>
       <ul>
         {boards.map(({ id, title }) => (
           <li key={id}>
