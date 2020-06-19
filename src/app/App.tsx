@@ -16,7 +16,7 @@ watchState();
 
 const App: FC = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Provider store={store}>
         <Header />
         <Switch>
