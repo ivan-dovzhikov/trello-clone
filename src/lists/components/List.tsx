@@ -1,19 +1,22 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, memo } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { FieldEditor } from 'shared';
 import ListOfCard from 'cards';
+import { useSelector } from 'react-redux';
+import { AppState } from 'utils';
 
 export interface ListProps {
   index: number;
   id: string;
-  title: string;
   onEdit: (listId: string, newTitle: string) => any;
   onDelete: (listId: string) => any;
 }
 
-const List: FC<ListProps> = ({ index, id, title, onEdit, onDelete }) => {
+const List: FC<ListProps> = ({ index, id, onEdit, onDelete }) => {
   const handleDelete = () => onDelete(id);
   const handleSubmit = (newTitle: string) => onEdit(id, newTitle);
+
+  const title = useSelector<AppState, string>(({ lists }) => lists[id].title);
 
   // Caret insert in edit mode won't work if disableInteractiveElementBlocking
   // will be enabled
@@ -49,4 +52,4 @@ const List: FC<ListProps> = ({ index, id, title, onEdit, onDelete }) => {
   );
 };
 
-export default List;
+export default memo(List);

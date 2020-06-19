@@ -8,7 +8,7 @@ import store from './store';
 import { watchState } from './localStorage';
 import Header from './Header/Header';
 import HomePage from './HomePage/HomePage';
-import BoardPage from './BoardPage/BoardPageContainer';
+import BoardPage from './BoardPage/BoardPage';
 import BoardsNavigation from 'boards';
 
 watchState();

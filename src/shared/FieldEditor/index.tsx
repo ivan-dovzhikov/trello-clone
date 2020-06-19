@@ -56,10 +56,11 @@ export const FieldEditor: FC<FieldEditorProps> = ({
   };
 
   const handleSubmit = () => {
-    if (!currentValue.trim()) return;
-    if (value !== currentValue) {
-      value = currentValue;
-      onSubmit(value);
+    const trimmedCurrentValue = currentValue.trim();
+    if (!trimmedCurrentValue) return;
+    if (value !== trimmedCurrentValue) {
+      value = trimmedCurrentValue;
+      onSubmit(trimmedCurrentValue);
     }
     toggleEdit();
   };

@@ -1,45 +1,100 @@
-import React, { FC } from 'react';
+import React, { FC, memo, useCallback } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
-import { ListData } from '../types';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppState } from 'utils';
+import { createList, deleteList, changeList, moveCard } from '../actions';
+import { moveList } from 'boards/actions';
 import List from './List';
 import NewList from './NewList';
 
 export interface ListOfListsProps {
-  lists: ListData[];
-  onCreate: (title: string) => any;
-  onDelete: (id: string) => any;
-  onEdit: (id: string, newTitle: string) => any;
+  boardId: string;
 }
 
-const ListOfLists: FC<ListOfListsProps> = ({
-  lists,
-  onCreate,
-  onDelete,
-  onEdit,
-}) => {
+const ListOfLists: FC<ListOfListsProps> = ({ boardId }) => {
+  const lists = useSelector<AppState, string[]>(
+    ({ boards }) => boards.byId[boardId]?.lists || []
+  );
+
+  const dispatch = useDispatch();
+
+  const onCreate = useCallback(
+    (title: string) => dispatch(createList(boardId, title)),
+    [dispatch, boardId]
+  );
+
+  const onDelete = useCallback(
+    (listId: string) => dispatch(deleteList(boardId, listId)),
+    [boardId, dispatch]
+  );
+
+  const onEdit = useCallback(
+    (listId: string, title: string) => dispatch(changeList(listId, title)),
+    [dispatch]
+  );
+
+  const onListMove = useCallback(
+    (fromIndex: number, toIndex: number) =>
+      dispatch(moveList(boardId, fromIndex, toIndex)),
+    [dispatch, boardId]
+  );
+
+  const onCardMove = useCallback(
+    (
+      fromListId: string,
+      toListId: string,
+      fromIndex: number,
+      toIndex: number
+    ) => dispatch(moveCard(fromListId, toListId, fromIndex, toIndex)),
+    [dispatch]
+  );
+
+  const onDragEnd = (result: DropResult) => {
+    const { destination, source, type } = result;
+
+    if (!destination) return;
+
+    if (type === 'card') {
+      const { droppableId: fromListId, index: fromIndex } = source;
+      const { droppableId: toListId, index: toIndex } = destination;
+
+      if (fromListId === toListId && fromIndex === toIndex) {
+        return;
+      }
+
+      onCardMove(fromListId, toListId, fromIndex, toIndex);
+    } else if (type === 'list') {
+      if (source.index === destination.index) return;
+
+      onListMove(source.index, destination.index);
+    }
+  };
+
   return (
-    <div className="list-of-lists">
-      <Droppable droppableId="lists" direction="horizontal" type="list">
-        {provided => (
-          <ul {...provided.droppableProps} ref={provided.innerRef}>
-            {lists.map(({ id, title }, index) => (
-              <li key={id}>
-                <List
-                  index={index}
-                  id={id}
-                  title={title}
-                  onEdit={onEdit}
-                  onDelete={onDelete}
-                />
-              </li>
-            ))}
-            {provided.placeholder}
-          </ul>
-        )}
-      </Droppable>
-      <NewList onCreate={onCreate} />
-    </div>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className="list-of-lists">
+        <Droppable droppableId="lists" direction="horizontal" type="list">
+          {provided => (
+            <ul {...provided.droppableProps} ref={provided.innerRef}>
+              {lists.map((id, index) => (
+                <li key={id}>
+                  <List
+                    index={index}
+                    id={id}
+                    onEdit={onEdit}
+                    onDelete={onDelete}
+                  />
+                </li>
+              ))}
+              {provided.placeholder}
+            </ul>
+          )}
+        </Droppable>
+        <NewList onCreate={onCreate} />
+      </div>
+    </DragDropContext>
   );
 };
 
-export default ListOfLists;
+export default memo(ListOfLists);
