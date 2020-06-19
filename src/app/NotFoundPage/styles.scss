@@ -1,0 +1,23 @@
+@import '../../utils/';
+
+.not-found-page {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+
+  .message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    @include window;
+  }
+
+  .error-code {
+    line-height: 1;
+    font-size: 3rem;
+  }
+}

@@ -10,6 +10,7 @@ import Header from './Header/Header';
 import HomePage from './HomePage/HomePage';
 import BoardPage from './BoardPage/BoardPage';
 import BoardsNavigation from 'boards';
+import NotFoundPage from './NotFoundPage/NotFoundPage';
 
 watchState();
 
@@ -29,7 +30,10 @@ const App: FC = () => {
               </>
             )}
           />
-          <Route path="*" render={() => <h2>No such page</h2>} />
+          <Route
+            path="*"
+            render={() => <NotFoundPage message="Such page doesn't exist!" />}
+          />
         </Switch>
       </Provider>
     </BrowserRouter>

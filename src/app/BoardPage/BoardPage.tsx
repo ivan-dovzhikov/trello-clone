@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { HORIZONTAL_SCROLLING_SPEED_FACTOR, AppState } from 'utils';
 import './styles.scss';
 import ListOfLists from 'lists';
+import NotFoundPage from 'app/NotFoundPage/NotFoundPage';
 
 export interface BoardPageProps extends RouteComponentProps<{ id: string }> {}
 
@@ -32,7 +33,7 @@ const BoardPage: FC<BoardPageProps> = ({ match }) => {
         <ListOfLists boardId={boardId} />
       </main>
     );
-  } else return <h2>No such board</h2>;
+  } else return <NotFoundPage message="Such board doesn't exist!" />;
 };
 
 export default BoardPage;
