@@ -16,10 +16,11 @@ const BoardLink: FC<BoardLinkProps> = ({ id, title, onEdit, onDelete }) => {
   const FieldEditProps = {
     fieldName: 'Title',
     value: title,
+    useIconToggler: true,
     editMode,
+    onEditToggle: toggleEdit,
     onSubmit: (newTitle: string) => onEdit(id, newTitle),
     onDelete: () => onDelete(id),
-    onEditToggle: toggleEdit,
   };
 
   return editMode ? (

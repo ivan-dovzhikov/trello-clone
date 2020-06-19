@@ -1,34 +1,84 @@
-.field-editor {
-  $min-height: 1.5em;
+@import '../../utils/';
 
+$button-size: 1.25rem;
+
+.field-editor {
   position: relative;
-  display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  border-radius: inherit;
 
-  .textarea-container {
-    min-height: $min-height;
+  .click-overlay {
+    z-index: 10;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
     width: 100%;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:focus + .textarea-container {
+      border-color: get-color(accent);
+    }
   }
 
-  &:hover .button {
+  .textarea-container {
+    width: 100%;
+    border-radius: inherit;
+    border: 2px solid transparent;
+    transition: border 0.2s ease;
+  }
+
+  &.edit {
+    .textarea {
+      color: get-color(dark);
+    }
+
+    .buttons-container {
+      z-index: 100;
+      height: $button-size;
+      margin-top: 0.25rem;
+    }
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 0;
+    padding: 0 0.25rem;
+    overflow: hidden;
+    transition: 0.2s ease-out;
+  }
+
+  &:hover .edit-button {
     opacity: 1;
   }
 
-  .buttons {
+  & .edit-button {
     position: absolute;
-    top: 0;
-    right: 0;
-    transition: 0.1s ease;
+    top: 50%;
+    right: 0.25rem;
+    opacity: 0;
+    transform: translateY(-50%);
 
-    .button {
-      height: $min-height;
-      width: $min-height;
-      opacity: 0;
-
-      &:focus {
-        opacity: 1;
-      }
+    &:focus {
+      opacity: 1;
     }
   }
+
+  .submit-button {
+    margin-right: 0.25em;
+  }
+}
+
+.field-editor-button {
+  height: $button-size;
+  width: $button-size;
+  padding: 0;
+  box-shadow: none;
+  font-size: $button-size;
+  background-color: transparent;
 }

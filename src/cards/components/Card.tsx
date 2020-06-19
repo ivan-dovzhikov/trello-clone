@@ -1,4 +1,4 @@
-import React, { FC, useState, ReactElement } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { FieldEditor } from 'shared';
 import { createPortal } from 'react-dom';
@@ -17,18 +17,25 @@ const optionalPortal = (style: any, element: ReactElement): ReactElement => {
 };
 
 const Card: FC<CardProps> = ({ index, id, content, onDelete, onEdit }) => {
-  const [editMode, setEditMode] = useState(false);
-  const toggleEdit = () => setEditMode(!editMode);
   const handleDelete = () => onDelete(id);
   const handleSubmit = (newContent: string) => onEdit(id, newContent);
 
+  // Caret insert in edit mode won't work if disableInteractiveElementBlocking
+  // will be enabled
+  const [textareaDrag, setTextareaDrag] = useState(true);
+  const toggleTextareaDrag = () => setTextareaDrag(!textareaDrag);
+
   return (
-    <Draggable draggableId={id} index={index}>
+    <Draggable
+      draggableId={id}
+      index={index}
+      disableInteractiveElementBlocking={textareaDrag}
+    >
       {provided =>
         optionalPortal(
           provided.draggableProps.style,
           <div
-            className={`card${editMode ? ' edit' : ''}`}
+            className="card"
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
@@ -36,10 +43,9 @@ const Card: FC<CardProps> = ({ index, id, content, onDelete, onEdit }) => {
             <FieldEditor
               fieldName="Text"
               value={content}
-              editMode={editMode}
-              onEditToggle={toggleEdit}
               onSubmit={handleSubmit}
               onDelete={handleDelete}
+              onEditToggle={toggleTextareaDrag}
             />
           </div>
         )

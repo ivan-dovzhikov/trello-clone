@@ -2,7 +2,7 @@
 
 $number-of-columns: 6;
 $boards-navigation-margin: 0.5rem;
-$board-link-x-padding: 0.5rem;
+$board-link-x-margin: 0.25rem;
 
 .boards-navigation {
   display: flex;
@@ -22,42 +22,60 @@ $board-link-x-padding: 0.5rem;
   }
 }
 
+.field-editor {
+  width: 100%;
+}
+
+.textarea {
+  cursor: initial;
+
+  &:disabled {
+    cursor: pointer;
+  }
+}
+
 .board-link {
   display: flex;
   align-items: center;
-  min-height: 70px;
+  min-height: 75px;
   width: calc(
     (
         100vw - #{$boards-navigation-margin * 2 + $number-of-columns *
-          $board-link-x-padding}
+          $board-link-x-margin * 2}
       ) / #{$number-of-columns}
   );
-  margin: 0 $board-link-x-padding / 2;
+  margin: 0 $board-link-x-margin;
   padding: 0.5rem;
   @include window;
   text-decoration: none;
   transition: 0.2s ease;
   border-radius: 8px;
 
-  @include focus;
+  &:focus,
+  &:hover {
+    @include accent;
 
-  .field-editor {
-    width: 100%;
+    .button {
+      background-color: get-color(accent, 1, 5%);
+      color: get-color(light);
+
+      &:hover {
+        background-color: get-color(light);
+        color: get-color(accent);
+      }
+    }
   }
 
-  .textarea {
+  .field-editor:not(.edit) .textarea {
     text-align: center;
-    cursor: initial;
-
-    &:disabled {
-      cursor: pointer;
-    }
   }
 }
 
 .new-board {
-  @extend .board-link;
-  width: auto;
-  margin-left: 0.5rem;
+  flex: none;
   border: none;
+
+  .field-editor:not(.edit) .textarea {
+    white-space: nowrap;
+  }
 }

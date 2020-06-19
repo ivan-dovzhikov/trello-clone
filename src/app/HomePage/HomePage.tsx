@@ -8,7 +8,7 @@ const HomePage: FC = () => {
     <main className="home-page">
       <h1>Trello clone</h1>
       <Link to="/boards">
-        <Button styleType={'accent'}>Get started</Button>
+        <Button>Get started</Button>
       </Link>
     </main>
   );

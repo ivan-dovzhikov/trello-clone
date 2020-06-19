@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { FieldEditor } from 'shared';
 
 export interface NewListProps {
@@ -6,22 +6,14 @@ export interface NewListProps {
 }
 
 const NewList: FC<NewListProps> = ({ onCreate }) => {
-  const [editMode, setEditMode] = useState(false);
-  const toggleEdit = () => setEditMode(!editMode);
-
-  return editMode ? (
-    <div className="new-list">
+  return (
+    <div className="list new-list">
       <FieldEditor
-        editMode={true}
         fieldName="Title"
-        onEditToggle={toggleEdit}
         onSubmit={onCreate}
+        displayOnViewMode="New List"
       />
     </div>
-  ) : (
-    <button className="new-list" onClick={toggleEdit}>
-      New List
-    </button>
   );
 };
 

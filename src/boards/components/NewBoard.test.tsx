@@ -16,7 +16,7 @@ describe('Test board create button', () => {
       </BrowserRouter>
     );
     return {
-      button: screen.getByRole('button', { name: 'New Board' }),
+      button: screen.getByRole('button', { name: 'Edit' }),
       ...props,
     };
   };
@@ -36,9 +36,7 @@ describe('Test board create button', () => {
     const { button } = setup();
     userEvent.click(button);
     userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
-    expect(
-      screen.getByRole('button', { name: 'New Board' })
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Edit' })).toBeInTheDocument();
   });
 
   it('should call onCreate with typed value on submit click', () => {

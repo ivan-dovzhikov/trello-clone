@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { FieldEditor } from 'shared';
 
 export interface NewBoardProps {
@@ -6,22 +6,16 @@ export interface NewBoardProps {
 }
 
 const NewBoard: FC<NewBoardProps> = ({ onCreate }) => {
-  const [showEdit, setShowEdit] = useState(false);
-  const toggleShowEdit = () => setShowEdit(!showEdit);
-
-  return showEdit ? (
-    <div className="new-board">
-      <FieldEditor
-        fieldName="Title"
-        editMode={true}
-        onSubmit={onCreate}
-        onEditToggle={toggleShowEdit}
-      />
+  return (
+    <div>
+      <div className="board-link new-board">
+        <FieldEditor
+          fieldName="Title"
+          displayOnViewMode="New Board"
+          onSubmit={onCreate}
+        />
+      </div>
     </div>
-  ) : (
-    <button className="new-board" onClick={toggleShowEdit}>
-      New Board
-    </button>
   );
 };
 

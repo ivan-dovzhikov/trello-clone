@@ -53,8 +53,6 @@ describe('Test presentational boards navigation component', () => {
 
   it('should render New Board button', () => {
     setup();
-    expect(
-      screen.getByRole('button', { name: 'New Board' })
-    ).toBeInTheDocument();
+    expect(screen.getByText('New Board')).toBeInTheDocument();
   });
 });

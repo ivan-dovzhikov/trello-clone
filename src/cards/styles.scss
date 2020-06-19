@@ -22,12 +22,19 @@ $card-y-margin: 0.25rem;
   padding: 0.25rem;
   border: 0;
   background-color: get-color(light, 0.8);
+  border-radius: 0.25rem;
   box-shadow: -1px 2px 2px 0 rgba(get-color(dark), 0.5);
+  transition: background-color 0.2s ease;
 
-  @include focus;
+  &:focus {
+    @include accent;
+  }
 }
 
 .new-card {
-  @extend .card;
   margin: $card-y-margin 0.5rem 0.5rem;
+
+  .field-editor:not(.edit) .textarea {
+    text-align: center;
+  }
 }

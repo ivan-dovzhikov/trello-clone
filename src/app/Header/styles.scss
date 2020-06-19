@@ -24,10 +24,13 @@
     border: 1px solid transparent;
     transition: 0.2s ease;
 
+    &:hover,
+    &:focus {
+      @include accent;
+    }
+
     &.active {
       border-color: get-color(dark, 0.5);
     }
-
-    @include focus;
   }
 }

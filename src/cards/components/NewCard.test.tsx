@@ -17,7 +17,7 @@ describe('Test New card component', () => {
     );
 
     return {
-      button: screen.getByRole('button', { name: 'New Card' }),
+      button: screen.getByRole('button', { name: 'Edit' }),
       ...props,
     };
   };

@@ -12,13 +12,20 @@ export interface ListProps {
 }
 
 const List: FC<ListProps> = ({ index, id, title, onEdit, onDelete }) => {
-  const [editMode, setEditMode] = useState(false);
-  const toggleEdit = () => setEditMode(!editMode);
   const handleDelete = () => onDelete(id);
   const handleSubmit = (newTitle: string) => onEdit(id, newTitle);
 
+  // Caret insert in edit mode won't work if disableInteractiveElementBlocking
+  // will be enabled
+  const [shouldDrag, setShouldDrag] = useState(true);
+  const toggleShouldDrag = () => setShouldDrag(!shouldDrag);
+
   return (
-    <Draggable draggableId={id} index={index}>
+    <Draggable
+      draggableId={id}
+      index={index}
+      disableInteractiveElementBlocking={shouldDrag}
+    >
       {provided => (
         <div
           className="list"
@@ -28,12 +35,11 @@ const List: FC<ListProps> = ({ index, id, title, onEdit, onDelete }) => {
         >
           <header>
             <FieldEditor
-              editMode={editMode}
               fieldName="Title"
               value={title}
               onDelete={handleDelete}
               onSubmit={handleSubmit}
-              onEditToggle={toggleEdit}
+              onEditToggle={toggleShouldDrag}
             />
           </header>
           <ListOfCard listId={id} />

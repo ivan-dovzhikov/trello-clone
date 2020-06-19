@@ -44,8 +44,10 @@ describe('Test list view', () => {
     );
 
     return {
-      textarea: screen.getByRole('textbox'),
-      getEditButton: () => screen.getByRole('button', { name: 'Edit' }),
+      textarea: screen.getAllByRole('textbox')[0],
+      // Component also renders list of cards with "New Card" component
+      // which has its own Edit button
+      getEditButton: () => screen.getAllByRole('button', { name: 'Edit' })[0],
       getDeleteButton: () => screen.getByRole('button', { name: 'Delete' }),
       getSubmitButton: () => screen.getByRole('button', { name: 'Submit' }),
       getCancelButton: () => screen.getByRole('button', { name: 'Cancel' }),

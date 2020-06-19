@@ -9,17 +9,20 @@ import React, {
 import { preventClickDefault } from 'utils';
 import { Button, TextArea } from 'shared';
 import {
-  Edit as EditIcon,
-  Delete as DeleteIcon,
-  Done as SubmitIcon,
-  Close as CancelIcon,
+  EditOutlined as EditIcon,
+  DeleteOutlineRounded as DeleteIcon,
+  DoneRounded as SubmitIcon,
+  CloseRounded as CancelIcon,
 } from '@material-ui/icons';
 import './styles.scss';
 
 export interface FieldEditorProps {
   fieldName: string;
+  displayOnViewMode?: string;
   value?: string;
-  editMode: boolean;
+  initialEditMode?: boolean;
+  editMode?: boolean;
+  useIconToggler?: boolean;
   onSubmit: (title: any) => any;
   onDelete?: () => any;
   onEditToggle?: () => any;
@@ -27,18 +30,23 @@ export interface FieldEditorProps {
 
 export const FieldEditor: FC<FieldEditorProps> = ({
   fieldName,
+  displayOnViewMode,
   value = '',
-  editMode,
+  initialEditMode = false,
+  editMode: derivedEditMode,
+  useIconToggler = false,
   onSubmit,
   onDelete,
   onEditToggle,
 }) => {
+  const [editMode, setEditMode] = useState(derivedEditMode ?? initialEditMode);
   const [currentValue, setCurrentValue] = useState(value);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const isInvalid = !currentValue.trim();
 
   const toggleEdit = () => {
     setCurrentValue(value);
+    setEditMode(!editMode);
     if (onEditToggle) onEditToggle();
   };
 
@@ -70,11 +78,17 @@ export const FieldEditor: FC<FieldEditorProps> = ({
 
   return (
     <form className={`field-editor${editMode ? ' edit' : ''}`}>
+      {/* disabled textarea ignores clicks */}
+      {!editMode && !useIconToggler && (
+        <button className="click-overlay" onClick={toggleEdit} title="Edit" />
+      )}
       <TextArea
         labelValue={fieldName}
-        title={fieldName}
+        title={editMode ? fieldName : undefined}
         isInvalid={isInvalid}
-        value={currentValue}
+        value={
+          displayOnViewMode && !editMode ? displayOnViewMode : currentValue
+        }
         rowsMax={3}
         disabled={!editMode}
         required={true}
@@ -82,42 +96,46 @@ export const FieldEditor: FC<FieldEditorProps> = ({
         onKeyDown={handleKeyDown}
         ref={textAreaRef}
       />
-      <div className="buttons" onClick={preventClickDefault}>
-        {editMode ? (
+      {!editMode && useIconToggler && (
+        <div className="edit-button-container" onClick={preventClickDefault}>
+          <Button
+            title="Edit"
+            className="field-editor-button edit-button"
+            onClick={toggleEdit}
+          >
+            <EditIcon fontSize="inherit" />
+          </Button>
+        </div>
+      )}
+      <div className="buttons-container" onClick={preventClickDefault}>
+        {editMode && (
           <>
-            <Button
-              title="Submit"
-              styleType={'fill'}
-              onClick={handleSubmit}
-              icon={true}
-              disabled={isInvalid}
-            >
-              <SubmitIcon />
-            </Button>
-            <Button
-              title="Cancel"
-              styleType={'fill'}
-              icon={true}
-              onClick={toggleEdit}
-            >
-              <CancelIcon />
-            </Button>
+            <div>
+              <Button
+                title="Submit"
+                className="field-editor-button submit-button"
+                onClick={handleSubmit}
+                disabled={isInvalid}
+              >
+                <SubmitIcon fontSize="inherit" />
+              </Button>
+              <Button
+                className="field-editor-button"
+                title="Cancel"
+                onClick={toggleEdit}
+              >
+                <CancelIcon fontSize="inherit" />
+              </Button>
+            </div>
             {onDelete && (
               <Button
+                className="field-editor-button"
                 title="Delete"
-                styleType={'fill'}
-                icon={true}
                 onClick={onDelete}
               >
-                <DeleteIcon />
+                <DeleteIcon fontSize="inherit" />
               </Button>
             )}
-          </>
-        ) : (
-          <>
-            <Button title="Edit" icon={true} onClick={toggleEdit}>
-              <EditIcon />
-            </Button>
           </>
         )}
       </div>

@@ -66,8 +66,6 @@ describe('Test list of lists component', () => {
 
   it('should render New List button', () => {
     setup();
-    expect(
-      screen.getByRole('button', { name: 'New List' })
-    ).toBeInTheDocument();
+    expect(screen.getByText('New List')).toBeInTheDocument();
   });
 });

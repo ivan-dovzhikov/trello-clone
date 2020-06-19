@@ -7,11 +7,14 @@
   flex-direction: column;
   flex: 1;
   width: 100%;
-  @include window(0.6);
+  @include window(0.1);
 
   h1 {
     display: block;
     margin: 0 0 5rem;
+    padding: 0.25rem 2rem;
+    background-color: get-color(light, 0.8);
+    border-radius: 8px;
     font: 5rem 'Oswald', sans-serif;
     line-height: 1;
     text-align: center;
@@ -22,5 +25,15 @@
     font-size: 1.75rem;
     line-height: 1;
     text-decoration: none;
+  }
+
+  .button {
+    background-color: get-color(accent);
+    color: get-color(light);
+
+    &:hover,
+    &:focus {
+      background-color: get-color(accent, 1, 5%);
+    }
   }
 }

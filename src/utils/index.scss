@@ -28,11 +28,9 @@ $colors: (
   box-shadow: 0 3px 2px -2px $shadow-color, -1px 0 2px -2px $shadow-color;
 }
 
-@mixin focus {
-  &:focus {
-    background-color: get-color(accent, 1, 5%);
-    color: get-color(light);
-  }
+@mixin accent {
+  background-color: get-color(accent, 1, 5%);
+  color: get-color(light);
 }
 
 @mixin scrollbar($color, $disappearing: false) {

@@ -17,34 +17,32 @@ describe('Test list create button', () => {
     );
 
     return {
-      button: screen.getByRole('button', { name: 'New List' }),
+      editButton: screen.getByRole('button', { name: 'Edit' }),
       ...props,
     };
   };
 
   it('should render button', () => {
-    const { button } = setup();
-    expect(button).toBeInTheDocument();
+    const { editButton } = setup();
+    expect(editButton).toBeInTheDocument();
   });
 
   it('should display form on click', () => {
-    const { button } = setup();
-    userEvent.click(button);
+    const { editButton } = setup();
+    userEvent.click(editButton);
     expect(screen.getByRole('textbox')).toBeInTheDocument();
   });
 
   it('should display button back on cancel click', () => {
-    const { button } = setup();
-    userEvent.click(button);
+    const { editButton } = setup();
+    userEvent.click(editButton);
     userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
-    expect(
-      screen.getByRole('button', { name: 'New List' })
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Edit' })).toBeInTheDocument();
   });
 
   it('should call onCreate with typed value on submit click', () => {
-    const { button, onCreate } = setup();
-    userEvent.click(button);
+    const { editButton, onCreate } = setup();
+    userEvent.click(editButton);
     const typedValue = 'twinkle twinkle little star';
     userEvent.type(screen.getByRole('textbox'), typedValue);
     userEvent.click(screen.getByRole('button', { name: 'Submit' }));

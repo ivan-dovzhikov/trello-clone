@@ -7,9 +7,14 @@ $list-x-margin: 0.25rem;
   display: flex;
   align-items: flex-start;
   height: 100%;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+
+  & > ul {
+    display: flex;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 
   & > li {
     height: 100%;
@@ -32,30 +37,33 @@ $list-x-margin: 0.25rem;
   max-height: 100%;
   @include window;
   border-radius: 8px;
+  transition: background-color 0.2s ease;
 
-  @include focus;
+  &:focus {
+    @include accent;
 
-  &:focus .new-card,
-  &:focus .card {
-    background-color: get-color(light);
-    color: get-color(dark);
+    .new-card,
+    .card {
+      background-color: get-color(light);
+      color: get-color(dark);
+    }
   }
 
   header {
     line-height: 1;
-    text-align: center;
     padding: 0.25rem 0.25rem 0;
 
-    .textarea {
+    .field-editor:not(.edit) .textarea {
       text-align: center;
     }
   }
 }
 
 .new-list {
-  @extend .list;
-  margin: 0;
   padding: 0.5rem;
   border: 0;
-  transition: 0.2s ease;
+
+  .field-editor:not(.edit) .textarea {
+    text-align: center;
+  }
 }

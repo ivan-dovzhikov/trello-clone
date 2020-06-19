@@ -25,7 +25,6 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     let textAreaClassName = 'textarea';
     if (isInvalid) textAreaClassName += ' invalid';
-    if (attributes.disabled) textAreaClassName += ' disabled';
     if (labelValue && hideLabel) textAreaClassName += ' hide-label';
     if (derivedClassName) textAreaClassName += ' ' + derivedClassName;
 
@@ -45,13 +44,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
               {labelValue}
             </span>
             <TextareaAutosize {...textAreaProps} ref={ref} />
-            <div className="underline" />
           </label>
         ) : (
-          <>
-            <TextareaAutosize {...textAreaProps} ref={ref} />
-            <div className="underline" />
-          </>
+          <TextareaAutosize {...textAreaProps} ref={ref} />
         )}
       </div>
     );
