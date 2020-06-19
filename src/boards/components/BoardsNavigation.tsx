@@ -1,24 +1,38 @@
-import React, { FC, WheelEvent } from 'react';
-import { ConnectedProps } from 'react-redux';
+import React, { FC, WheelEvent, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { HORIZONTAL_SCROLLING_SPEED_FACTOR } from 'utils';
-import { connector } from './BoardsNavigationContainer';
+import { HORIZONTAL_SCROLLING_SPEED_FACTOR, AppState } from 'utils';
 import BoardLink from './BoardLink';
 import NewBoard from './NewBoard';
+import { useSelector, useDispatch } from 'react-redux';
+import { createBoard, deleteBoard, changeBoard } from 'boards/actions';
 
-export type BoardsNavigationProps = ConnectedProps<typeof connector>;
-
-const BoardsNavigation: FC<BoardsNavigationProps> = ({
-  boards,
-  onCreate,
-  onDelete,
-  onEdit,
-}) => {
+const BoardsNavigation: FC = () => {
   const history = useHistory();
-  const handleDelete = (id: string) => {
-    if (history.location.pathname.includes(id)) history.push('/boards/');
-    onDelete(id);
-  };
+  const dispatch = useDispatch();
+
+  const boardsIds = useSelector<AppState, string[]>(
+    ({ boards }) => boards.allIds
+  );
+
+  const onCreate = useCallback(
+    (title: string) => dispatch(createBoard(title)),
+    [dispatch]
+  );
+
+  const onDelete = useCallback(
+    (boardId: string) => {
+      if (history.location.pathname.includes(boardId)) history.push('/boards/');
+      dispatch(deleteBoard(boardId));
+    },
+    [dispatch, history]
+  );
+
+  const onEdit = useCallback(
+    (boardId: string, newTitle: string) => {
+      dispatch(changeBoard(boardId, newTitle));
+    },
+    [dispatch]
+  );
 
   const onWheel = ({
     target,
@@ -35,14 +49,9 @@ const BoardsNavigation: FC<BoardsNavigationProps> = ({
   return (
     <nav className="boards-navigation" onWheel={onWheel}>
       <ul>
-        {boards.map(({ id, title }) => (
+        {boardsIds.map(id => (
           <li key={id}>
-            <BoardLink
-              id={id}
-              title={title}
-              onDelete={handleDelete}
-              onEdit={onEdit}
-            />
+            <BoardLink id={id} onDelete={onDelete} onEdit={onEdit} />
           </li>
         ))}
       </ul>

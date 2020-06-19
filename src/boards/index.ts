@@ -1,2 +1,2 @@
 import './styles.scss';
-export { default } from './components/BoardsNavigationContainer';
+export { default } from './components/BoardsNavigation';

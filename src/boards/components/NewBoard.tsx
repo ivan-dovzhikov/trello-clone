@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { FieldEditor } from 'shared';
 
 export interface NewBoardProps {
@@ -19,4 +19,4 @@ const NewBoard: FC<NewBoardProps> = ({ onCreate }) => {
   );
 };
 
-export default NewBoard;
+export default memo(NewBoard);

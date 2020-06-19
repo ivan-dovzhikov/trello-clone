@@ -1,15 +1,20 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FieldEditor } from 'shared';
+import { useSelector } from 'react-redux';
+import { AppState } from 'utils';
 
 export interface BoardLinkProps {
   id: string;
-  title: string;
   onEdit: (id: string, newTitle: string) => any;
   onDelete: (id: string) => any;
 }
 
-const BoardLink: FC<BoardLinkProps> = ({ id, title, onEdit, onDelete }) => {
+const BoardLink: FC<BoardLinkProps> = ({ id, onEdit, onDelete }) => {
+  const title = useSelector<AppState, string>(
+    ({ boards }) => boards.byId[id].title
+  );
+
   const [editMode, setEditMode] = useState(false);
   const toggleEdit = () => setEditMode(!editMode);
 
@@ -34,4 +39,4 @@ const BoardLink: FC<BoardLinkProps> = ({ id, title, onEdit, onDelete }) => {
   );
 };
 
-export default BoardLink;
+export default memo(BoardLink);
