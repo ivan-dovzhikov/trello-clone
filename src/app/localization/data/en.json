@@ -1,0 +1,19 @@
+{
+  "create": "Create",
+  "edit": "Edit",
+  "submit": "Submit",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "app/home": "Home",
+  "app/boards": "Boards",
+  "app/get-started": "Get started",
+  "app/go-back": "Get back",
+  "app/page404": "Such page doesn't exist",
+  "app/board404": "Such board doesn't exist",
+  "boards/title": "Title",
+  "boards/new-board": "New Board",
+  "lists/title": "title",
+  "lists/new-list": "New List",
+  "cards/content": "Content",
+  "cards/new-card": "New Card"
+}

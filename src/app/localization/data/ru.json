@@ -1,0 +1,19 @@
+{
+  "create": "Создать",
+  "edit": "Редактировать",
+  "submit": "Сохранить",
+  "delete": "Удалить",
+  "cancel": "Отменить",
+  "app/home": "Домой",
+  "app/boards": "Доски",
+  "app/get-started": "Начать",
+  "app/go-back": "Вернуться",
+  "app/page404": "Такой страницы не существует",
+  "app/board404": "Такой доски не существует",
+  "boards/title": "Заголовок",
+  "boards/new-board": "Создать доску",
+  "lists/title": "Заголовок",
+  "lists/new-list": "Создать список",
+  "cards/content": "Содержание",
+  "cards/new-card": "Создать карточку"
+}
