@@ -25,11 +25,12 @@
   }
 
   &:disabled {
-    color: get-color(light, 1, -20%);
+    color: get-color(dark, 1, 40%);
 
     &:focus,
     &:hover {
-      background-color: get-color(danger, 0.7);
+      background-color: get-color(danger, 1, 20%);
+      color: get-color(light);
     }
   }
 }

@@ -55,7 +55,11 @@ $board-link-x-margin: 0.25rem;
   &:hover {
     @include accent;
 
-    .button {
+    .button:disabled {
+      color: get-color(light, 1, -15%);
+    }
+
+    .button:not(:disabled) {
       background-color: get-color(accent, 1, 5%);
       color: get-color(light);
 
