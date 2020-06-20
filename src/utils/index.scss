@@ -70,3 +70,79 @@ $colors: (
     visibility: visible;
   }
 }
+
+@function calculate-width($item-x-margins, $container-x-margins, $columns: 8) {
+  @return calc(
+    (100vw - #{$container-x-margins + $columns * $item-x-margins}) / #{$columns}
+  );
+}
+
+@mixin adaptive-column-layout($item-x-margins: 0, $container-x-margins: 0) {
+  width: calculate-width($item-x-margins, $container-x-margins, 8);
+
+  @include for-desktop {
+    width: calculate-width($item-x-margins, $container-x-margins, 7);
+  }
+
+  @include for-laptop {
+    width: calculate-width($item-x-margins, $container-x-margins, 6);
+  }
+
+  @include for-big-tablet {
+    width: calculate-width($item-x-margins, $container-x-margins, 5);
+  }
+
+  @include for-big-phone {
+    width: calculate-width($item-x-margins, $container-x-margins, 4);
+  }
+
+  @include for-phone {
+    width: calculate-width($item-x-margins, $container-x-margins, 3);
+  }
+
+  @include for-small-phone {
+    width: calculate-width($item-x-margins, $container-x-margins, 2);
+  }
+}
+
+@mixin for-desktop {
+  @media only screen and (max-width: 1680px) {
+    @content;
+  }
+}
+
+@mixin for-laptop {
+  @media only screen and (max-width: 1366px) {
+    @content;
+  }
+}
+
+@mixin for-big-tablet {
+  @media only screen and (max-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin for-tablet {
+  @media only screen and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin for-big-phone {
+  @media only screen and (max-width: 800px) {
+    @content;
+  }
+}
+
+@mixin for-phone {
+  @media only screen and (max-width: 600px) {
+    @content;
+  }
+}
+
+@mixin for-small-phone {
+  @media only screen and (max-width: 340px) {
+    @content;
+  }
+}

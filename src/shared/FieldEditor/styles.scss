@@ -3,9 +3,6 @@
 $button-size: 1.25rem;
 
 .field-editor {
-  position: relative;
-  justify-content: space-between;
-  align-items: flex-end;
   border-radius: inherit;
 
   .click-overlay {
@@ -43,6 +40,12 @@ $button-size: 1.25rem;
     }
   }
 
+  .field-editor-textarea-container {
+    display: flex;
+    align-items: center;
+    border-radius: inherit;
+  }
+
   .buttons-container {
     display: flex;
     justify-content: space-between;
@@ -57,15 +60,22 @@ $button-size: 1.25rem;
     opacity: 1;
   }
 
-  & .edit-button {
+  .edit-button {
     position: absolute;
     top: 50%;
-    right: 0.25rem;
+    right: 0.5rem;
     opacity: 0;
     transform: translateY(-50%);
+    border-radius: inherit;
 
     &:focus {
       opacity: 1;
+    }
+
+    @include for-big-tablet {
+      position: static;
+      opacity: 1;
+      transform: none;
     }
   }
 

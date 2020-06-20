@@ -30,6 +30,10 @@
       border-color: transparent;
       background-color: transparent;
     }
+
+    @include for-big-phone {
+      padding: $padding / 2;
+    }
   }
 
   .label {

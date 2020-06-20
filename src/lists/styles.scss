@@ -22,19 +22,11 @@ $list-x-margin: 0.25rem;
 }
 
 .list {
-  $number-of-columns: 6;
-
-  width: calc(
-    (
-        100vw - #{$board-page-x-margin * 2 + $list-x-margin * 2 *
-          $number-of-columns}
-      ) / #{$number-of-columns}
-  );
-
-  margin: 0 $list-x-margin;
   display: flex;
   flex-direction: column;
+  @include adaptive-column-layout($list-x-margin * 2, $board-page-x-margin * 2);
   max-height: 100%;
+  margin: 0 $list-x-margin;
   @include window;
   border-radius: 8px;
   transition: background-color 0.2s ease;

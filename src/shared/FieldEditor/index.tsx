@@ -5,6 +5,7 @@ import React, {
   useRef,
   ChangeEvent,
   KeyboardEvent,
+  MouseEvent,
 } from 'react';
 import { preventClickDefault } from 'utils';
 import { Button, TextArea } from 'shared';
@@ -44,7 +45,8 @@ export const FieldEditor: FC<FieldEditorProps> = ({
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const isInvalid = !currentValue.trim();
 
-  const toggleEdit = () => {
+  const toggleEdit = (e?: MouseEvent<HTMLElement>) => {
+    e?.preventDefault();
     setCurrentValue(value);
     setEditMode(!editMode);
     if (onEditToggle) onEditToggle();
@@ -83,22 +85,22 @@ export const FieldEditor: FC<FieldEditorProps> = ({
       {!editMode && !useIconToggler && (
         <button className="click-overlay" onClick={toggleEdit} title="Edit" />
       )}
-      <TextArea
-        labelValue={fieldName}
-        title={editMode ? fieldName : undefined}
-        isInvalid={isInvalid}
-        value={
-          displayOnViewMode && !editMode ? displayOnViewMode : currentValue
-        }
-        rowsMax={3}
-        disabled={!editMode}
-        required={true}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        ref={textAreaRef}
-      />
-      {!editMode && useIconToggler && (
-        <div className="edit-button-container" onClick={preventClickDefault}>
+      <div className="field-editor-textarea-container">
+        <TextArea
+          labelValue={fieldName}
+          title={editMode ? fieldName : undefined}
+          isInvalid={isInvalid}
+          value={
+            displayOnViewMode && !editMode ? displayOnViewMode : currentValue
+          }
+          rowsMax={3}
+          disabled={!editMode}
+          required={true}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          ref={textAreaRef}
+        />
+        {!editMode && useIconToggler && (
           <Button
             title="Edit"
             className="field-editor-button edit-button"
@@ -106,8 +108,8 @@ export const FieldEditor: FC<FieldEditorProps> = ({
           >
             <EditIcon fontSize="inherit" />
           </Button>
-        </div>
-      )}
+        )}
+      </div>
       <div className="buttons-container" onClick={preventClickDefault}>
         {editMode && (
           <>

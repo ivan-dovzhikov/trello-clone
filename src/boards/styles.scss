@@ -1,12 +1,10 @@
 @import '../utils';
 
-$number-of-columns: 6;
 $boards-navigation-margin: 0.5rem;
 $board-link-x-margin: 0.25rem;
 
 .boards-navigation {
   display: flex;
-  align-items: flex-start;
   margin: $boards-navigation-margin;
   padding-bottom: 0.5rem;
 
@@ -35,14 +33,13 @@ $board-link-x-margin: 0.25rem;
 }
 
 .board-link {
+  position: relative;
   display: flex;
   align-items: center;
-  min-height: 75px;
-  width: calc(
-    (
-        100vw - #{$boards-navigation-margin * 2 + $number-of-columns *
-          $board-link-x-margin * 2}
-      ) / #{$number-of-columns}
+  height: 100%;
+  @include adaptive-column-layout(
+    $board-link-x-margin * 2,
+    $boards-navigation-margin * 2
   );
   margin: 0 $board-link-x-margin;
   padding: 0.5rem;
@@ -78,8 +75,4 @@ $board-link-x-margin: 0.25rem;
 .new-board {
   flex: none;
   border: none;
-
-  .field-editor:not(.edit) .textarea {
-    white-space: nowrap;
-  }
 }

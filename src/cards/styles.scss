@@ -29,6 +29,10 @@ $card-y-margin: 0.25rem;
   &:focus {
     @include accent;
   }
+
+  @include for-big-phone {
+    padding: 0;
+  }
 }
 
 .new-card {
