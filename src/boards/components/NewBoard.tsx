@@ -1,4 +1,5 @@
 import React, { FC, memo } from 'react';
+import { useIntl } from 'react-intl';
 import { FieldEditor } from 'shared';
 
 export interface NewBoardProps {
@@ -6,13 +7,27 @@ export interface NewBoardProps {
 }
 
 const NewBoard: FC<NewBoardProps> = ({ onCreate }) => {
+  const intl = useIntl();
+
   return (
     <div>
       <div className="board-link new-board">
         <FieldEditor
-          fieldName="Title"
-          displayOnViewMode="New Board"
+          fieldName={intl.formatMessage({
+            id: 'boards/title',
+            defaultMessage: 'Title',
+          })}
+          displayOnViewMode={intl.formatMessage({
+            id: 'boards/new-board',
+            defaultMessage: 'Create board',
+          })}
           onSubmit={onCreate}
+          titles={{
+            edit: intl.formatMessage({
+              id: 'create',
+              defaultMessage: 'Create',
+            }),
+          }}
         />
       </div>
     </div>

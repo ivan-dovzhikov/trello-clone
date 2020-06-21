@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { FieldEditor } from 'shared';
 import { useSelector } from 'react-redux';
 import { AppState } from 'utils';
+import { useIntl } from 'react-intl';
 
 export interface BoardLinkProps {
   id: string;
@@ -11,6 +12,8 @@ export interface BoardLinkProps {
 }
 
 const BoardLink: FC<BoardLinkProps> = ({ id, onEdit, onDelete }) => {
+  const intl = useIntl();
+
   const title = useSelector<AppState, string>(
     ({ boards }) => boards.byId[id].title
   );
@@ -19,7 +22,10 @@ const BoardLink: FC<BoardLinkProps> = ({ id, onEdit, onDelete }) => {
   const toggleEdit = () => setEditMode(!editMode);
 
   const FieldEditProps = {
-    fieldName: 'Title',
+    fieldName: intl.formatMessage({
+      id: 'boards/title',
+      defaultMessage: 'Title',
+    }),
     value: title,
     useIconToggler: true,
     editMode,
