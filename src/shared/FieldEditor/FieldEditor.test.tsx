@@ -1,11 +1,16 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { FieldEditor, FieldEditorProps } from '.';
 import { BrowserRouter } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
+import translations from 'app/localization/data';
+import { FieldEditor, FieldEditorProps } from '.';
 
 describe('Test FieldEditor component', () => {
   const setup = (editMode: boolean) => {
+    const language = 'en';
+    const translationData = translations[language].data;
+
     const props: FieldEditorProps = {
       editMode,
       fieldName: 'test',
@@ -17,17 +22,23 @@ describe('Test FieldEditor component', () => {
 
     render(
       <BrowserRouter>
-        <FieldEditor {...props} />
+        <IntlProvider locale={language} messages={translationData}>
+          <FieldEditor {...props} />
+        </IntlProvider>
       </BrowserRouter>
     );
 
     return {
       ...props,
       textarea: screen.getByRole('textbox'),
-      getSubmitButton: () => screen.getByRole('button', { name: 'Submit' }),
-      getCancelButton: () => screen.getByRole('button', { name: 'Cancel' }),
-      getDeleteButton: () => screen.getByRole('button', { name: 'Delete' }),
-      getEditButton: () => screen.getByRole('button', { name: 'Edit' }),
+      getSubmitButton: () =>
+        screen.getByRole('button', { name: translationData['submit'] }),
+      getCancelButton: () =>
+        screen.getByRole('button', { name: translationData['cancel'] }),
+      getDeleteButton: () =>
+        screen.getByRole('button', { name: translationData['delete'] }),
+      getEditButton: () =>
+        screen.getByRole('button', { name: translationData['edit'] }),
     };
   };
 
