@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useIntl } from 'react-intl';
 import { FieldEditor } from 'shared';
 
 export interface NewListProps {
@@ -6,12 +7,23 @@ export interface NewListProps {
 }
 
 const NewList: FC<NewListProps> = ({ onCreate }) => {
+  const intl = useIntl();
+
   return (
     <div className="list new-list">
       <FieldEditor
-        fieldName="Title"
+        fieldName={intl.formatMessage({
+          id: 'lists/title',
+          defaultMessage: 'Title',
+        })}
         onSubmit={onCreate}
-        displayOnViewMode="New List"
+        displayOnViewMode={intl.formatMessage({
+          id: 'lists/new-list',
+          defaultMessage: 'Create card',
+        })}
+        titles={{
+          edit: intl.formatMessage({ id: 'create', defaultMessage: 'Create' }),
+        }}
       />
     </div>
   );

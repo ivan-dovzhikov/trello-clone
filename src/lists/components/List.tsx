@@ -4,6 +4,7 @@ import { FieldEditor } from 'shared';
 import ListOfCard from 'cards';
 import { useSelector } from 'react-redux';
 import { AppState } from 'utils';
+import { useIntl } from 'react-intl';
 
 export interface ListProps {
   index: number;
@@ -13,10 +14,12 @@ export interface ListProps {
 }
 
 const List: FC<ListProps> = ({ index, id, onEdit, onDelete }) => {
-  const handleDelete = () => onDelete(id);
-  const handleSubmit = (newTitle: string) => onEdit(id, newTitle);
+  const intl = useIntl();
 
   const title = useSelector<AppState, string>(({ lists }) => lists[id].title);
+
+  const handleDelete = () => onDelete(id);
+  const handleSubmit = (newTitle: string) => onEdit(id, newTitle);
 
   // Caret insert in edit mode won't work if disableInteractiveElementBlocking
   // will be enabled
@@ -38,7 +41,10 @@ const List: FC<ListProps> = ({ index, id, onEdit, onDelete }) => {
         >
           <header>
             <FieldEditor
-              fieldName="Title"
+              fieldName={intl.formatMessage({
+                id: 'lists/title',
+                defaultMessage: 'Title',
+              })}
               value={title}
               onDelete={handleDelete}
               onSubmit={handleSubmit}
