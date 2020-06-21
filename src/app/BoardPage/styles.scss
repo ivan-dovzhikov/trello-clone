@@ -6,10 +6,11 @@ $board-page-x-margin: 0.5rem;
   display: flex;
   align-items: flex-start;
   flex: 1;
+  min-height: 50vh;
   margin: 0 $board-page-x-margin 0.25rem;
   padding-bottom: 0.5rem;
 
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: auto;
   @include scrollbar(get-color(light, 0.8), true);
 }

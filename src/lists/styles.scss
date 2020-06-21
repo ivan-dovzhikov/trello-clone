@@ -19,6 +19,10 @@ $list-x-margin: 0.25rem;
   & > li {
     height: 100%;
   }
+
+  @media only screen and (max-height: 600px) {
+    height: auto;
+  }
 }
 
 .list {

@@ -66,6 +66,10 @@ $colors: (
     border-radius: 4px;
   }
 
+  &::-webkit-scrollbar-corner {
+    display: none;
+  }
+
   &:hover::-webkit-scrollbar-thumb {
     visibility: visible;
   }
