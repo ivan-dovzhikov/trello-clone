@@ -2,6 +2,8 @@ import translations from './data';
 
 export type AvailableLanguages = keyof typeof translations;
 
+export type EnTranslationId = keyof typeof translations['en']['data'];
+
 export enum LocaleActionTypes {
   SET_LANGUAGE = 'SET_LANGUAGE',
 }
