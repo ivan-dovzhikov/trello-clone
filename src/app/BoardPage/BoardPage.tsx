@@ -1,6 +1,7 @@
 import React, { FC, WheelEvent } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useIntl } from 'react-intl';
 import { HORIZONTAL_SCROLLING_SPEED_FACTOR, AppState } from 'utils';
 import './styles.scss';
 import ListOfLists from 'lists';
@@ -9,6 +10,8 @@ import NotFoundPage from 'app/NotFoundPage/NotFoundPage';
 export interface BoardPageProps extends RouteComponentProps<{ id: string }> {}
 
 const BoardPage: FC<BoardPageProps> = ({ match }) => {
+  const intl = useIntl();
+
   const boardId = match.params.id;
   const boardExist = useSelector<AppState, boolean>(
     state => !!state.boards.byId[boardId]
@@ -33,7 +36,15 @@ const BoardPage: FC<BoardPageProps> = ({ match }) => {
         <ListOfLists boardId={boardId} />
       </main>
     );
-  } else return <NotFoundPage message="Such board doesn't exist!" />;
+  } else
+    return (
+      <NotFoundPage
+        message={intl.formatMessage({
+          id: 'app/board404',
+          defaultMessage: "Such board doesn't exist",
+        })}
+      />
+    );
 };
 
 export default BoardPage;

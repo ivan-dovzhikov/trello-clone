@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { IntlProvider } from 'react-intl';
+import { IntlProvider, useIntl } from 'react-intl';
 import { Switch, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import 'normalize.css';
@@ -32,12 +32,22 @@ const App: FC = () => {
             </>
           )}
         />
-        <Route
-          path="*"
-          render={() => <NotFoundPage message="Such page doesn't exist!" />}
-        />
+        <Route path="*" component={PageNotFound} />
       </Switch>
     </IntlProvider>
+  );
+};
+
+const PageNotFound: FC = () => {
+  const intl = useIntl();
+
+  return (
+    <NotFoundPage
+      message={intl.formatMessage({
+        id: 'app/page404',
+        defaultMessage: "Such page doesn't exist",
+      })}
+    />
   );
 };
 

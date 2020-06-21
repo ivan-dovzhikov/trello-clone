@@ -2,12 +2,16 @@ import React from 'react';
 import Header from './Header';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
+import translations from 'app/localization/data';
 
 describe('Test header component', () => {
   beforeEach(() => {
     render(
       <BrowserRouter>
-        <Header />
+        <IntlProvider locale="en" messages={translations.en.data}>
+          <Header />
+        </IntlProvider>
       </BrowserRouter>
     );
   });

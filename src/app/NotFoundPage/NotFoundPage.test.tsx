@@ -1,30 +1,41 @@
 import React from 'react';
-import NotFoundPage from './NotFoundPage';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
+import { EnTranslationId, AvailableLanguages } from 'app/localization/types';
+import translations from 'app/localization/data';
+import NotFoundPage from './NotFoundPage';
 
 describe('Test Not found page component', () => {
   const setup = () => {
-    const message = 'some message';
+    const language: AvailableLanguages = 'en';
+    const message = 'Some message';
 
     render(
       <BrowserRouter>
-        <NotFoundPage message={message} />
+        <IntlProvider locale={language} messages={translations[language].data}>
+          <NotFoundPage message={message} />
+        </IntlProvider>
       </BrowserRouter>
     );
 
-    return message;
+    return {
+      language,
+      message,
+    };
   };
 
   it('should render given message', () => {
-    const message = setup();
-
+    const { message } = setup();
     expect(screen.getByText(message)).toBeInTheDocument();
   });
 
   it('should render "Go back" button', () => {
-    setup();
+    const { language } = setup();
+    const buttonText = translations[language].data['app/go-back'];
 
-    expect(screen.getByRole('button', { name: 'Go back' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: buttonText })
+    ).toBeInTheDocument();
   });
 });

@@ -1,13 +1,17 @@
 import React from 'react';
-import HomePage from './HomePage';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
+import HomePage from './HomePage';
+import translations from 'app/localization/data';
 
 describe('Test home page component', () => {
   beforeEach(() => {
     render(
       <BrowserRouter>
-        <HomePage />
+        <IntlProvider locale="en" messages={translations.en.data}>
+          <HomePage />
+        </IntlProvider>
       </BrowserRouter>
     );
   });
