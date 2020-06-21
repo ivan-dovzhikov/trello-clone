@@ -3,6 +3,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { FieldEditor } from 'shared';
 import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
+import { useIntl } from 'react-intl';
 import { AppState } from 'utils';
 
 export interface CardProps {
@@ -18,6 +19,8 @@ const optionalPortal = (style: any, element: ReactElement): ReactElement => {
 };
 
 const Card: FC<CardProps> = ({ index, id, onDelete, onEdit }) => {
+  const intl = useIntl();
+
   const content = useSelector<AppState, string>(
     ({ cards }) => cards[id].content
   );
@@ -46,7 +49,10 @@ const Card: FC<CardProps> = ({ index, id, onDelete, onEdit }) => {
             ref={provided.innerRef}
           >
             <FieldEditor
-              fieldName="Text"
+              fieldName={intl.formatMessage({
+                id: 'cards/content',
+                defaultMessage: 'Content',
+              })}
               value={content}
               onSubmit={handleSubmit}
               onDelete={handleDelete}

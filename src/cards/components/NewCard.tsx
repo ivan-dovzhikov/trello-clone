@@ -1,4 +1,5 @@
-import React, { FC, useState, memo } from 'react';
+import React, { FC, memo } from 'react';
+import { useIntl } from 'react-intl';
 import { FieldEditor } from 'shared';
 
 export interface NewCardProps {
@@ -6,17 +7,23 @@ export interface NewCardProps {
 }
 
 const NewCard: FC<NewCardProps> = ({ onCreate }) => {
-  const [editMode, setEditMode] = useState(false);
-  const toggleEditMode = () => setEditMode(!editMode);
+  const intl = useIntl();
 
   return (
     <div className="card new-card">
       <FieldEditor
-        fieldName="Text"
-        editMode={editMode}
-        displayOnViewMode="New Card"
-        onEditToggle={toggleEditMode}
+        fieldName={intl.formatMessage({
+          id: 'cards/content',
+          defaultMessage: 'Content',
+        })}
+        displayOnViewMode={intl.formatMessage({
+          id: 'cards/new-card',
+          defaultMessage: 'New card',
+        })}
         onSubmit={onCreate}
+        titles={{
+          edit: intl.formatMessage({ id: 'create', defaultMessage: 'Create' }),
+        }}
       />
     </div>
   );
