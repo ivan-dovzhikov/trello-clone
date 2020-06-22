@@ -20,7 +20,7 @@ describe('Test FieldEditor component', () => {
       onEditToggle: jest.fn(),
     };
 
-    render(
+    const { container } = render(
       <BrowserRouter>
         <IntlProvider locale={language} messages={translationData}>
           <FieldEditor {...props} />
@@ -30,6 +30,7 @@ describe('Test FieldEditor component', () => {
 
     return {
       ...props,
+      container,
       textarea: screen.getByRole('textbox'),
       getSubmitButton: () =>
         screen.getByRole('button', { name: translationData['submit'] }),
@@ -50,6 +51,36 @@ describe('Test FieldEditor component', () => {
   it('should render textarea with given initial value', () => {
     const { textarea, value } = setup(true);
     expect(textarea).toHaveValue(value);
+  });
+
+  describe('test modal behavior', () => {
+    describe('edit mode on', () => {
+      it('should exit on click on not Field editor component', () => {
+        const { textarea, container } = setup(true);
+        userEvent.click(container);
+        expect(textarea).toBeDisabled();
+      });
+
+      it('should exit on focus on not Field editor component', () => {
+        const { textarea, container } = setup(true);
+        fireEvent(container, new Event('focusin', { bubbles: true }));
+        expect(textarea).toBeDisabled();
+      });
+    });
+
+    describe('edit mode off', () => {
+      it('should not attach onClick listener', () => {
+        const { container, onEditToggle } = setup(false);
+        userEvent.click(container);
+        expect(onEditToggle).not.toBeCalled();
+      });
+
+      it('should not attach focusIn listener', () => {
+        const { container, onEditToggle } = setup(false);
+        fireEvent(container, new Event('focusin', { bubbles: true }));
+        expect(onEditToggle).not.toBeCalled();
+      });
+    });
   });
 
   describe('test submit button', () => {

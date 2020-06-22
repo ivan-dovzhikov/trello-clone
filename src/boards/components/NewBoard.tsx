@@ -21,13 +21,14 @@ const NewBoard: FC<NewBoardProps> = ({ onCreate }) => {
             id: 'boards/new-board',
             defaultMessage: 'Create board',
           })}
-          onSubmit={onCreate}
           titles={{
             edit: intl.formatMessage({
               id: 'create',
               defaultMessage: 'Create',
             }),
           }}
+          exitOnSubmit={false}
+          onSubmit={onCreate}
         />
       </div>
     </div>

@@ -2,10 +2,11 @@ import React, {
   FC,
   useState,
   useEffect,
+  useCallback,
   useRef,
   ChangeEvent,
   KeyboardEvent,
-  MouseEvent,
+  MouseEvent as ReactMouseEvent,
 } from 'react';
 import { useIntl } from 'react-intl';
 import { preventClickDefault } from 'utils';
@@ -20,33 +21,35 @@ import './styles.scss';
 
 export interface FieldEditorProps {
   fieldName: string;
-  displayOnViewMode?: string;
   value?: string;
-  initialEditMode?: boolean;
-  editMode?: boolean;
-  useIconToggler?: boolean;
-  onSubmit: (title: any) => any;
-  onDelete?: () => any;
-  onEditToggle?: () => any;
+  displayOnViewMode?: string;
   titles?: {
     submit?: string;
     cancel?: string;
     delete?: string;
     edit?: string;
   };
+  initialEditMode?: boolean;
+  editMode?: boolean;
+  onEditToggle?: () => any;
+  useIconToggler?: boolean;
+  exitOnSubmit?: boolean;
+  onSubmit: (value: string) => any;
+  onDelete?: () => any;
 }
 
 export const FieldEditor: FC<FieldEditorProps> = ({
   fieldName,
-  displayOnViewMode,
   value = '',
+  displayOnViewMode,
+  titles,
   initialEditMode = false,
   editMode: derivedEditMode,
+  onEditToggle,
   useIconToggler = false,
+  exitOnSubmit = true,
   onSubmit,
   onDelete,
-  onEditToggle,
-  titles,
 }) => {
   const intl = useIntl();
   const [editMode, setEditMode] = useState(derivedEditMode ?? initialEditMode);
@@ -54,12 +57,15 @@ export const FieldEditor: FC<FieldEditorProps> = ({
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const isInvalid = !currentValue.trim();
 
-  const toggleEdit = (e?: MouseEvent<HTMLElement>) => {
-    e?.preventDefault();
-    setCurrentValue(value);
-    setEditMode(!editMode);
-    if (onEditToggle) onEditToggle();
-  };
+  const toggleEdit = useCallback(
+    (e?: ReactMouseEvent<HTMLElement>) => {
+      e?.preventDefault();
+      setEditMode(!editMode);
+      setCurrentValue(value);
+      if (onEditToggle) onEditToggle();
+    },
+    [value, editMode, onEditToggle]
+  );
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value.replace(/\r\n|\r|\n/gm, ' ');
@@ -67,13 +73,15 @@ export const FieldEditor: FC<FieldEditorProps> = ({
   };
 
   const handleSubmit = () => {
+    if (isInvalid) return;
+
     const trimmedCurrentValue = currentValue.trim();
-    if (!trimmedCurrentValue) return;
     if (value !== trimmedCurrentValue) {
-      value = trimmedCurrentValue;
       onSubmit(trimmedCurrentValue);
     }
-    toggleEdit();
+
+    if (exitOnSubmit) toggleEdit();
+    else setCurrentValue('');
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -85,8 +93,26 @@ export const FieldEditor: FC<FieldEditorProps> = ({
   };
 
   useEffect(() => {
-    if (editMode) textAreaRef.current?.focus();
-  }, [editMode]);
+    if (!editMode) return;
+    textAreaRef.current?.focus();
+    const clickHandler = ({ target }: MouseEvent) => {
+      if (!(target as HTMLElement)?.closest('.field-editor.edit')) toggleEdit();
+    };
+    const focusHandler = ({ target }: FocusEvent) => {
+      if (!(target as HTMLElement)?.closest('.field-editor.edit')) toggleEdit();
+    };
+
+    document.addEventListener('click', clickHandler);
+    document.addEventListener('focusin', focusHandler);
+    return () => {
+      document.removeEventListener('click', clickHandler);
+      document.removeEventListener('focusin', focusHandler);
+    };
+  }, [editMode, toggleEdit]);
+
+  useEffect(() => {
+    setCurrentValue(value);
+  }, [value]);
 
   const editTitle = titles?.edit || intl.formatMessage({ id: 'edit' });
   const submitTitle = titles?.submit || intl.formatMessage({ id: 'submit' });

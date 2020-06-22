@@ -20,10 +20,11 @@ const NewCard: FC<NewCardProps> = ({ onCreate }) => {
           id: 'cards/new-card',
           defaultMessage: 'New card',
         })}
-        onSubmit={onCreate}
         titles={{
           edit: intl.formatMessage({ id: 'create', defaultMessage: 'Create' }),
         }}
+        exitOnSubmit={false}
+        onSubmit={onCreate}
       />
     </div>
   );

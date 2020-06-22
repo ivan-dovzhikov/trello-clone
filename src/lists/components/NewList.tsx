@@ -16,7 +16,6 @@ const NewList: FC<NewListProps> = ({ onCreate }) => {
           id: 'lists/title',
           defaultMessage: 'Title',
         })}
-        onSubmit={onCreate}
         displayOnViewMode={intl.formatMessage({
           id: 'lists/new-list',
           defaultMessage: 'Create card',
@@ -24,6 +23,8 @@ const NewList: FC<NewListProps> = ({ onCreate }) => {
         titles={{
           edit: intl.formatMessage({ id: 'create', defaultMessage: 'Create' }),
         }}
+        exitOnSubmit={false}
+        onSubmit={onCreate}
       />
     </div>
   );
