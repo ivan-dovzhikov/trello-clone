@@ -41,7 +41,7 @@ const BoardsNavigation: FC = () => {
   }: WheelEvent<HTMLDivElement>) => {
     if ((target as HTMLElement)?.closest('.field-editor.edit')) return;
     currentTarget.scrollTo({
-      left: currentTarget.scrollLeft +=
+      left: currentTarget.scrollLeft =
         deltaY * HORIZONTAL_SCROLLING_SPEED_FACTOR,
     });
   };

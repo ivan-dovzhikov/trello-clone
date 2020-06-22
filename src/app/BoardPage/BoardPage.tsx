@@ -23,11 +23,11 @@ const BoardPage: FC<BoardPageProps> = ({ match }) => {
       currentTarget,
       deltaY,
     }: WheelEvent<HTMLDivElement>) => {
+      if (window.innerHeight <= 600) return;
       if ((target as HTMLElement)?.closest('.list')) return;
       currentTarget.scrollTo({
-        left: currentTarget.scrollLeft +=
-          deltaY * HORIZONTAL_SCROLLING_SPEED_FACTOR,
-        behavior: 'smooth',
+        left:
+          currentTarget.scrollLeft + deltaY * HORIZONTAL_SCROLLING_SPEED_FACTOR,
       });
     };
 
