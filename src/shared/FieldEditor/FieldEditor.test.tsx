@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
@@ -7,12 +7,12 @@ import translations from 'app/localization/data';
 import { FieldEditor, FieldEditorProps } from '.';
 
 describe('Test FieldEditor component', () => {
-  const setup = (editMode: boolean) => {
+  const setup = (initialEditMode: boolean) => {
     const language = 'en';
     const translationData = translations[language].data;
 
     const props: FieldEditorProps = {
-      editMode,
+      initialEditMode,
       fieldName: 'test',
       value: 'something',
       onSubmit: jest.fn(),
@@ -53,36 +53,6 @@ describe('Test FieldEditor component', () => {
     expect(textarea).toHaveValue(value);
   });
 
-  describe('test modal behavior', () => {
-    describe('edit mode on', () => {
-      it('should exit on click on not Field editor component', () => {
-        const { textarea, container } = setup(true);
-        userEvent.click(container);
-        expect(textarea).toBeDisabled();
-      });
-
-      it('should exit on focus on not Field editor component', () => {
-        const { textarea, container } = setup(true);
-        fireEvent(container, new Event('focusin', { bubbles: true }));
-        expect(textarea).toBeDisabled();
-      });
-    });
-
-    describe('edit mode off', () => {
-      it('should not attach onClick listener', () => {
-        const { container, onEditToggle } = setup(false);
-        userEvent.click(container);
-        expect(onEditToggle).not.toBeCalled();
-      });
-
-      it('should not attach focusIn listener', () => {
-        const { container, onEditToggle } = setup(false);
-        fireEvent(container, new Event('focusin', { bubbles: true }));
-        expect(onEditToggle).not.toBeCalled();
-      });
-    });
-  });
-
   describe('test submit button', () => {
     it('should render button', () => {
       const { getSubmitButton } = setup(true);
@@ -105,9 +75,11 @@ describe('Test FieldEditor component', () => {
     });
 
     it('should call onEdit toggle when clicked', () => {
-      const { onEditToggle, getCancelButton } = setup(true);
-      userEvent.click(getCancelButton());
-      expect(onEditToggle).toBeCalled();
+      act(() => {
+        const { onEditToggle, getCancelButton } = setup(true);
+        userEvent.click(getCancelButton());
+        expect(onEditToggle).toBeCalled();
+      });
     });
   });
 

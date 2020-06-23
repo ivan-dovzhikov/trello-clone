@@ -27,7 +27,7 @@ const BoardLink: FC<BoardLinkProps> = ({ id, onEdit, onDelete }) => {
       defaultMessage: 'Title',
     }),
     value: title,
-    useIconToggler: true,
+    iconToggle: true,
     editMode,
     onEditToggle: toggleEdit,
     onSubmit: (newTitle: string) => onEdit(id, newTitle),

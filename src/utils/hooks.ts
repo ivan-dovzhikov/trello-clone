@@ -1,6 +1,30 @@
 import { useState, useEffect } from 'react';
 import { closestByReference } from './lib';
 
+export const useStateWithCallback = <S>(
+  initialState: S,
+  callback?: Function
+) => {
+  const [state, setState] = useState(initialState);
+  return [
+    state,
+    value => {
+      if (callback) callback(value);
+      setState(value);
+    },
+  ] as [S, (value: S) => void];
+};
+
+export const useSwitchWithCallback = (
+  initialState: boolean,
+  callback?: Function
+) => {
+  const [state, setState] = useStateWithCallback(initialState, callback);
+  const enable = () => setState(true);
+  const disable = () => setState(false);
+  return [state, enable, disable] as [boolean, () => void, () => void];
+};
+
 export const useToggle = (initialState: boolean) => {
   const [state, setState] = useState(initialState);
   const toggleState = () => setState(!state);

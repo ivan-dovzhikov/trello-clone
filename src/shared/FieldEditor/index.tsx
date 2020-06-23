@@ -2,14 +2,17 @@ import React, {
   FC,
   useState,
   useEffect,
-  useCallback,
   useRef,
   ChangeEvent,
   KeyboardEvent,
-  MouseEvent as ReactMouseEvent,
 } from 'react';
 import { useIntl } from 'react-intl';
-import { preventClickDefault } from 'utils';
+import {
+  preventDefault,
+  useCallbackOnExternalAction,
+  removeLineBreaks,
+  useSwitchWithCallback,
+} from 'utils';
 import { Button, TextArea } from 'shared';
 import {
   EditOutlined as EditIcon,
@@ -19,22 +22,23 @@ import {
 } from '@material-ui/icons';
 import './styles.scss';
 
+interface Titles {
+  submit?: string;
+  cancel?: string;
+  delete?: string;
+  edit?: string;
+}
+
 export interface FieldEditorProps {
   fieldName: string;
   value?: string;
   displayOnViewMode?: string;
-  titles?: {
-    submit?: string;
-    cancel?: string;
-    delete?: string;
-    edit?: string;
-  };
+  titles?: Titles;
   initialEditMode?: boolean;
-  editMode?: boolean;
-  onEditToggle?: () => any;
-  useIconToggler?: boolean;
+  onEditToggle?: Function;
+  iconToggle?: boolean;
   exitOnSubmit?: boolean;
-  onSubmit: (value: string) => any;
+  onSubmit: Function;
   onDelete?: () => any;
 }
 
@@ -44,33 +48,26 @@ export const FieldEditor: FC<FieldEditorProps> = ({
   displayOnViewMode,
   titles,
   initialEditMode = false,
-  editMode: derivedEditMode,
   onEditToggle,
-  useIconToggler = false,
+  iconToggle = false,
   exitOnSubmit = true,
   onSubmit,
   onDelete,
 }) => {
   const intl = useIntl();
-  const [editMode, setEditMode] = useState(derivedEditMode ?? initialEditMode);
-  const [currentValue, setCurrentValue] = useState(value);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  const isInvalid = !currentValue.trim();
+  const formRef = useRef<HTMLDivElement>(null);
 
-  const toggleEdit = useCallback(
-    (e?: ReactMouseEvent<HTMLElement>) => {
-      e?.preventDefault();
-      setEditMode(!editMode);
-      setCurrentValue(value);
-      if (onEditToggle) onEditToggle();
-    },
-    [value, editMode, onEditToggle]
+  const [editMode, enterEditMode, exitEditMode] = useSwitchWithCallback(
+    initialEditMode,
+    onEditToggle
   );
+  const [currentValue, setCurrentValue] = useState(value);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value.replace(/\r\n|\r|\n/gm, ' ');
-    setCurrentValue(value);
+    setCurrentValue(removeLineBreaks(e.target.value));
   };
+  const isInvalid = !currentValue.trim();
 
   const handleSubmit = () => {
     if (isInvalid) return;
@@ -80,12 +77,12 @@ export const FieldEditor: FC<FieldEditorProps> = ({
       onSubmit(trimmedCurrentValue);
     }
 
-    if (exitOnSubmit) toggleEdit();
+    if (exitOnSubmit) exitEditMode();
     else setCurrentValue('');
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Escape') toggleEdit();
+    if (e.key === 'Escape') exitEditMode();
     if (e.key === 'Enter') {
       e.preventDefault();
       handleSubmit();
@@ -93,26 +90,14 @@ export const FieldEditor: FC<FieldEditorProps> = ({
   };
 
   useEffect(() => {
-    if (!editMode) return;
-    textAreaRef.current?.focus();
-    const clickHandler = ({ target }: MouseEvent) => {
-      if (!(target as HTMLElement)?.closest('.field-editor.edit')) toggleEdit();
-    };
-    const focusHandler = ({ target }: FocusEvent) => {
-      if (!(target as HTMLElement)?.closest('.field-editor.edit')) toggleEdit();
-    };
-
-    document.addEventListener('click', clickHandler);
-    document.addEventListener('focusin', focusHandler);
-    return () => {
-      document.removeEventListener('click', clickHandler);
-      document.removeEventListener('focusin', focusHandler);
-    };
-  }, [editMode, toggleEdit]);
+    if (editMode) textAreaRef.current?.focus();
+  }, [editMode]);
 
   useEffect(() => {
     setCurrentValue(value);
-  }, [value]);
+  }, [value, editMode]);
+
+  useCallbackOnExternalAction(formRef.current, exitEditMode, editMode);
 
   const editTitle = titles?.edit || intl.formatMessage({ id: 'edit' });
   const submitTitle = titles?.submit || intl.formatMessage({ id: 'submit' });
@@ -120,15 +105,7 @@ export const FieldEditor: FC<FieldEditorProps> = ({
   const deleteTitle = titles?.delete || intl.formatMessage({ id: 'delete' });
 
   return (
-    <form className={`field-editor${editMode ? ' edit' : ''}`}>
-      {/* disabled textarea ignores clicks */}
-      {!editMode && !useIconToggler && (
-        <button
-          className="click-overlay"
-          onClick={toggleEdit}
-          title={editTitle}
-        />
-      )}
+    <div className={`field-editor${editMode ? ' edit' : ''}`} ref={formRef}>
       <div className="field-editor-textarea-container">
         <TextArea
           labelValue={fieldName}
@@ -144,40 +121,50 @@ export const FieldEditor: FC<FieldEditorProps> = ({
           onKeyDown={handleKeyDown}
           ref={textAreaRef}
         />
-        {!editMode && useIconToggler && (
-          <Button
-            title={editTitle}
-            className="field-editor-button edit-button"
-            onClick={toggleEdit}
-          >
-            <EditIcon fontSize="inherit" />
-          </Button>
-        )}
+        <div className="default-prevention-boundary" onClick={preventDefault}>
+          {!editMode &&
+            (iconToggle ? (
+              <Button
+                className="field-editor-button edit-button"
+                title={editTitle}
+                onClick={enterEditMode}
+              >
+                <EditIcon fontSize="inherit" />
+              </Button>
+            ) : (
+              // disabled textarea ignores clicks
+              <button
+                className="click-overlay"
+                title={editTitle}
+                onClick={enterEditMode}
+              />
+            ))}
+        </div>
       </div>
-      <div className="buttons-container" onClick={preventClickDefault}>
+      <div className="buttons-container">
         {editMode && (
           <>
             <div>
               <Button
-                title={submitTitle}
                 className="field-editor-button submit-button"
+                title={submitTitle}
                 onClick={handleSubmit}
                 disabled={isInvalid}
               >
                 <SubmitIcon fontSize="inherit" />
               </Button>
               <Button
-                title={cancelTitle}
                 className="field-editor-button"
-                onClick={toggleEdit}
+                title={cancelTitle}
+                onClick={exitEditMode}
               >
                 <CancelIcon fontSize="inherit" />
               </Button>
             </div>
             {onDelete && (
               <Button
-                title={deleteTitle}
                 className="field-editor-button"
+                title={deleteTitle}
                 onClick={onDelete}
               >
                 <DeleteIcon fontSize="inherit" />
@@ -186,6 +173,6 @@ export const FieldEditor: FC<FieldEditorProps> = ({
           </>
         )}
       </div>
-    </form>
+    </div>
   );
 };

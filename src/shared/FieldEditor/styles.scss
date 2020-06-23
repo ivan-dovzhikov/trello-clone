@@ -6,6 +6,10 @@ $button-size: 1.25rem;
   position: relative;
   border-radius: inherit;
 
+  .default-prevention-boundary {
+    border-radius: inherit;
+  }
+
   .click-overlay {
     z-index: 10;
     position: absolute;
