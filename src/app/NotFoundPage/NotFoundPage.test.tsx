@@ -13,7 +13,10 @@ describe('Test Not found page component', () => {
 
     render(
       <BrowserRouter>
-        <IntlProvider locale={language} messages={translations[language].data}>
+        <IntlProvider
+          locale={language}
+          messages={translations[language].translation}
+        >
           <NotFoundPage message={message} />
         </IntlProvider>
       </BrowserRouter>

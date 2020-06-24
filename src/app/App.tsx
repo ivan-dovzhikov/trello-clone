@@ -19,7 +19,7 @@ const App: FC = () => {
   );
 
   return (
-    <IntlProvider locale={locale} messages={translations[locale].data}>
+    <IntlProvider locale={locale} messages={translations[locale].translation}>
       <Header />
       <Switch>
         <Route path="/" exact={true} component={HomePage} />

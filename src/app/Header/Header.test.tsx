@@ -9,7 +9,7 @@ describe('Test header component', () => {
   beforeEach(() => {
     render(
       <BrowserRouter>
-        <IntlProvider locale="en" messages={translations.en.data}>
+        <IntlProvider locale="en" messages={translations.en.translation}>
           <Header />
         </IntlProvider>
       </BrowserRouter>

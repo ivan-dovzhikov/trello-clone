@@ -4,11 +4,11 @@ import russianTranslation from './ru.json';
 const translations = {
   en: {
     name: 'english',
-    data: englishTranslation,
+    translation: englishTranslation,
   },
   ru: {
     name: 'russian',
-    data: russianTranslation,
+    translation: russianTranslation,
   },
 };
 

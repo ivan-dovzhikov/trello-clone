@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
@@ -9,7 +9,7 @@ import { FieldEditor, FieldEditorProps } from '.';
 describe('Test FieldEditor component', () => {
   const setup = (initialEditMode: boolean) => {
     const language = 'en';
-    const translationData = translations[language].data;
+    const translationData = translations[language].translation;
 
     const props: FieldEditorProps = {
       initialEditMode,
@@ -75,11 +75,9 @@ describe('Test FieldEditor component', () => {
     });
 
     it('should call onEdit toggle when clicked', () => {
-      act(() => {
-        const { onEditToggle, getCancelButton } = setup(true);
-        userEvent.click(getCancelButton());
-        expect(onEditToggle).toBeCalled();
-      });
+      const { onEditToggle, getCancelButton } = setup(true);
+      userEvent.click(getCancelButton());
+      expect(onEditToggle).toBeCalled();
     });
   });
 

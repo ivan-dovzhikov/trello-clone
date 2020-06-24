@@ -9,7 +9,7 @@ describe('Test home page component', () => {
   beforeEach(() => {
     render(
       <BrowserRouter>
-        <IntlProvider locale="en" messages={translations.en.data}>
+        <IntlProvider locale="en" messages={translations.en.translation}>
           <HomePage />
         </IntlProvider>
       </BrowserRouter>
