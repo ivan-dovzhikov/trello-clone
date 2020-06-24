@@ -2,12 +2,14 @@ import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import './styles.scss';
+import Menu from './Components/Menu';
 
 const Header: FC = () => {
   const intl = useIntl();
 
   return (
     <header className="site-header">
+      <div className="placeholder" />
       <nav className="site-navigation">
         <ul>
           <li>
@@ -25,6 +27,7 @@ const Header: FC = () => {
           </li>
         </ul>
       </nav>
+      <Menu />
     </header>
   );
 };
