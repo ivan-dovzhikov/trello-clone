@@ -1,10 +1,10 @@
-import React, { FC, ReactElement, useState, memo } from 'react';
+import React, { FC, ReactElement, memo } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { FieldEditor } from 'shared';
 import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
-import { AppState } from 'utils';
+import { AppState, useToggle } from 'utils';
 
 export interface CardProps {
   index: number;
@@ -30,8 +30,7 @@ const Card: FC<CardProps> = ({ index, id, onDelete, onEdit }) => {
 
   // Caret insert in edit mode won't work if disableInteractiveElementBlocking
   // will be enabled
-  const [shouldDrag, setShouldDrag] = useState(true);
-  const toggleShouldDrag = () => setShouldDrag(!shouldDrag);
+  const [shouldDrag, toggleShouldDrag] = useToggle(true);
 
   return (
     <Draggable

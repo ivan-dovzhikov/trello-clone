@@ -1,9 +1,9 @@
-import React, { FC, useState, memo } from 'react';
+import React, { FC, memo } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { FieldEditor } from 'shared';
 import ListOfCard from 'cards';
 import { useSelector } from 'react-redux';
-import { AppState } from 'utils';
+import { AppState, useToggle } from 'utils';
 import { useIntl } from 'react-intl';
 
 export interface ListProps {
@@ -23,8 +23,7 @@ const List: FC<ListProps> = ({ index, id, onEdit, onDelete }) => {
 
   // Caret insert in edit mode won't work if disableInteractiveElementBlocking
   // will be enabled
-  const [shouldDrag, setShouldDrag] = useState(true);
-  const toggleShouldDrag = () => setShouldDrag(!shouldDrag);
+  const [shouldDrag, toggleShouldDrag] = useToggle(true);
 
   return (
     <Draggable
