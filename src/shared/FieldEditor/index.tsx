@@ -12,6 +12,7 @@ import {
   useCallbackOnExternalAction,
   removeLineBreaks,
   useSwitchWithCallback,
+  AnyFunction,
 } from 'utils';
 import { Button, TextArea } from 'shared';
 import {
@@ -35,11 +36,11 @@ export interface FieldEditorProps {
   displayOnViewMode?: string;
   titles?: Titles;
   initialEditMode?: boolean;
-  onEditToggle?: Function;
+  onEditToggle?: AnyFunction;
   iconToggle?: boolean;
   exitOnSubmit?: boolean;
-  onSubmit: Function;
-  onDelete?: () => any;
+  onSubmit: AnyFunction;
+  onDelete?: AnyFunction;
 }
 
 export const FieldEditor: FC<FieldEditorProps> = ({

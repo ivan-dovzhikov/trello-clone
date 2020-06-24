@@ -3,7 +3,7 @@ import { closestByReference } from './lib';
 
 export const useStateWithCallback = <S>(
   initialState: S,
-  callback?: Function
+  callback?: (state: S) => any
 ) => {
   const [state, setState] = useState(initialState);
   return [
@@ -17,7 +17,7 @@ export const useStateWithCallback = <S>(
 
 export const useSwitchWithCallback = (
   initialState: boolean,
-  callback?: Function
+  callback?: (state: boolean) => any
 ) => {
   const [state, setState] = useStateWithCallback(initialState, callback);
   const enable = () => setState(true);

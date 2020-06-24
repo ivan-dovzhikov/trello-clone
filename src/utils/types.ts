@@ -3,6 +3,8 @@ import { BoardsState, BoardActions } from 'boards/types';
 import { ListsState, ListActions } from 'lists/types';
 import { CardsState, CardActions } from 'cards/types';
 
+export type AnyFunction = (...args: any[]) => any;
+
 export interface AppState {
   locale: LocaleState;
   boards: BoardsState;
