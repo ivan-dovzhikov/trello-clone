@@ -1,8 +1,8 @@
-import React, { FC, useState, memo } from 'react';
+import React, { FC, memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FieldEditor } from 'shared';
 import { useSelector } from 'react-redux';
-import { AppState } from 'utils';
+import { AppState, preventDefault, useToggle } from 'utils';
 import { useIntl } from 'react-intl';
 
 export interface BoardLinkProps {
@@ -18,8 +18,7 @@ const BoardLink: FC<BoardLinkProps> = ({ id, onEdit, onDelete }) => {
     ({ boards }) => boards.byId[id].title
   );
 
-  const [editMode, setEditMode] = useState(false);
-  const toggleEdit = () => setEditMode(!editMode);
+  const [editMode, toggleEditMode] = useToggle(false);
 
   const FieldEditProps = {
     fieldName: intl.formatMessage({
@@ -28,18 +27,17 @@ const BoardLink: FC<BoardLinkProps> = ({ id, onEdit, onDelete }) => {
     }),
     value: title,
     iconToggle: true,
-    editMode,
-    onEditToggle: toggleEdit,
+    onEditToggle: toggleEditMode,
     onSubmit: (newTitle: string) => onEdit(id, newTitle),
     onDelete: () => onDelete(id),
   };
 
-  return editMode ? (
-    <div className="board-link">
-      <FieldEditor {...FieldEditProps} />
-    </div>
-  ) : (
-    <NavLink to={`/boards/${id}`} className="board-link">
+  return (
+    <NavLink
+      to={`/boards/${id}`}
+      className="board-link"
+      onClick={editMode ? preventDefault : undefined}
+    >
       <FieldEditor {...FieldEditProps} />
     </NavLink>
   );
