@@ -4,16 +4,23 @@
   "submit": "Submit",
   "delete": "Delete",
   "cancel": "Cancel",
+
   "app/home": "Home",
   "app/boards": "Boards",
   "app/get-started": "Get started",
   "app/go-back": "Go back",
   "app/page404": "Such page doesn't exist",
   "app/board404": "Such board doesn't exist",
+  "app/open-menu": "Menu",
+  "app/close-menu": "Close",
+  "app/change-language": "Change language",
+
   "boards/title": "Title",
   "boards/new-board": "New Board",
+
   "lists/title": "title",
   "lists/new-list": "New List",
+
   "cards/content": "Content",
   "cards/new-card": "New Card"
 }
