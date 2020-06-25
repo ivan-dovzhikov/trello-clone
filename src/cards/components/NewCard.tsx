@@ -4,9 +4,10 @@ import { FieldEditor } from 'shared';
 
 export interface NewCardProps {
   onCreate: (content: string) => any;
+  toggleListDrag: () => void;
 }
 
-const NewCard: FC<NewCardProps> = ({ onCreate }) => {
+const NewCard: FC<NewCardProps> = ({ onCreate, toggleListDrag }) => {
   const intl = useIntl();
 
   return (
@@ -21,10 +22,14 @@ const NewCard: FC<NewCardProps> = ({ onCreate }) => {
           defaultMessage: 'New card',
         })}
         titles={{
-          edit: intl.formatMessage({ id: 'create', defaultMessage: 'Create' }),
+          edit: intl.formatMessage({
+            id: 'create',
+            defaultMessage: 'Create',
+          }),
         }}
         exitOnSubmit={false}
         onSubmit={onCreate}
+        onEditToggle={toggleListDrag}
       />
     </div>
   );

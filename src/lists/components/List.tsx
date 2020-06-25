@@ -50,7 +50,7 @@ const List: FC<ListProps> = ({ index, id, onEdit, onDelete }) => {
               onEditToggle={toggleShouldDrag}
             />
           </header>
-          <ListOfCard listId={id} />
+          <ListOfCard listId={id} toggleListDrag={toggleShouldDrag} />
         </div>
       )}
     </Draggable>

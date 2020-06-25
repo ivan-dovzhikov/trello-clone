@@ -8,9 +8,10 @@ import { AppState } from 'utils';
 
 export interface ListOfCardsProps {
   listId: string;
+  toggleListDrag: () => void;
 }
 
-const ListOfCards: FC<ListOfCardsProps> = ({ listId }) => {
+const ListOfCards: FC<ListOfCardsProps> = ({ listId, toggleListDrag }) => {
   const dispatch = useDispatch();
 
   const cardsIds = useSelector<AppState, string[]>(
@@ -55,7 +56,7 @@ const ListOfCards: FC<ListOfCardsProps> = ({ listId }) => {
           </ul>
         )}
       </Droppable>
-      <NewCard onCreate={onCreate} />
+      <NewCard onCreate={onCreate} toggleListDrag={toggleListDrag} />
     </>
   );
 };
