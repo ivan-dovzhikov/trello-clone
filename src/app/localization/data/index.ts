@@ -16,7 +16,7 @@ const translations: Translations = {
     translation: englishTranslation,
   },
   ru: {
-    name: 'russian',
+    name: 'русский',
     translation: russianTranslation,
   },
 };
