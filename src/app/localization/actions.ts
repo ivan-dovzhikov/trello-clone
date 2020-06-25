@@ -1,14 +1,8 @@
 import translations from './data';
-import {
-  LocaleActionTypes,
-  SetLanguageAction,
-  AvailableLanguages,
-} from './types';
+import { LocaleActionTypes, SetLanguageAction } from './types';
 const { SET_LANGUAGE } = LocaleActionTypes;
 
-export type SetLanguageActionCreator = (
-  code: AvailableLanguages
-) => SetLanguageAction;
+export type SetLanguageActionCreator = (code: string) => SetLanguageAction;
 
 export const setLanguage: SetLanguageActionCreator = code => ({
   type: SET_LANGUAGE,

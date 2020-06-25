@@ -12,7 +12,7 @@ const { SET_LANGUAGE } = LocaleActionTypes;
 export interface SetLanguageAction {
   type: typeof SET_LANGUAGE;
   payload: {
-    languageCode: AvailableLanguages;
+    languageCode: string;
     languageName: string;
   };
 }
@@ -20,6 +20,6 @@ export interface SetLanguageAction {
 export type LocaleActions = SetLanguageAction;
 
 export interface LocaleState {
-  languageCode: AvailableLanguages;
+  languageCode: string;
   languageName: string;
 }

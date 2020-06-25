@@ -1,6 +1,5 @@
 import { Reducer } from 'redux';
 import {
-  AvailableLanguages,
   LocaleActionTypes,
   LocaleState,
   LocaleActions,
@@ -11,9 +10,8 @@ import translations from './data';
 const { SET_LANGUAGE } = LocaleActionTypes;
 
 const preferredLanguage = navigator.language?.slice(0, 2);
-let language: AvailableLanguages = 'en';
-if (preferredLanguage in translations)
-  language = preferredLanguage as AvailableLanguages;
+let language: string = 'en';
+if (preferredLanguage in translations) language = preferredLanguage;
 
 const initialState: LocaleState = {
   languageCode: language,

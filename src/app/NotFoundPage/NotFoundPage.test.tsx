@@ -2,13 +2,12 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
-import { EnTranslationId, AvailableLanguages } from 'app/localization/types';
 import translations from 'app/localization/data';
 import NotFoundPage from './NotFoundPage';
 
 describe('Test Not found page component', () => {
   const setup = () => {
-    const language: AvailableLanguages = 'en';
+    const language = 'en';
     const message = 'Some message';
 
     render(
@@ -35,7 +34,7 @@ describe('Test Not found page component', () => {
 
   it('should render "Go back" button', () => {
     const { language } = setup();
-    const buttonText = translations[language].data['app/go-back'];
+    const buttonText = translations[language].translation['app/go-back'];
 
     expect(
       screen.getByRole('button', { name: buttonText })

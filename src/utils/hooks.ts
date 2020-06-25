@@ -40,7 +40,7 @@ export const useCallbackOnExternalAction = (
     if (!condition || !element) return;
 
     const handler = ({ target }: Event) => {
-      if (!closestByReference(target as HTMLElement, element!)) callback();
+      if (!closestByReference(target as HTMLElement, element)) callback();
     };
 
     document.addEventListener('click', handler);

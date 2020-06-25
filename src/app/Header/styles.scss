@@ -2,7 +2,12 @@
 
 .placeholder,
 .site-menu {
-  width: 200px;
+  min-width: 200px;
+
+  @include for-big-phone {
+    min-width: auto;
+    flex: 1;
+  }
 }
 
 .site-header {
@@ -19,6 +24,10 @@
 
 .site-navigation {
   flex: 1;
+
+  @include for-small-phone {
+    flex: 0;
+  }
 
   ul {
     display: flex;
@@ -61,7 +70,7 @@
     height: 100%;
     width: 100%;
     margin: 0;
-    padding: 0;
+    padding: 0 1rem;
     border: 0;
     background-color: transparent;
     transition: 0.2s ease;
@@ -93,7 +102,11 @@
   }
 
   &.expand {
-    width: 25%;
+    min-width: 25%;
+
+    @include for-big-phone {
+      flex: 1;
+    }
 
     .toggler {
       background-color: get-color(dark, 1);
@@ -105,16 +118,58 @@
       }
     }
 
+    @include for-phone {
+      position: absolute;
+      right: 0;
+      width: 100vw;
+    }
+
     .dropdown {
       height: 100vh;
       width: 100%;
       box-shadow: -2px 0 2px 0 get-color(dark, 0.5);
-      background-color: get-color(dark, 0.9);
+      background-color: get-color(dark, 0.8);
       color: get-color(light);
     }
 
     .dropdown-inner {
       opacity: 1;
+    }
+  }
+}
+
+.language-select {
+  width: 100%;
+  margin: 0;
+  margin-top: 0.5rem;
+  padding: 0 0.5rem;
+  background-color: get-color(dark);
+  border: 1px solid get-color(dark);
+  outline: none;
+  outline: none;
+  line-height: 2;
+  text-transform: capitalize;
+  color: get-color(light);
+  cursor: pointer;
+
+  appearance: none;
+
+  &:focus,
+  &:hover {
+    border-color: get-color(accent);
+    outline: none;
+  }
+
+  .language-option {
+    border: 1px solid get-color(dark);
+    line-height: 2;
+    text-transform: capitalize;
+    cursor: pointer;
+
+    &:focus,
+    &:hover {
+      border-color: get-color(accent);
+      outline: none;
     }
   }
 }
