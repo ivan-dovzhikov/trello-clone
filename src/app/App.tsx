@@ -33,6 +33,24 @@ const App: FC = () => {
         />
         <Route path="*" component={PageNotFound} />
       </Switch>
+      <span className="photo-signature">
+        Photo by{' '}
+        <a
+          href="https://www.pexels.com/@splitshire"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          SplitShire
+        </a>
+        . Downloaded from{' '}
+        <a
+          href="https://www.pexels.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Pexels.com
+        </a>
+      </span>
     </IntlProvider>
   );
 };
