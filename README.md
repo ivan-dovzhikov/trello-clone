@@ -1,5 +1,5 @@
-a# Trello clone
-> <a href="https://einegeist.github.io/trello-clone/" target="_blank">Demo</a>
+# Trello clone
+<a href="https://einegeist.github.io/trello-clone/" target="_blank">Demo</a>
 
 ## About
 
