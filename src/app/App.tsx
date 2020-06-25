@@ -33,24 +33,7 @@ const App: FC = () => {
         />
         <Route path="*" component={PageNotFound} />
       </Switch>
-      <span className="photo-signature">
-        Photo by{' '}
-        <a
-          href="https://www.pexels.com/@splitshire"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          SplitShire
-        </a>
-        . Downloaded from{' '}
-        <a
-          href="https://www.pexels.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Pexels.com
-        </a>
-      </span>
+      <PhotoSignature />
     </IntlProvider>
   );
 };
@@ -65,6 +48,35 @@ const PageNotFound: FC = () => {
         defaultMessage: "Such page doesn't exist",
       })}
     />
+  );
+};
+
+const PhotoSignature: FC = () => {
+  const intl = useIntl();
+
+  return (
+    <span className="photo-signature">
+      {intl.formatMessage({ id: 'app/photo-by', defaultMessage: 'Photo by' })}{' '}
+      <a
+        href="https://www.pexels.com/@splitshire"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        SplitShire
+      </a>
+      .{' '}
+      {intl.formatMessage({
+        id: 'app/downloaded-from',
+        defaultMessage: 'Downloaded from',
+      })}{' '}
+      <a
+        href="https://www.pexels.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Pexels.com
+      </a>
+    </span>
   );
 };
 

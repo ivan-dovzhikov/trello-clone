@@ -14,6 +14,8 @@
   "app/open-menu": "Menu",
   "app/close-menu": "Close",
   "app/change-language": "Change language",
+  "app/photo-by": "Photo by",
+  "app/downloaded-from": "Downloaded from",
 
   "boards/title": "Title",
   "boards/new-board": "New Board",

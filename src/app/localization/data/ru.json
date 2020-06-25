@@ -14,6 +14,8 @@
   "app/open-menu": "Меню",
   "app/close-menu": "Закрыть",
   "app/change-language": "Сменить язык",
+  "app/photo-by": "Фото сделано",
+  "app/downloaded-from": "Скачано с",
 
   "boards/title": "Заголовок",
   "boards/new-board": "Создать доску",
