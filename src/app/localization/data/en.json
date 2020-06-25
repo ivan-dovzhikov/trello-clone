@@ -7,7 +7,7 @@
   "app/home": "Home",
   "app/boards": "Boards",
   "app/get-started": "Get started",
-  "app/go-back": "Get back",
+  "app/go-back": "Go back",
   "app/page404": "Such page doesn't exist",
   "app/board404": "Such board doesn't exist",
   "boards/title": "Title",
