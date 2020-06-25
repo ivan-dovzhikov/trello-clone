@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { useIntl } from 'react-intl';
 import { FieldEditor } from 'shared';
 
@@ -30,4 +30,4 @@ const NewList: FC<NewListProps> = ({ onCreate }) => {
   );
 };
 
-export default NewList;
+export default memo(NewList);
