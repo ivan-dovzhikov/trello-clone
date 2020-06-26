@@ -58,6 +58,11 @@
 
   &.active {
     border-color: get-color(dark, 0.5);
+
+    &:focus,
+    &:hover {
+      border-bottom-width: 1px;
+    }
   }
 }
 
