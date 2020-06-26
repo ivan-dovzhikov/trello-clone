@@ -10,7 +10,7 @@ const HomePage: FC = () => {
   return (
     <main className="home-page">
       <h1>Trello clone</h1>
-      <Link to="/boards">
+      <Link to="/boards" tabIndex={-1}>
         <Button>
           {intl.formatMessage({
             id: 'app/get-started',
