@@ -24,6 +24,11 @@ html {
   }
 }
 
+a:focus,
+a:hover {
+  border-bottom: 2px solid get-color(accent);
+}
+
 a,
 button,
 textarea,
