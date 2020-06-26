@@ -10,7 +10,7 @@ const NewBoard: FC<NewBoardProps> = ({ onCreate }) => {
   const intl = useIntl();
 
   return (
-    <div className="board-link new-board">
+    <div className="boards-navigation__new-board">
       <FieldEditor
         fieldName={intl.formatMessage({
           id: 'boards/title',

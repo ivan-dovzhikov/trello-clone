@@ -20,7 +20,7 @@ $board-link-x-margin: 0.25rem;
   }
 }
 
-.board-link {
+.boards-navigation__link {
   position: relative;
   display: flex;
   align-items: center;
@@ -55,13 +55,14 @@ $board-link-x-margin: 0.25rem;
       }
     }
   }
-
-  .boards-navigation__link-textarea {
-    text-align: center;
-  }
 }
 
-.new-board {
+.boards-navigation__new-board {
+  @extend .boards-navigation__link;
   flex: none;
   border: none;
+}
+
+.boards-navigation__link-textarea {
+  text-align: center;
 }

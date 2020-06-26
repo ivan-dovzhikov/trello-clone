@@ -26,7 +26,7 @@ const BoardLink: FC<BoardLinkProps> = ({ id, onEdit, onDelete }) => {
   return (
     <NavLink
       to={`/boards/${id}`}
-      className="board-link"
+      className="boards-navigation__link"
       onClick={editMode ? preventDefault : undefined}
     >
       <FieldEditor
