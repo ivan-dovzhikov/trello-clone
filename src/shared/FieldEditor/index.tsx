@@ -31,6 +31,7 @@ interface Titles {
 }
 
 export interface FieldEditorProps {
+  className?: string;
   fieldName: string;
   value?: string;
   displayOnViewMode?: string;
@@ -46,6 +47,7 @@ export interface FieldEditorProps {
 }
 
 export const FieldEditor: FC<FieldEditorProps> = ({
+  className = '',
   fieldName,
   value = '',
   displayOnViewMode,
@@ -110,8 +112,11 @@ export const FieldEditor: FC<FieldEditorProps> = ({
   const deleteTitle = titles?.delete || intl.formatMessage({ id: 'delete' });
 
   return (
-    <div className={`field-editor${editMode ? ' edit' : ''}`} ref={formRef}>
-      <div className="field-editor-textarea-container">
+    <div
+      className={`field-editor${editMode ? '--edit' : ''} ${className}`}
+      ref={formRef}
+    >
+      <div className="field-editor__textarea-container">
         <TextArea
           containerClassName={textareaContainerClassName}
           className={textareaClassName}
@@ -132,7 +137,7 @@ export const FieldEditor: FC<FieldEditorProps> = ({
           {!editMode &&
             (iconToggle ? (
               <Button
-                className="field-editor-button edit-button"
+                className="field-editor__button-edit"
                 title={editTitle}
                 onClick={enterEditMode}
               >
@@ -141,19 +146,19 @@ export const FieldEditor: FC<FieldEditorProps> = ({
             ) : (
               // disabled textarea ignores clicks
               <button
-                className="click-overlay"
+                className="field-editor__click-overlay"
                 title={editTitle}
                 onClick={enterEditMode}
               />
             ))}
         </div>
       </div>
-      <div className="buttons-container">
+      <div className="field-editor__buttons-container">
         {editMode && (
           <>
             <div>
               <Button
-                className="field-editor-button submit-button"
+                className="field-editor__button-submit"
                 title={submitTitle}
                 onClick={handleSubmit}
                 disabled={isInvalid}
@@ -161,7 +166,7 @@ export const FieldEditor: FC<FieldEditorProps> = ({
                 <SubmitIcon fontSize="inherit" />
               </Button>
               <Button
-                className="field-editor-button"
+                className="field-editor__button"
                 title={cancelTitle}
                 onClick={exitEditMode}
               >
@@ -170,7 +175,7 @@ export const FieldEditor: FC<FieldEditorProps> = ({
             </div>
             {onDelete && (
               <Button
-                className="field-editor-button"
+                className="field-editor__button"
                 title={deleteTitle}
                 onClick={onDelete}
               >

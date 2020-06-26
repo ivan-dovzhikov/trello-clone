@@ -1,7 +1,5 @@
 @import '../../utils/';
 
-$button-size: 1.25rem;
-
 .field-editor {
   position: relative;
   border-radius: inherit;
@@ -10,24 +8,34 @@ $button-size: 1.25rem;
     border-radius: inherit;
   }
 
-  .click-overlay {
-    z-index: 10;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    border-radius: 0.25rem;
-    background-color: transparent;
-    cursor: pointer;
-
-    &:focus {
-      border: 2px solid get-color(accent);
-    }
+  &:hover .field-editor__button-edit {
+    opacity: 1;
   }
+}
+
+.field-editor__click-overlay {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  cursor: pointer;
+
+  &:focus {
+    border: 2px solid get-color(accent);
+  }
+}
+
+.field-editor__textarea-container {
+  display: flex;
+  align-items: center;
+  border-radius: inherit;
 
   .textarea__container {
     width: 100%;
@@ -35,68 +43,65 @@ $button-size: 1.25rem;
     border: 2px solid transparent;
     transition: border 0.2s ease;
   }
-
-  &.edit {
-    .boards-navigation__link-textarea {
-      color: get-color(dark);
-    }
-
-    .buttons-container {
-      z-index: 100;
-      height: $button-size;
-      margin-top: 0.25rem;
-    }
-  }
-
-  .field-editor-textarea-container {
-    display: flex;
-    align-items: center;
-    border-radius: inherit;
-  }
-
-  .buttons-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 0;
-    padding: 0 0.25rem;
-    overflow: hidden;
-    transition: 0.2s ease-out;
-  }
-
-  &:hover .edit-button {
-    opacity: 1;
-  }
-
-  .edit-button {
-    position: absolute;
-    top: 50%;
-    right: 0.5rem;
-    opacity: 0;
-    transform: translateY(-50%);
-    border-radius: inherit;
-
-    &:focus {
-      opacity: 1;
-    }
-
-    @include for-big-tablet {
-      position: static;
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  .submit-button {
-    margin-right: 0.25em;
-  }
 }
 
-.field-editor-button {
+.field-editor__buttons-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 0;
+  padding: 0 0.25rem;
+  overflow: hidden;
+  transition: 0.2s ease-out;
+}
+
+$button-size: 1.25rem;
+
+.field-editor__button {
   height: $button-size;
   width: $button-size;
   padding: 0;
   box-shadow: none;
   font-size: $button-size;
   background-color: transparent;
+}
+
+.field-editor__button-edit,
+.field-editor__button-submit {
+  @extend .field-editor__button;
+}
+
+.field-editor__button-edit {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  opacity: 0;
+  transform: translateY(-50%);
+  border-radius: inherit;
+
+  &:focus {
+    opacity: 1;
+  }
+
+  @include for-big-tablet {
+    position: static;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.field-editor__button-edit-submit {
+  margin-right: 0.25em;
+}
+
+.field-editor--edit {
+  .boards-navigation__link-textarea {
+    color: get-color(dark);
+  }
+
+  .field-editor__buttons-container {
+    z-index: 100;
+    height: $button-size;
+    margin-top: 0.25rem;
+  }
 }
