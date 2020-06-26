@@ -40,7 +40,7 @@ const ListOfCards: FC<ListOfCardsProps> = ({ listId, toggleListDrag }) => {
           <ul
             {...provided.droppableProps}
             ref={provided.innerRef}
-            className="list-of-cards"
+            className="cards"
           >
             {cardsIds.map((id, index) => (
               <li key={id}>

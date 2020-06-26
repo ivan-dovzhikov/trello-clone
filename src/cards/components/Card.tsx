@@ -42,7 +42,7 @@ const Card: FC<CardProps> = ({ index, id, onDelete, onEdit }) => {
         optionalPortal(
           provided.draggableProps.style,
           <div
-            className="card"
+            className="cards__card"
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}

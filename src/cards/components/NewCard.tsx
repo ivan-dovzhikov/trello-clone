@@ -11,7 +11,7 @@ const NewCard: FC<NewCardProps> = ({ onCreate, toggleListDrag }) => {
   const intl = useIntl();
 
   return (
-    <div className="card new-card">
+    <div className="cards__new-card">
       <FieldEditor
         fieldName={intl.formatMessage({
           id: 'cards/content',

@@ -1,6 +1,6 @@
 @import '../utils';
 
-.list-of-cards {
+.cards {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@
 
 $card-y-margin: 0.25rem;
 
-.card {
+.cards__card {
   position: relative;
   display: block;
   margin: $card-y-margin 0;
@@ -35,10 +35,11 @@ $card-y-margin: 0.25rem;
   }
 }
 
-.new-card {
+.cards__new-card {
+  @extend .cards__card;
   margin: $card-y-margin 0.5rem 0.5rem;
+}
 
-  .cards__card-textarea {
-    text-align: center;
-  }
+.cards__card-textarea {
+  text-align: center;
 }
