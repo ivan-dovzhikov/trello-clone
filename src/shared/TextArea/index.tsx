@@ -5,6 +5,7 @@ import './styles.scss';
 export interface TextAreaProps extends TextareaAutosizeProps {
   labelValue?: string;
   isInvalid?: boolean;
+  containerClassName?: string;
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -12,24 +13,23 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     {
       labelValue = false,
       isInvalid = false,
-      className: derivedClassName,
+      containerClassName = '',
+      className: derivedClassName = '',
       value,
       ...attributes
     },
     ref
   ) => {
     const [hideLabel, setHideLabel] = useState(!!value);
+
     useEffect(() => {
       setHideLabel(!!value);
     }, [value]);
 
-    let textAreaClassName = 'textarea';
-    if (isInvalid) textAreaClassName += ' invalid';
-    if (labelValue && hideLabel) textAreaClassName += ' hide-label';
-    if (derivedClassName) textAreaClassName += ' ' + derivedClassName;
-
     const textAreaProps = {
-      className: textAreaClassName,
+      className: `textarea__textarea${
+        isInvalid ? '--invalid' : ''
+      } ${derivedClassName}`,
       spellCheck: false,
       value,
       ...attributes,
@@ -37,10 +37,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     };
 
     return (
-      <div className="textarea-container">
+      <div className={`textarea__container ${containerClassName}`}>
         {labelValue ? (
-          <label className="label">
-            <span className={`label-value${hideLabel ? ' hide' : ''}`}>
+          <label className="textarea__label">
+            <span
+              className={`textarea__label-value${hideLabel ? '--hide' : ''}`}
+            >
               {labelValue}
             </span>
             <TextareaAutosize {...textAreaProps} ref={ref} />

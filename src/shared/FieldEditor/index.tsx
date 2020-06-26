@@ -41,6 +41,8 @@ export interface FieldEditorProps {
   exitOnSubmit?: boolean;
   onSubmit: AnyFunction;
   onDelete?: AnyFunction;
+  textareaClassName?: string;
+  textareaContainerClassName?: string;
 }
 
 export const FieldEditor: FC<FieldEditorProps> = ({
@@ -54,6 +56,8 @@ export const FieldEditor: FC<FieldEditorProps> = ({
   exitOnSubmit = true,
   onSubmit,
   onDelete,
+  textareaClassName,
+  textareaContainerClassName,
 }) => {
   const intl = useIntl();
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -109,6 +113,8 @@ export const FieldEditor: FC<FieldEditorProps> = ({
     <div className={`field-editor${editMode ? ' edit' : ''}`} ref={formRef}>
       <div className="field-editor-textarea-container">
         <TextArea
+          containerClassName={textareaContainerClassName}
+          className={textareaClassName}
           labelValue={fieldName}
           title={editMode ? fieldName : undefined}
           isInvalid={isInvalid}

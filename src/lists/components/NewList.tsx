@@ -25,6 +25,7 @@ const NewList: FC<NewListProps> = ({ onCreate }) => {
         }}
         exitOnSubmit={false}
         onSubmit={onCreate}
+        textareaClassName="lists__list-textarea"
       />
     </div>
   );

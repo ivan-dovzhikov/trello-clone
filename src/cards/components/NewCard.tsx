@@ -30,6 +30,7 @@ const NewCard: FC<NewCardProps> = ({ onCreate, toggleListDrag }) => {
         exitOnSubmit={false}
         onSubmit={onCreate}
         onEditToggle={toggleListDrag}
+        textareaClassName="cards__card-textarea"
       />
     </div>
   );

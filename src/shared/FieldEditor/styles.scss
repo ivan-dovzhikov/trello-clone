@@ -29,7 +29,7 @@ $button-size: 1.25rem;
     }
   }
 
-  .textarea-container {
+  .textarea__container {
     width: 100%;
     border-radius: inherit;
     border: 2px solid transparent;
@@ -37,7 +37,7 @@ $button-size: 1.25rem;
   }
 
   &.edit {
-    .textarea {
+    .boards-navigation__link-textarea {
       color: get-color(dark);
     }
 

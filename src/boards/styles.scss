@@ -20,14 +20,6 @@ $board-link-x-margin: 0.25rem;
   }
 }
 
-// .textarea {
-//   cursor: initial;
-
-//   &:disabled {
-//     cursor: pointer;
-//   }
-// }
-
 .board-link {
   position: relative;
   display: flex;
@@ -47,6 +39,7 @@ $board-link-x-margin: 0.25rem;
   &:focus,
   &:hover {
     @include accent;
+    border: none;
 
     .button:disabled {
       color: get-color(light, 1, -15%);
@@ -63,7 +56,7 @@ $board-link-x-margin: 0.25rem;
     }
   }
 
-  .field-editor:not(.edit) .textarea {
+  .field-editor:not(.edit) .boards-navigation__link-textarea {
     text-align: center;
   }
 }

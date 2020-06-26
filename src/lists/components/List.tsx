@@ -48,6 +48,7 @@ const List: FC<ListProps> = ({ index, id, onEdit, onDelete }) => {
               onDelete={handleDelete}
               onSubmit={handleSubmit}
               onEditToggle={toggleShouldDrag}
+              textareaClassName="lists__list-textarea"
             />
           </header>
           <ListOfCard listId={id} toggleListDrag={toggleShouldDrag} />

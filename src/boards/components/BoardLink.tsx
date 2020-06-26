@@ -20,17 +20,8 @@ const BoardLink: FC<BoardLinkProps> = ({ id, onEdit, onDelete }) => {
 
   const [editMode, toggleEditMode] = useToggle(false);
 
-  const FieldEditProps = {
-    fieldName: intl.formatMessage({
-      id: 'boards/title',
-      defaultMessage: 'Title',
-    }),
-    value: title,
-    iconToggle: true,
-    onEditToggle: toggleEditMode,
-    onSubmit: (newTitle: string) => onEdit(id, newTitle),
-    onDelete: () => onDelete(id),
-  };
+  const handleSubmit = (newTitle: string) => onEdit(id, newTitle);
+  const handleDelete = () => onDelete(id);
 
   return (
     <NavLink
@@ -38,7 +29,18 @@ const BoardLink: FC<BoardLinkProps> = ({ id, onEdit, onDelete }) => {
       className="board-link"
       onClick={editMode ? preventDefault : undefined}
     >
-      <FieldEditor {...FieldEditProps} />
+      <FieldEditor
+        fieldName={intl.formatMessage({
+          id: 'boards/title',
+          defaultMessage: 'Title',
+        })}
+        value={title}
+        iconToggle={true}
+        onEditToggle={toggleEditMode}
+        onSubmit={handleSubmit}
+        onDelete={handleDelete}
+        textareaClassName="boards-navigation__link-textarea"
+      />
     </NavLink>
   );
 };

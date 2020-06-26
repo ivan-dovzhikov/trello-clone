@@ -38,7 +38,7 @@ $card-y-margin: 0.25rem;
 .new-card {
   margin: $card-y-margin 0.5rem 0.5rem;
 
-  .field-editor:not(.edit) .textarea {
+  .field-editor:not(.edit) .cards__card-textarea {
     text-align: center;
   }
 }

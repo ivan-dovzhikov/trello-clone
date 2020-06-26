@@ -56,6 +56,7 @@ const Card: FC<CardProps> = ({ index, id, onDelete, onEdit }) => {
               onSubmit={handleSubmit}
               onDelete={handleDelete}
               onEditToggle={toggleShouldDrag}
+              textareaClassName="cards__card-textarea"
             />
           </div>
         )

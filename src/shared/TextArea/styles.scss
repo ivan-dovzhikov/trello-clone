@@ -1,53 +1,60 @@
 @import '../../utils';
 
-.textarea-container {
-  $padding: 0.25em;
+$padding: 0.25em;
+
+.textarea__container {
   position: relative;
+}
 
-  .textarea {
-    display: block;
-    resize: none;
-    width: 100%;
-    padding: $padding;
-    border: 2px solid get-color(dark, 0.5);
-    background-color: get-color(light, 0.8);
-    border-radius: 0.25rem;
-    transition: border 0.15s ease;
+.textarea__textarea {
+  display: block;
+  resize: none;
+  width: 100%;
+  padding: $padding;
+  border: 2px solid get-color(dark, 0.5);
+  background-color: get-color(light, 0.8);
+  border-radius: 0.25rem;
+  transition: border 0.15s ease;
 
-    @include scrollbar(get-color(dark, 0.8));
+  @include scrollbar(get-color(dark, 0.8));
 
-    &:focus,
-    &:hover {
-      outline: none;
-      border-color: get-color(accent);
-
-      &.invalid {
-        border-color: get-color(danger);
-      }
-    }
-
-    &:disabled {
-      border-color: transparent;
-      background-color: transparent;
-    }
-
-    @include for-big-phone {
-      padding: $padding / 2;
-    }
+  &:focus,
+  &:hover {
+    outline: none;
+    border-color: get-color(accent);
   }
 
-  .label {
-    display: block;
+  &:disabled {
+    border-color: transparent;
+    background-color: transparent;
   }
 
-  .label-value {
-    position: absolute;
-    display: block;
-    padding: $padding;
-    color: get-color(dark, 0.5);
-
-    &.hide {
-      display: none;
-    }
+  @include for-big-phone {
+    padding: $padding / 2;
   }
+}
+
+.textarea__textarea--invalid {
+  @extend .textarea__textarea;
+
+  &:focus,
+  &:hover {
+    border-color: get-color(danger);
+  }
+}
+
+.textarea__label {
+  display: block;
+}
+
+.textarea__label-value {
+  position: absolute;
+  display: block;
+  padding: $padding;
+  color: get-color(dark, 0.5);
+}
+
+.textarea__label-value--hide {
+  @extend .textarea__label-value;
+  display: none;
 }
