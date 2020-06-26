@@ -20,17 +20,13 @@ $board-link-x-margin: 0.25rem;
   }
 }
 
-.field-editor {
-  width: 100%;
-}
+// .textarea {
+//   cursor: initial;
 
-.textarea {
-  cursor: initial;
-
-  &:disabled {
-    cursor: pointer;
-  }
-}
+//   &:disabled {
+//     cursor: pointer;
+//   }
+// }
 
 .board-link {
   position: relative;
