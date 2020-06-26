@@ -55,14 +55,14 @@ $board-link-x-margin: 0.25rem;
       }
     }
   }
+
+  .field-editor .boards-navigation__link-textarea {
+    text-align: center;
+  }
 }
 
 .boards-navigation__new-board {
   @extend .boards-navigation__link;
   flex: none;
   border: none;
-}
-
-.boards-navigation__link-textarea {
-  text-align: center;
 }
