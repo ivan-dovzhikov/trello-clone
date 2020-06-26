@@ -6,18 +6,18 @@
   align-items: center;
   justify-content: center;
   flex: 1;
+}
 
-  .message {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    border-radius: 0.5rem;
-    @include window;
-  }
+.not-found-page__message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  @include window;
+}
 
-  .error-code {
-    line-height: 1;
-    font-size: 3rem;
-  }
+.not-found-page__error-code {
+  font-size: 3rem;
+  line-height: 1;
 }

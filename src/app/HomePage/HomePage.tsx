@@ -9,8 +9,8 @@ const HomePage: FC = () => {
 
   return (
     <main className="home-page">
-      <h1>Trello clone</h1>
-      <Link to="/boards" tabIndex={-1}>
+      <h1 className="home-page__heading">Trello clone</h1>
+      <Link className="home_page__link" to="/boards" tabIndex={-1}>
         <Button>
           {intl.formatMessage({
             id: 'app/get-started',

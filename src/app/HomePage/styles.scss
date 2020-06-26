@@ -8,24 +8,24 @@
   flex: 1;
   width: 100%;
   @include window(0.1);
+}
 
-  h1 {
-    display: block;
-    margin: 0 0 5rem;
-    padding: 0.25rem 2rem;
-    background-color: get-color(light, 0.8);
-    border-radius: 8px;
-    font: 5rem 'Oswald', sans-serif;
-    line-height: 1;
-    text-align: center;
-  }
+.home-page__heading {
+  display: block;
+  margin: 0 0 5rem;
+  padding: 0.25rem 2rem;
+  background-color: get-color(light, 0.8);
+  border-radius: 8px;
+  font: 5rem 'Oswald', sans-serif;
+  line-height: 1;
+  text-align: center;
+}
 
-  a {
-    z-index: 1;
-    font-size: 1.75rem;
-    line-height: 1;
-    text-decoration: none;
-  }
+.home_page__link {
+  z-index: 1;
+  font-size: 1.75rem;
+  line-height: 1;
+  text-decoration: none;
 
   .button {
     background-color: get-color(accent);

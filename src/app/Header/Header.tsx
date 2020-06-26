@@ -9,16 +9,20 @@ const Header: FC = () => {
 
   return (
     <header className="site-header">
-      <div className="placeholder" />
-      <nav className="site-navigation">
-        <ul>
+      <div className="site-header__placeholder" />
+      <nav className="site-header__navigation">
+        <ul className="site-header__navigation-list">
           <li>
-            <NavLink to="/" exact={true}>
+            <NavLink
+              className="site-header__navigation-link"
+              to="/"
+              exact={true}
+            >
               {intl.formatMessage({ id: 'app/home', defaultMessage: 'Home' })}
             </NavLink>
           </li>
           <li>
-            <NavLink to="/boards">
+            <NavLink className="site-header__navigation-link" to="/boards">
               {intl.formatMessage({
                 id: 'app/boards',
                 defaultMessage: 'Boards',

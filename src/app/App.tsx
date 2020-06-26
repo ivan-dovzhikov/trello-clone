@@ -55,7 +55,7 @@ const PhotoSignature: FC = () => {
   const intl = useIntl();
 
   return (
-    <span className="photo-signature">
+    <span className="app__photo-signature">
       {intl.formatMessage({ id: 'app/photo-by', defaultMessage: 'Photo by' })}{' '}
       <a
         href="https://www.pexels.com/@splitshire"

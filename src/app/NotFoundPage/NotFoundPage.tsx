@@ -14,8 +14,8 @@ const NotFoundPage: FC<NotFoundPageProps> = ({ message }) => {
 
   return (
     <main className="not-found-page">
-      <div className="message">
-        <span className="error-code">404</span>
+      <div className="not-found-page__message">
+        <span className="not-found-page__error-code">404</span>
         <p>{message}</p>
         <Button onClick={history.goBack}>
           {intl.formatMessage({
