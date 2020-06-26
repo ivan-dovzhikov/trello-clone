@@ -33,12 +33,12 @@ const List: FC<ListProps> = ({ index, id, onEdit, onDelete }) => {
     >
       {provided => (
         <div
-          className="list"
+          className="lists__list"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          <header>
+          <header className="lists__list-header">
             <FieldEditor
               fieldName={intl.formatMessage({
                 id: 'lists/title',

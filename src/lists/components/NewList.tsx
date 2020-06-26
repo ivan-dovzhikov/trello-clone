@@ -10,7 +10,7 @@ const NewList: FC<NewListProps> = ({ onCreate }) => {
   const intl = useIntl();
 
   return (
-    <div className="list new-list">
+    <div className="lists__new-list">
       <FieldEditor
         fieldName={intl.formatMessage({
           id: 'lists/title',

@@ -3,29 +3,29 @@
 
 $list-x-margin: 0.25rem;
 
-.list-of-lists {
+.lists {
   display: flex;
   align-items: flex-start;
   height: 100%;
-
-  & > ul {
-    display: flex;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  & > li {
-    height: 100%;
-  }
 
   @media only screen and (max-height: 600px) {
     height: auto;
   }
 }
 
-.list {
+.lists__ul {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lists__ul-item {
+  height: 100%;
+}
+
+.lists__list {
   display: flex;
   flex-direction: column;
   @include adaptive-column-layout($list-x-margin * 2, $board-page-x-margin * 2);
@@ -38,28 +38,25 @@ $list-x-margin: 0.25rem;
   &:focus {
     @include accent;
 
-    .new-card,
-    .card {
+    .cards_new-card,
+    .cards_card {
       background-color: get-color(light);
       color: get-color(dark);
     }
   }
 
-  header {
-    line-height: 1;
-    padding: 0.25rem 0.25rem 0;
-
-    .lists__list-textarea {
-      text-align: center;
-    }
+  .field-editor .lists__list-textarea {
+    text-align: center;
   }
 }
 
-.new-list {
+.lists__list-header {
+  line-height: 1;
+  padding: 0.25rem 0.25rem 0;
+}
+
+.lists__new-list {
+  @extend .lists__list;
   padding: 0.5rem;
   border: 0;
-
-  .lists__list-textarea {
-    text-align: center;
-  }
 }

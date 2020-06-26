@@ -73,12 +73,16 @@ const ListOfLists: FC<ListOfListsProps> = ({ boardId }) => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="list-of-lists">
+      <div className="lists">
         <Droppable droppableId="lists" direction="horizontal" type="list">
           {provided => (
-            <ul {...provided.droppableProps} ref={provided.innerRef}>
+            <ul
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              className="lists__ul"
+            >
               {lists.map((id, index) => (
-                <li key={id}>
+                <li key={id} className="lists__ul-item">
                   <List
                     index={index}
                     id={id}
