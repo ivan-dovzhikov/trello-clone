@@ -2,6 +2,7 @@ import React, { FC, useRef } from 'react';
 import { useIntl } from 'react-intl';
 import { useToggle, useCallbackOnExternalAction } from 'utils';
 import SelectLanguage from './SelectLanguage';
+import ThemeToggle from 'app/ThemeToggle';
 
 const Menu: FC = () => {
   const intl = useIntl();
@@ -26,6 +27,7 @@ const Menu: FC = () => {
       <div className="site-header__menu-dropdown">
         <div className="site-header__menu-dropdown-inner">
           <SelectLanguage />
+          <ThemeToggle />
         </div>
       </div>
     </div>
