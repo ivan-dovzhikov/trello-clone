@@ -2,7 +2,8 @@ import React, { FC, memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
-import { AppState, preventDefault, useToggle } from 'utils';
+import { preventDefault, useToggle } from 'utils';
+import { AppState } from 'app/types';
 import { FieldEditor } from 'shared';
 import './BoardLink.scss';
 

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppState } from 'utils';
+import { AppState } from 'app/types';
 import { toggleTheme as toggleThemeActionCreator } from 'themes/actions';
 import { Toggle } from 'shared';
 import './ThemeToggle.scss';

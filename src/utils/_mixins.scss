@@ -1,0 +1,105 @@
+@mixin window($opacity: 0.6, $shadow-color: get-color(dark)) {
+  background-color: get-color(light, $opacity);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 3px 2px -2px $shadow-color, -1px 0 2px -2px $shadow-color;
+}
+
+@mixin light-theme {
+  ._theme--light {
+    @content;
+  }
+}
+
+@mixin dark-theme {
+  ._theme--dark {
+    @content;
+  }
+}
+
+@mixin for-light-theme {
+  ._theme--light & {
+    @content;
+  }
+}
+
+@mixin for-dark-theme {
+  ._theme--dark & {
+    @content;
+  }
+}
+
+@mixin accent(
+  $light-bg-color: get-color(accent-light, 1),
+  $dark-bg-color: get-color(accent-dark),
+  $light-color: get-color(light),
+  $dark-color: get-color(light)
+) {
+  ._theme--light & {
+    background-color: $light-bg-color;
+    color: $light-color;
+  }
+
+  ._theme--dark & {
+    background-color: $dark-bg-color;
+    color: $light-color;
+  }
+}
+
+@mixin accent-reverse(
+  $light-bg-color: get-color(light),
+  $dark-bg-color: get-color(light),
+  $light-color: get-color(accent-light, 1),
+  $dark-color: get-color(accent-dark)
+) {
+  ._theme--light & {
+    background-color: $light-bg-color;
+    color: $light-color;
+  }
+
+  ._theme--dark & {
+    background-color: $dark-bg-color;
+    color: $dark-color;
+  }
+}
+
+@mixin scrollbar($color, $disappearing: false) {
+  @if $disappearing {
+    & {
+      background-color: transparent;
+      background-clip: text;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $color;
+      }
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @if $disappearing {
+      background-color: inherit;
+    } @else {
+      visibility: hidden;
+      background-color: $color;
+    }
+
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-corner {
+    display: none;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+  }
+}

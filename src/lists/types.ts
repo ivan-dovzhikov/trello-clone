@@ -1,6 +1,6 @@
 import { ActionCreator } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { AppState } from 'utils';
+import { AppState } from 'app/types';
 
 export enum ListActionTypes {
   CREATE_LIST = 'CREATE_LIST',

@@ -1,0 +1,24 @@
+$site-header-height: 50px;
+$boards-navigation-height: 150px;
+$board-page-height: calc(
+  100vh - #{$site-header-height + $boards-navigation-height}
+);
+
+$colors: (
+  accent-light: #0095d1,
+  accent-dark: #572787,
+  light: #f0f0f0,
+  dark: #000000,
+  danger: #de1f23,
+);
+
+@function get-color($key, $opacity: 1, $lighten: 0) {
+  $color: map-get($colors, $key);
+  $color: rgba($color, $opacity);
+  $color: call(
+    if($lighten >= 0, get-function('lighten'), get-function('darken')),
+    $color,
+    abs($lighten)
+  );
+  @return $color;
+}

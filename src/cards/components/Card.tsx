@@ -3,7 +3,8 @@ import { Draggable } from 'react-beautiful-dnd';
 import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
-import { AppState, useToggle } from 'utils';
+import { useToggle } from 'utils';
+import { AppState } from 'app/types';
 import { FieldEditor } from 'shared';
 import './Card.scss';
 

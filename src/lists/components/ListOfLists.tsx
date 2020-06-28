@@ -2,7 +2,7 @@ import React, { FC, memo, useCallback } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { useSelector, useDispatch } from 'react-redux';
-import { AppState } from 'utils';
+import { AppState } from 'app/types';
 import { createList, deleteList, changeList, moveCard } from '../actions';
 import { moveList } from 'boards/actions';
 import List from './List';

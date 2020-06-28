@@ -1,5 +1,5 @@
 import { ThunkAction } from 'redux-thunk';
-import { AppState } from 'utils';
+import { AppState } from 'app/types';
 import { ActionCreator } from 'redux';
 
 export enum BoardActionTypes {

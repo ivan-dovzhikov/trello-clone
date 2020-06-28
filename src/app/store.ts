@@ -1,7 +1,7 @@
 import { Store, createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import ReduxThunk from 'redux-thunk';
-import { AppState, AllActions } from 'utils';
+import { AppState, AllActions } from './types';
 import { loadState } from './localStorage';
 import rootReducer from './rootReducer';
 

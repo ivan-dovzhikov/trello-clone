@@ -1,0 +1,33 @@
+@function calculate-width($item-x-margins, $container-x-margins, $columns: 8) {
+  @return calc(
+    (100vw - #{$container-x-margins + $columns * $item-x-margins}) / #{$columns}
+  );
+}
+
+@mixin adaptive-column-layout($item-x-margins: 0, $container-x-margins: 0) {
+  width: calculate-width($item-x-margins, $container-x-margins, 8);
+
+  @include for-desktop {
+    width: calculate-width($item-x-margins, $container-x-margins, 7);
+  }
+
+  @include for-laptop {
+    width: calculate-width($item-x-margins, $container-x-margins, 6);
+  }
+
+  @include for-big-tablet {
+    width: calculate-width($item-x-margins, $container-x-margins, 5);
+  }
+
+  @include for-big-phone {
+    width: calculate-width($item-x-margins, $container-x-margins, 4);
+  }
+
+  @include for-phone {
+    width: calculate-width($item-x-margins, $container-x-margins, 3);
+  }
+
+  @include for-small-phone {
+    width: calculate-width($item-x-margins, $container-x-margins, 2);
+  }
+}

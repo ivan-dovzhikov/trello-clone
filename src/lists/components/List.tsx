@@ -1,10 +1,12 @@
 import React, { FC, memo } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import { useSelector } from 'react-redux';
+import { useIntl } from 'react-intl';
+import { useToggle } from 'utils';
+import { AppState } from 'app/types';
 import { FieldEditor } from 'shared';
 import ListOfCard from 'cards';
-import { useSelector } from 'react-redux';
-import { AppState, useToggle } from 'utils';
-import { useIntl } from 'react-intl';
+
 import './List.scss';
 
 export interface ListProps {

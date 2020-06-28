@@ -1,7 +1,8 @@
 import React, { FC, ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
-import { AppState, useStateWithCallback } from 'utils';
+import { useStateWithCallback } from 'utils';
+import { AppState } from 'app/types';
 import { setLanguage } from 'localization/actions';
 import translations from 'localization/data';
 import './SelectLanguage.scss';

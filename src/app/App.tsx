@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import 'normalize.css';
 import './App.scss';
-import { AppState } from 'utils';
+import { AppState } from './types';
 import { ThemeState } from 'themes/types';
 import translations from 'localization/data';
 import Header from './Header/Header';

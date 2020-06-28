@@ -1,7 +1,8 @@
 import React, { FC, WheelEvent, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { HORIZONTAL_SCROLLING_SPEED_FACTOR, AppState } from 'utils';
+import { HORIZONTAL_SCROLLING_SPEED_FACTOR } from 'utils';
+import { AppState } from 'app/types';
 import { createBoard, deleteBoard, changeBoard } from '../actions';
 import BoardLink from './BoardLink';
 import NewBoard from './NewBoard';

@@ -39,6 +39,19 @@ describe('board action creators', () => {
     };
 
     deleteList(boardId, listsIds[0])(dispatch, () => ({
+      locale: {
+        languageCode: 'en',
+        languageName: 'english',
+      },
+      theme: {
+        theme: 'light',
+        data: {
+          bgAuthor: '1',
+          bgAuthorLink: '2',
+          bgSource: '3',
+          bgSourceLink: '4',
+        },
+      },
       boards: {
         byId: {
           [boardId]: { id: boardId, title: '', lists: listsIds },
