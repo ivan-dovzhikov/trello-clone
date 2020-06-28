@@ -48,7 +48,7 @@ const BoardsNavigation: FC = () => {
 
   return (
     <nav className="boards-navigation" onWheel={onWheel}>
-      <ul>
+      <ul className="boards-navigation__list">
         {boardsIds.map(id => (
           <li key={id}>
             <BoardLink id={id} onDelete={onDelete} onEdit={onEdit} />

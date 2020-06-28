@@ -28,7 +28,13 @@
   cursor: pointer;
 
   &:focus {
-    border: 2px solid get-color(accent);
+    @include for-light-theme {
+      border: 2px solid get-color(accent-light);
+    }
+
+    @include for-dark-theme {
+      border: 2px solid get-color(accent-dark);
+    }
   }
 }
 
@@ -82,12 +88,6 @@ $button-size: 1.25rem;
   &:focus {
     opacity: 1;
   }
-
-  @include for-big-tablet {
-    position: static;
-    opacity: 1;
-    transform: none;
-  }
 }
 
 .field-editor__button-edit-submit {
@@ -103,5 +103,13 @@ $button-size: 1.25rem;
     z-index: 100;
     height: $button-size;
     margin-top: 0.25rem;
+  }
+}
+
+@include for-big-tablet {
+  .field-editor__button-edit {
+    position: static;
+    opacity: 1;
+    transform: none;
   }
 }

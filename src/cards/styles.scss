@@ -6,11 +6,18 @@
   flex-direction: column;
   width: 100%;
   padding: 0.5rem 0.5rem 1px;
+  list-style: none;
 
   overflow-y: auto;
   overflow-x: hidden;
-  @include scrollbar(get-color(dark, 0.8), true);
-  list-style: none;
+
+  @include for-light-theme {
+    @include scrollbar(get-color(dark, 0.8), true);
+  }
+
+  @include for-dark-theme {
+    @include scrollbar(get-color(light, 0.3), true);
+  }
 }
 
 $card-y-margin: 0.25rem;
@@ -30,8 +37,8 @@ $card-y-margin: 0.25rem;
     @include accent;
   }
 
-  @include for-big-phone {
-    padding: 0;
+  @include for-dark-theme {
+    background-color: get-color(dark, 0.3);
   }
 }
 
@@ -41,5 +48,11 @@ $card-y-margin: 0.25rem;
 
   .field-editor .cards__card-textarea {
     text-align: center;
+  }
+}
+
+@include for-big-phone {
+  .cards__card {
+    padding: 0;
   }
 }

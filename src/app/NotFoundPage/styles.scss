@@ -14,7 +14,14 @@
   align-items: center;
   padding: 2rem;
   border-radius: 0.5rem;
-  @include window;
+
+  @include for-light-theme {
+    @include window;
+  }
+
+  @include for-dark-theme {
+    @include window(0.1);
+  }
 }
 
 .not-found-page__error-code {

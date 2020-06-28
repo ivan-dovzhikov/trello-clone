@@ -7,15 +7,15 @@
   flex-direction: column;
   flex: 1;
   width: 100%;
-  @include window(0.1);
+  @include window(0);
 }
 
 .home-page__heading {
   display: block;
   margin: 0 0 5rem;
   padding: 0.25rem 2rem;
-  background-color: get-color(light, 0.8);
   border-radius: 8px;
+  background-color: get-color(light, 0.1);
   font: 5rem 'Oswald', sans-serif;
   line-height: 1;
   text-align: center;
@@ -27,13 +27,8 @@
   line-height: 1;
   text-decoration: none;
 
-  .button {
-    background-color: get-color(accent);
-    color: get-color(light);
-
-    &:hover,
-    &:focus {
-      background-color: get-color(accent, 1, 5%);
-    }
+  &:hover,
+  &:focus {
+    border: none !important;
   }
 }

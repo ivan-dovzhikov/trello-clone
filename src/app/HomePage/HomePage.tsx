@@ -11,7 +11,7 @@ const HomePage: FC = () => {
     <main className="home-page">
       <h1 className="home-page__heading">Trello clone</h1>
       <Link className="home_page__link" to="/boards" tabIndex={-1}>
-        <Button>
+        <Button styleType="accent">
           {intl.formatMessage({
             id: 'app/get-started',
             defaultMessage: 'Get started',

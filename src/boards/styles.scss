@@ -10,14 +10,21 @@ $board-link-x-margin: 0.25rem;
 
   overflow-x: auto;
   overflow-y: hidden;
-  @include scrollbar(get-color(light, 0.8), true);
 
-  ul {
-    display: flex;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  @include for-light-theme {
+    @include scrollbar(get-color(light, 0.8), true);
   }
+
+  @include for-dark-theme {
+    @include scrollbar(get-color(light, 0.4), true);
+  }
+}
+
+.boards-navigation__list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .boards-navigation__link {
@@ -31,33 +38,54 @@ $board-link-x-margin: 0.25rem;
   );
   margin: 0 $board-link-x-margin;
   padding: 0.5rem;
-  @include window;
   text-decoration: none;
   transition: 0.2s ease;
   border-radius: 8px;
 
+  @include for-light-theme {
+    color: get-color(dark);
+    @include window;
+  }
+
+  @include for-dark-theme {
+    color: get-color(light);
+    @include window(0.1);
+  }
+
   &:focus,
   &:hover {
-    @include accent;
-    border: none;
+    border: none !important;
 
-    .button:disabled {
-      color: get-color(light, 1, -15%);
+    @include for-light-theme {
+      background-color: get-color(accent-light);
+
+      .field-editor .textarea__textarea {
+        color: get-color(light);
+      }
     }
 
-    .button:not(:disabled) {
-      background-color: get-color(accent, 1, 5%);
-      color: get-color(light);
+    @include for-dark-theme {
+      background-color: get-color(accent-dark);
+    }
 
-      &:hover {
-        background-color: get-color(light);
-        color: get-color(accent);
-      }
+    .field-editor .boards-navigation__link-textarea {
+      cursor: pointer;
+    }
+
+    .button--plain {
+      color: get-color(light);
     }
   }
 
   .field-editor .boards-navigation__link-textarea {
     text-align: center;
+  }
+
+  .button--plain {
+    &:focus,
+    &:hover {
+      @include accent-reverse;
+    }
   }
 }
 

@@ -15,12 +15,12 @@
   "app/close-menu": "Close",
   "app/change-language": "Change language",
   "app/photo-by": "Photo by",
-  "app/downloaded-from": "Downloaded from",
+  "app/downloaded-from": "from",
 
   "boards/title": "Title",
   "boards/new-board": "New Board",
 
-  "lists/title": "title",
+  "lists/title": "Title",
   "lists/new-list": "New List",
 
   "cards/content": "Content",

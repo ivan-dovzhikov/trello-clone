@@ -137,6 +137,7 @@ export const FieldEditor: FC<FieldEditorProps> = ({
           {!editMode &&
             (iconToggle ? (
               <Button
+                styleType="plain"
                 className="field-editor__button-edit"
                 title={editTitle}
                 onClick={enterEditMode}
@@ -158,6 +159,7 @@ export const FieldEditor: FC<FieldEditorProps> = ({
           <>
             <div>
               <Button
+                styleType="plain"
                 className="field-editor__button-submit"
                 title={submitTitle}
                 onClick={handleSubmit}
@@ -166,6 +168,7 @@ export const FieldEditor: FC<FieldEditorProps> = ({
                 <SubmitIcon fontSize="inherit" />
               </Button>
               <Button
+                styleType="plain"
                 className="field-editor__button"
                 title={cancelTitle}
                 onClick={exitEditMode}
@@ -175,6 +178,7 @@ export const FieldEditor: FC<FieldEditorProps> = ({
             </div>
             {onDelete && (
               <Button
+                styleType="plain"
                 className="field-editor__button"
                 title={deleteTitle}
                 onClick={onDelete}

@@ -24,9 +24,22 @@ html {
   }
 }
 
-a:focus,
-a:hover {
-  border-bottom: 2px solid get-color(accent);
+@include light-theme {
+  a:focus,
+  a:hover {
+    border-bottom: 2px solid get-color(accent-light);
+  }
+}
+
+@include dark-theme {
+  a:focus,
+  a:hover {
+    border-bottom: 2px solid get-color(accent-dark);
+  }
+}
+
+:focus {
+  outline: none;
 }
 
 a,
@@ -38,26 +51,32 @@ textarea,
 
 button {
   white-space: nowrap;
-  color: inherit;
   cursor: pointer;
 }
 
 html,
 body,
-#app {
+#app,
+#theme {
   overflow: hidden;
   height: 100vh;
 }
 
-:focus {
-  outline: none;
-}
-
-#app {
+#theme {
   display: flex;
   flex-direction: column;
-  background: #32639c no-repeat url('../assets/bg.jpg');
+  transition: 0.2s ease;
+}
+
+@include light-theme {
+  background: #32639c no-repeat top url('../assets/bg/light.jpg');
   background-size: cover;
+}
+
+@include dark-theme {
+  background: #1c2330 no-repeat bottom url('../assets/bg/dark.jpg');
+  background-size: cover;
+  color: get-color(light);
 }
 
 .app__photo-signature {
@@ -68,6 +87,10 @@ body,
   text-shadow: 0 0 2px get-color(dark);
   font-size: 0.75rem;
   color: get-color(light);
+
+  @include for-dark-theme {
+    color: get-color(light, 0.8);
+  }
 }
 
 #draggable {

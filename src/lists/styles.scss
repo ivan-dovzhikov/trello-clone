@@ -31,17 +31,28 @@ $list-x-margin: 0.25rem;
   @include adaptive-column-layout($list-x-margin * 2, $board-page-x-margin * 2);
   max-height: 100%;
   margin: 0 $list-x-margin;
-  @include window;
   border-radius: 8px;
   transition: background-color 0.2s ease;
+
+  @include for-light-theme {
+    @include window;
+  }
+
+  @include for-dark-theme {
+    @include window(0.1);
+  }
 
   &:focus {
     @include accent;
 
-    .cards_new-card,
-    .cards_card {
+    .cards__new-card,
+    .cards__card {
       background-color: get-color(light);
-      color: get-color(dark);
+
+      .textarea__textarea,
+      .textarea__textarea--invalid {
+        color: get-color(dark);
+      }
     }
   }
 

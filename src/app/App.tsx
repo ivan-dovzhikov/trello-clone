@@ -16,24 +16,27 @@ const App: FC = () => {
   const locale = useSelector<AppState, string>(
     ({ locale }) => locale.languageCode
   );
+  const theme = useSelector<AppState, string>(({ theme }) => theme.theme);
 
   return (
     <IntlProvider locale={locale} messages={translations[locale].translation}>
-      <Header />
-      <Switch>
-        <Route path="/" exact={true} component={HomePage} />
-        <Route
-          path="/boards"
-          render={() => (
-            <>
-              <BoardsNavigation />
-              <Route path="/boards/:id" component={BoardPage} />
-            </>
-          )}
-        />
-        <Route path="*" component={PageNotFound} />
-      </Switch>
-      <PhotoSignature />
+      <div id="theme" className={`_theme--${theme}`}>
+        <Header />
+        <Switch>
+          <Route path="/" exact={true} component={HomePage} />
+          <Route
+            path="/boards"
+            render={() => (
+              <>
+                <BoardsNavigation />
+                <Route path="/boards/:id" component={BoardPage} />
+              </>
+            )}
+          />
+          <Route path="*" component={PageNotFound} />
+        </Switch>
+        <PhotoSignature />
+      </div>
     </IntlProvider>
   );
 };
@@ -58,18 +61,19 @@ const PhotoSignature: FC = () => {
     <span className="app__photo-signature">
       {intl.formatMessage({ id: 'app/photo-by', defaultMessage: 'Photo by' })}{' '}
       <a
+        className="app__photo-signature-link"
         href="https://www.pexels.com/@splitshire"
         target="_blank"
         rel="noopener noreferrer"
       >
         SplitShire
-      </a>
-      .{' '}
+      </a>{' '}
       {intl.formatMessage({
         id: 'app/downloaded-from',
         defaultMessage: 'Downloaded from',
       })}{' '}
       <a
+        className="app__photo-signature-link"
         href="https://www.pexels.com/"
         target="_blank"
         rel="noopener noreferrer"

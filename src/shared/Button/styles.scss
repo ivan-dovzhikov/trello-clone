@@ -7,23 +7,17 @@
   padding: 0.25em 0.75em 0.5em;
   border: none;
   outline: none;
-  background-color: get-color(light);
   box-shadow: -1px 2px 2px 0 get-color(dark, 0.5);
   border-radius: 0.25em;
   line-height: 1;
   text-align: center;
   color: get-color(dark);
-  transition: all 0.2s;
+  transition: 0.2s ease;
 
   &:focus,
-  &:hover {
-    transition: all 0.15s ease-out;
-    @include accent;
-  }
-
+  &:hover,
   &:active {
-    transition: all 0.15s ease-out;
-    background-color: get-color(accent, 1, -5%);
+    transition: 0.15s ease-out;
   }
 
   &:disabled {
@@ -31,8 +25,39 @@
 
     &:focus,
     &:hover {
-      background-color: get-color(danger, 1, 20%);
-      color: get-color(light);
+      background-color: get-color(danger, 1, 15%) !important;
     }
+  }
+}
+
+.button--plain {
+  @extend .button;
+  box-shadow: none;
+
+  @include for-dark-theme {
+    color: get-color(light);
+  }
+}
+
+.button--accent {
+  @extend .button;
+  @include accent;
+  color: get-color(light);
+}
+
+.button {
+  &:focus,
+  &:hover {
+    @include accent(
+      $light-bg-color: get-color(accent-light, 1, 10%),
+      $dark-bg-color: get-color(accent-dark, 1, 5%)
+    );
+  }
+
+  &:active {
+    @include accent(
+      $light-bg-color: get-color(accent-light, 1, -5%),
+      $dark-bg-color: get-color(accent-dark, 1, -5%)
+    );
   }
 }

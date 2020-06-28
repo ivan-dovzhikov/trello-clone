@@ -6,28 +6,27 @@
   display: flex;
   height: $site-header-height;
   width: 100%;
-  @include window;
   // Enables Hardware acceleration so others elements with it
   // couldn't overlap header
   opacity: 1;
+  transition: 0.2s ease;
+
+  @include for-light-theme {
+    @include window;
+  }
+
+  @include for-dark-theme {
+    @include window(0.1);
+  }
 }
 
 .site-header__placeholder,
 .site-header__menu {
   min-width: 200px;
-
-  @include for-big-phone {
-    min-width: auto;
-    flex: 1;
-  }
 }
 
 .site-header__navigation {
   flex: 1;
-
-  @include for-small-phone {
-    flex: 0;
-  }
 }
 
 .site-header__navigation-list {
@@ -45,23 +44,34 @@
   align-items: center;
   height: 100%;
   padding: 0 0.75rem 0.25rem;
+  border-bottom: 2px solid transparent;
   font-size: 1.25rem;
   line-height: 1;
   text-decoration: none;
-  border: 1px solid transparent;
   transition: 0.2s ease;
+
+  @include for-light-theme {
+    color: get-color(dark);
+  }
+
+  @include for-dark-theme {
+    color: get-color(light);
+  }
 
   &:hover,
   &:focus {
     @include accent;
   }
 
+  &:hover,
+  &:focus,
   &.active {
-    border-color: get-color(dark, 0.5);
+    @include for-light-theme {
+      border-color: get-color(accent-light);
+    }
 
-    &:focus,
-    &:hover {
-      border-bottom-width: 1px;
+    @include for-dark-theme {
+      border-color: get-color(accent-dark);
     }
   }
 }
@@ -83,8 +93,7 @@
 
   &:focus,
   &:hover {
-    background-color: get-color(accent);
-    color: get-color(light);
+    @include accent;
   }
 }
 
@@ -98,7 +107,7 @@
   height: 100%;
   padding-top: $site-header-height;
   background-color: transparent;
-  transition: background-color 0.2s ease, height 0.2s ease-out;
+  transition: background-color 0.2s ease, color 0.2s ease, height 0.2s ease-out;
   overflow: hidden;
 }
 
@@ -112,24 +121,14 @@
   @extend .site-header__menu;
   min-width: 25%;
 
-  @include for-big-phone {
-    flex: 1;
-  }
-
   .site-header__menu-toggle {
     background-color: get-color(dark, 1);
     color: get-color(light);
 
     &:focus,
     &:hover {
-      background-color: get-color(accent);
+      @include accent;
     }
-  }
-
-  @include for-phone {
-    position: absolute;
-    right: 0;
-    width: 100vw;
   }
 
   .site-header__menu-dropdown {
@@ -164,7 +163,7 @@
 
   &:focus,
   &:hover {
-    border-color: get-color(accent);
+    border-color: get-color(accent-light);
     outline: none;
   }
 
@@ -176,8 +175,34 @@
 
     &:focus,
     &:hover {
-      border-color: get-color(accent);
+      border-color: get-color(accent-light);
       outline: none;
     }
+  }
+}
+
+@include for-big-phone {
+  .site-header__placeholder,
+  .site-header__menu {
+    min-width: auto;
+    flex: 1;
+  }
+
+  .site-header__menu--expand {
+    flex: 1;
+  }
+}
+
+@include for-phone {
+  .site-header__menu--expand {
+    position: absolute;
+    right: 0;
+    width: 100vw;
+  }
+}
+
+@include for-small-phone {
+  .site-header__navigation {
+    flex: 0;
   }
 }

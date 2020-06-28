@@ -8,9 +8,16 @@ $board-page-x-margin: 0.5rem;
   flex: 1;
   min-height: 50vh;
   margin: 0 $board-page-x-margin 0.25rem;
-  padding-bottom: 0.5rem;
+  padding-bottom: 1.5rem;
 
   overflow-x: auto;
   overflow-y: auto;
-  @include scrollbar(get-color(light, 0.8), true);
+
+  @include for-light-theme {
+    @include scrollbar(get-color(light, 0.8), true);
+  }
+
+  @include for-dark-theme {
+    @include scrollbar(get-color(light, 0.4), true);
+  }
 }

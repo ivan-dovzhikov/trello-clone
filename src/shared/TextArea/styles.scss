@@ -12,25 +12,28 @@ $padding: 0.25em;
   width: 100%;
   padding: $padding;
   border: 2px solid get-color(dark, 0.5);
-  background-color: get-color(light, 0.8);
   border-radius: 0.25rem;
-  transition: border 0.15s ease;
+  background-color: get-color(light, 1, -5%);
+  color: get-color(dark);
+  transition: border 0.15s ease-out, color 0.2s ease;
 
   @include scrollbar(get-color(dark, 0.8));
 
   &:focus,
   &:hover {
-    outline: none;
-    border-color: get-color(accent);
+    @include for-light-theme {
+      border-color: get-color(accent-light);
+    }
+
+    @include for-dark-theme {
+      border-color: get-color(accent-dark);
+    }
   }
 
   &:disabled {
     border-color: transparent;
     background-color: transparent;
-  }
-
-  @include for-big-phone {
-    padding: $padding / 2;
+    color: inherit;
   }
 }
 
@@ -39,7 +42,13 @@ $padding: 0.25em;
 
   &:focus,
   &:hover {
-    border-color: get-color(danger);
+    @include for-light-theme {
+      border-color: get-color(danger);
+    }
+
+    @include for-dark-theme {
+      border-color: get-color(danger, 1, -5%);
+    }
   }
 }
 
@@ -57,4 +66,13 @@ $padding: 0.25em;
 .textarea__label-value--hide {
   @extend .textarea__label-value;
   display: none;
+}
+
+@include for-big-phone {
+  .textarea__textarea {
+    &:focus,
+    &:hover {
+      padding: $padding / 2;
+    }
+  }
 }
