@@ -1,0 +1,7 @@
+@import './BoardLink';
+
+.boards-navigation__new-board {
+  @extend .boards-navigation__link;
+  flex: none;
+  border: none;
+}

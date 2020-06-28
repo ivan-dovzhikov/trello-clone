@@ -1,6 +1,7 @@
 import React, { FC, memo } from 'react';
 import { useIntl } from 'react-intl';
 import { FieldEditor } from 'shared';
+import './NewBoard.scss';
 
 export interface NewBoardProps {
   onCreate: (title: string) => any;

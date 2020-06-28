@@ -1,0 +1,27 @@
+@import '../../utils/';
+
+$boards-navigation-margin: 0.5rem;
+
+.boards-navigation {
+  display: flex;
+  margin: $boards-navigation-margin;
+  padding-bottom: 0.5rem;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  @include for-light-theme {
+    @include scrollbar(get-color(light, 0.8), true);
+  }
+
+  @include for-dark-theme {
+    @include scrollbar(get-color(light, 0.4), true);
+  }
+}
+
+.boards-navigation__list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

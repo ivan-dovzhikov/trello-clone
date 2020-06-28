@@ -1,31 +1,7 @@
-@import '../utils';
+@import '../../utils/';
+@import './BoardsNavigation';
 
-$boards-navigation-margin: 0.5rem;
 $board-link-x-margin: 0.25rem;
-
-.boards-navigation {
-  display: flex;
-  margin: $boards-navigation-margin;
-  padding-bottom: 0.5rem;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  @include for-light-theme {
-    @include scrollbar(get-color(light, 0.8), true);
-  }
-
-  @include for-dark-theme {
-    @include scrollbar(get-color(light, 0.4), true);
-  }
-}
-
-.boards-navigation__list {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
 
 .boards-navigation__link {
   position: relative;
@@ -87,10 +63,4 @@ $board-link-x-margin: 0.25rem;
       @include accent-reverse;
     }
   }
-}
-
-.boards-navigation__new-board {
-  @extend .boards-navigation__link;
-  flex: none;
-  border: none;
 }

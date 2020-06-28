@@ -1,9 +1,10 @@
 import React, { FC, memo } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FieldEditor } from 'shared';
 import { useSelector } from 'react-redux';
-import { AppState, preventDefault, useToggle } from 'utils';
 import { useIntl } from 'react-intl';
+import { AppState, preventDefault, useToggle } from 'utils';
+import { FieldEditor } from 'shared';
+import './BoardLink.scss';
 
 export interface BoardLinkProps {
   id: string;

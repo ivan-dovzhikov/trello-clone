@@ -1,10 +1,11 @@
 import React, { FC, WheelEvent, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { HORIZONTAL_SCROLLING_SPEED_FACTOR, AppState } from 'utils';
+import { createBoard, deleteBoard, changeBoard } from '../actions';
 import BoardLink from './BoardLink';
 import NewBoard from './NewBoard';
-import { useSelector, useDispatch } from 'react-redux';
-import { createBoard, deleteBoard, changeBoard } from 'boards/actions';
+import './BoardsNavigation.scss';
 
 const BoardsNavigation: FC = () => {
   const history = useHistory();
