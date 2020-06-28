@@ -14,10 +14,10 @@ const PhotoSignature: FC<PhotoSignatureProps> = () => {
   );
 
   return (
-    <span className="app__photo-signature">
+    <span className="photo-signature">
       {intl.formatMessage({ id: 'app/photo-by', defaultMessage: 'Photo by' })}{' '}
       <a
-        className="app__photo-signature-link"
+        className="photo-signature__link"
         href={themeData.bgAuthorLink}
         target="_blank"
         rel="noopener noreferrer"
@@ -29,7 +29,7 @@ const PhotoSignature: FC<PhotoSignatureProps> = () => {
         defaultMessage: 'from',
       })}{' '}
       <a
-        className="app__photo-signature-link"
+        className="photo-signature__link"
         href={themeData.bgSourceLink}
         target="_blank"
         rel="noopener noreferrer"

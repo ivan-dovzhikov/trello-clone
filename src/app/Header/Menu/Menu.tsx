@@ -13,11 +13,8 @@ const Menu: FC = () => {
   useCallbackOnExternalAction(menuRef.current, toggleExpand, expand);
 
   return (
-    <div
-      className={`site-header__menu${expand ? '--expand' : ''}`}
-      ref={menuRef}
-    >
-      <button onClick={toggleExpand} className="site-header__menu-toggle">
+    <div className={`site-menu${expand ? '--expand' : ''}`} ref={menuRef}>
+      <button onClick={toggleExpand} className="site-menu__toggle">
         {expand
           ? intl.formatMessage({
               id: 'app/close-menu',
@@ -25,10 +22,10 @@ const Menu: FC = () => {
             })
           : intl.formatMessage({ id: 'app/open-menu', defaultMessage: 'Menu' })}
       </button>
-      <div className="site-header__menu-dropdown">
-        <div className="site-header__menu-dropdown-inner">
-          <fieldset className="site-header__menu-options-fieldset">
-            <legend className="site-header__menu-options-legend">
+      <div className="site-menu__dropdown">
+        <div className="site-menu__dropdown-inner">
+          <fieldset className="site-menu__options-fieldset">
+            <legend className="site-menu__options-legend">
               {intl.formatMessage({
                 id: 'app/options',
                 defaultMessage: 'Options',

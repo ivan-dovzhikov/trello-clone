@@ -21,7 +21,7 @@
 }
 
 .site-header__placeholder,
-.site-header__menu {
+.site-menu {
   min-width: 200px;
 }
 
@@ -78,21 +78,9 @@
 
 @include for-big-phone {
   .site-header__placeholder,
-  .site-header__menu {
+  .site-menu {
     min-width: auto;
     flex: 1;
-  }
-
-  .site-header__menu--expand {
-    flex: 1;
-  }
-}
-
-@include for-phone {
-  .site-header__menu--expand {
-    position: absolute;
-    right: 0;
-    width: 100vw;
   }
 }
 
