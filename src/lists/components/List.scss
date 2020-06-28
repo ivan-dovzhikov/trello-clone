@@ -1,29 +1,7 @@
-@import '../utils';
-@import '../app/views/BoardPage/BoardPage';
+@import '../../utils/';
+@import '../../app/views/BoardPage/BoardPage';
 
 $list-x-margin: 0.25rem;
-
-.lists {
-  display: flex;
-  align-items: flex-start;
-  height: 100%;
-
-  @media only screen and (max-height: 600px) {
-    height: auto;
-  }
-}
-
-.lists__ul {
-  display: flex;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.lists__ul-item {
-  height: 100%;
-}
 
 .lists__list {
   display: flex;
@@ -64,10 +42,4 @@ $list-x-margin: 0.25rem;
 .lists__list-header {
   line-height: 1;
   padding: 0.25rem 0.25rem 0;
-}
-
-.lists__new-list {
-  @extend .lists__list;
-  padding: 0.5rem;
-  border: 0;
 }

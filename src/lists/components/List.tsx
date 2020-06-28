@@ -5,6 +5,7 @@ import ListOfCard from 'cards';
 import { useSelector } from 'react-redux';
 import { AppState, useToggle } from 'utils';
 import { useIntl } from 'react-intl';
+import './List.scss';
 
 export interface ListProps {
   index: number;

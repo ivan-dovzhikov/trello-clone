@@ -1,0 +1,21 @@
+.lists {
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+
+  @media only screen and (max-height: 600px) {
+    height: auto;
+  }
+}
+
+.lists__ul {
+  display: flex;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lists__ul-item {
+  height: 100%;
+}

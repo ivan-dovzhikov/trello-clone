@@ -7,6 +7,7 @@ import { createList, deleteList, changeList, moveCard } from '../actions';
 import { moveList } from 'boards/actions';
 import List from './List';
 import NewList from './NewList';
+import './ListOfLists.scss';
 
 export interface ListOfListsProps {
   boardId: string;

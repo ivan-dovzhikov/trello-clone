@@ -1,0 +1,8 @@
+@import '../../utils/';
+@import './List.scss';
+
+.lists__new-list {
+  @extend .lists__list;
+  padding: 0.5rem;
+  border: 0;
+}
