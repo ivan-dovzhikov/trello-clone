@@ -25,8 +25,9 @@ const SelectLanguage: FC = () => {
     <label className="change-language">
       {intl.formatMessage({
         id: 'app/change-language',
-        defaultMessage: 'Change language',
+        defaultMessage: 'Language',
       })}
+      {':'}
       <select
         value={currentLanguage}
         onChange={onChange}

@@ -16,8 +16,9 @@ const ThemeToggle: FC = () => {
     <label>
       {intl.formatMessage({
         id: 'app/change-theme',
-        defaultMessage: 'Change theme',
+        defaultMessage: 'Theme',
       })}
+      {':'}
       <div className="theme-toggle__toggle-container">
         <Toggle checked={currentTheme === 'dark'} onChange={toggleTheme} />
       </div>

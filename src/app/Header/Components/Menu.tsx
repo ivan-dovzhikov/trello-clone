@@ -26,8 +26,20 @@ const Menu: FC = () => {
       </button>
       <div className="site-header__menu-dropdown">
         <div className="site-header__menu-dropdown-inner">
-          <SelectLanguage />
-          <ThemeToggle />
+          <fieldset className="site-header__menu-options-fieldset">
+            <legend className="site-header__menu-options-legend">
+              {intl.formatMessage({
+                id: 'app/options',
+                defaultMessage: 'Options',
+              })}
+            </legend>
+            <div className="field">
+              <SelectLanguage />
+            </div>
+            <div className="field">
+              <ThemeToggle />
+            </div>
+          </fieldset>
         </div>
       </div>
     </div>
