@@ -181,6 +181,11 @@
   }
 }
 
+.theme-toggle__toggle-container {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
 @include for-big-phone {
   .site-header__placeholder,
   .site-header__menu {

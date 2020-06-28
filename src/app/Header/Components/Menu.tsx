@@ -2,7 +2,7 @@ import React, { FC, useRef } from 'react';
 import { useIntl } from 'react-intl';
 import { useToggle, useCallbackOnExternalAction } from 'utils';
 import SelectLanguage from './SelectLanguage';
-import ThemeToggle from 'app/ThemeToggle';
+import ThemeToggle from './ThemeToggle';
 
 const Menu: FC = () => {
   const intl = useIntl();
