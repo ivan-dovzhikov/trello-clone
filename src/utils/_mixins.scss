@@ -63,6 +63,9 @@
 }
 
 @mixin scrollbar($color, $disappearing: false) {
+  scrollbar-width: thin;
+  scrollbar-color: $color;
+
   @if $disappearing {
     & {
       background-color: transparent;
