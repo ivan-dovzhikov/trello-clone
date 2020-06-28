@@ -1,0 +1,83 @@
+@import '../../utils/';
+
+$toggle-size: 40px;
+$toggle-padding: 2px;
+$toggle-border-width: $toggle-padding;
+$toggle-border-and-padding: $toggle-border-width + $toggle-padding;
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  height: $toggle-size;
+  min-width: $toggle-size * 1.75;
+}
+
+.chackbox {
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+  &:checked + .slider::before {
+    left: 100%;
+    transform: translateX(calc(-100% - #{$toggle-border-and-padding}));
+  }
+
+  &:disabled + .slider {
+    border-color: get-color(dark, 1, 50%);
+
+    &::before {
+      background-color: get-color(dark, 1, 50%);
+    }
+  }
+
+  &:not(:disabled):hover + .slider,
+  &:not(:disabled):focus + .slider {
+    @include for-light-theme {
+      border-color: get-color(accent-light);
+    }
+
+    @include for-dark-theme {
+      border-color: get-color(accent-dark);
+    }
+
+    &::before {
+      @include for-light-theme {
+        background-color: get-color(accent-light);
+      }
+
+      @include for-dark-theme {
+        background-color: get-color(accent-dark);
+      }
+    }
+  }
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: $toggle-border-width solid transparent;
+  border-color: get-color(light);
+  border-radius: $toggle-size / 2;
+  transition: 0.2s ease;
+  pointer-events: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: $toggle-border-and-padding;
+    top: $toggle-border-and-padding;
+    bottom: $toggle-border-and-padding;
+    width: $toggle-size - 3 * $toggle-border-and-padding;
+    border-radius: 50%;
+    background-color: get-color(light);
+    transition: 0.2s ease;
+    transform: translateX(0);
+  }
+}
