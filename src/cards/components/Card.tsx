@@ -1,10 +1,11 @@
 import React, { FC, ReactElement, memo } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { FieldEditor } from 'shared';
 import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { AppState, useToggle } from 'utils';
+import { FieldEditor } from 'shared';
+import './Card.scss';
 
 export interface CardProps {
   index: number;

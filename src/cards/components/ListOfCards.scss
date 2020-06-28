@@ -1,0 +1,21 @@
+@import '../../utils/';
+
+.cards {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.5rem 0.5rem 1px;
+  list-style: none;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  @include for-light-theme {
+    @include scrollbar(get-color(dark, 0.8), true);
+  }
+
+  @include for-dark-theme {
+    @include scrollbar(get-color(light, 0.3), true);
+  }
+}

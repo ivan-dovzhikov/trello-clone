@@ -1,0 +1,10 @@
+@import './Card.scss';
+
+.cards__new-card {
+  @extend .cards__card;
+  margin: $card-y-margin 0.5rem 0.5rem;
+
+  .field-editor .cards__card-textarea {
+    text-align: center;
+  }
+}

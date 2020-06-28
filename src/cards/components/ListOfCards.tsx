@@ -1,10 +1,11 @@
 import React, { FC, useCallback, memo } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { useSelector, useDispatch } from 'react-redux';
+import { AppState } from 'utils';
 import { createCard, deleteCard, changeCard } from '../actions';
+import './ListOfCards.scss';
 import Card from './Card';
 import NewCard from './NewCard';
-import { AppState } from 'utils';
 
 export interface ListOfCardsProps {
   listId: string;

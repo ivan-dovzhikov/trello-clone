@@ -1,0 +1,29 @@
+@import '../../utils/';
+
+$card-y-margin: 0.25rem;
+
+.cards__card {
+  position: relative;
+  display: block;
+  margin: $card-y-margin 0;
+  padding: 0.25rem;
+  border: 0;
+  background-color: get-color(light, 0.8);
+  border-radius: 0.25rem;
+  box-shadow: -1px 2px 2px 0 rgba(get-color(dark), 0.5);
+  transition: background-color 0.2s ease;
+
+  &:focus {
+    @include accent;
+  }
+
+  @include for-dark-theme {
+    background-color: get-color(dark, 0.3);
+  }
+}
+
+@include for-big-phone {
+  .cards__card {
+    padding: 0;
+  }
+}

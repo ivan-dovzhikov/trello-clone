@@ -1,6 +1,7 @@
 import React, { FC, memo } from 'react';
 import { useIntl } from 'react-intl';
 import { FieldEditor } from 'shared';
+import './NewCard.scss';
 
 export interface NewCardProps {
   onCreate: (content: string) => any;
