@@ -13,7 +13,9 @@
   "app/board404": "Such board doesn't exist",
   "app/open-menu": "Menu",
   "app/close-menu": "Close",
-  "app/change-language": "Change language",
+  "app/options": "Options",
+  "app/change-language": "Language",
+  "app/change-theme": "Theme",
   "app/photo-by": "Photo by",
   "app/downloaded-from": "from",
 

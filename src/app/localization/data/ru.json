@@ -13,7 +13,9 @@
   "app/board404": "Такой доски не существует",
   "app/open-menu": "Меню",
   "app/close-menu": "Закрыть",
-  "app/change-language": "Сменить язык",
+  "app/options": "Настройки",
+  "app/change-language": "Язык",
+  "app/change-theme": "Тема",
   "app/photo-by": "Фото сделано",
   "app/downloaded-from": "с",
 
