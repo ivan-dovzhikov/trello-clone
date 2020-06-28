@@ -19,6 +19,8 @@
   font: 5rem 'Oswald', sans-serif;
   line-height: 1;
   text-align: center;
+  color: get-color(light);
+  text-shadow: 0 0 3px get-color(dark);
 }
 
 .home_page__link {
