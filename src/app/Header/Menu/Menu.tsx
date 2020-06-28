@@ -2,8 +2,7 @@ import React, { FC, useRef } from 'react';
 import { useIntl } from 'react-intl';
 import { useToggle, useCallbackOnExternalAction } from 'utils';
 import './Menu.scss';
-import SelectLanguage from './SelectLanguage';
-import ThemeToggle from './ThemeToggle';
+import Options from './Options';
 
 const Menu: FC = () => {
   const intl = useIntl();
@@ -24,20 +23,7 @@ const Menu: FC = () => {
       </button>
       <div className="site-menu__dropdown">
         <div className="site-menu__dropdown-inner">
-          <fieldset className="site-menu__options-fieldset">
-            <legend className="site-menu__options-legend">
-              {intl.formatMessage({
-                id: 'app/options',
-                defaultMessage: 'Options',
-              })}
-            </legend>
-            <div className="field">
-              <SelectLanguage />
-            </div>
-            <div className="field">
-              <ThemeToggle />
-            </div>
-          </fieldset>
+          <Options />
         </div>
       </div>
     </div>

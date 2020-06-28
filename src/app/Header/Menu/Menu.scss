@@ -67,40 +67,6 @@
   }
 }
 
-.site-menu__options-fieldset {
-  padding: 0.5rem 0.75rem 1rem;
-  border-radius: 0.25rem;
-  border: 2px solid get-color(light, 0.5);
-  font-size: 0.75rem;
-  transition: 0.2s ease;
-
-  &:focus,
-  &:hover {
-    @include for-light-theme {
-      border-color: get-color(accent-light);
-
-      .site-menu__options-legend {
-        color: get-color(accent-light);
-      }
-    }
-
-    @include for-dark-theme {
-      border-color: get-color(accent-dark);
-
-      .site-menu__options-legend {
-        color: get-color(accent-dark);
-      }
-    }
-  }
-}
-
-.site-menu__options-legend {
-  margin: 0 auto 0.5rem;
-  padding: 0 0.25rem;
-  font-size: 1rem;
-  transition: 0.2s ease;
-}
-
 @include for-big-phone {
   .site-menu--expand {
     flex: 1;
