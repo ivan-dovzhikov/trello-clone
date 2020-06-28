@@ -3,7 +3,7 @@ import Header from './Header';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
-import translations from 'app/localization/data';
+import translations from 'localization/data';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 

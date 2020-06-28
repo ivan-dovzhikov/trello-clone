@@ -5,13 +5,13 @@ import { useSelector } from 'react-redux';
 import 'normalize.css';
 import './App.scss';
 import { AppState } from 'utils';
-import { ThemeState } from './ThemeToggle/types';
-import translations from './localization/data';
+import { ThemeState } from 'themes/types';
+import translations from 'localization/data';
 import Header from './Header/Header';
-import HomePage from './HomePage/HomePage';
-import BoardPage from './BoardPage/BoardPage';
+import NotFoundPage from './views/NotFoundPage/NotFoundPage';
+import HomePage from './views/HomePage/HomePage';
+import BoardPage from './views/BoardPage/BoardPage';
 import BoardsNavigation from 'boards';
-import NotFoundPage from './NotFoundPage/NotFoundPage';
 
 const App: FC = () => {
   const locale = useSelector<AppState, string>(

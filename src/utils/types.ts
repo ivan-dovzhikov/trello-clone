@@ -1,5 +1,5 @@
-import { LocaleState, LocaleActions } from 'app/localization/types';
-import { ThemeState, ThemeActions } from 'app/ThemeToggle/types';
+import { LocaleState, LocaleActions } from 'localization/types';
+import { ThemeState, ThemeActions } from 'themes/types';
 import { BoardsState, BoardActions } from 'boards/types';
 import { ListsState, ListActions } from 'lists/types';
 import { CardsState, CardActions } from 'cards/types';
@@ -15,8 +15,8 @@ export interface AppState {
 }
 
 export type AllActions =
-  | ThemeActions
   | LocaleActions
+  | ThemeActions
   | BoardActions
   | ListActions
   | CardActions;

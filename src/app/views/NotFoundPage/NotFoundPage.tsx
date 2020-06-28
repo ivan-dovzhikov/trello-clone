@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Button } from 'shared';
-import './styles.scss';
+import './NotFound.scss';
 
 export interface NotFoundPageProps {
   message?: string;

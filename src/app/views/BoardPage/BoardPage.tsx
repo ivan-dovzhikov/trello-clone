@@ -3,9 +3,9 @@ import { RouteComponentProps } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { HORIZONTAL_SCROLLING_SPEED_FACTOR, AppState } from 'utils';
-import './styles.scss';
+import './BoardPage.scss';
 import ListOfLists from 'lists';
-import NotFoundPage from 'app/NotFoundPage/NotFoundPage';
+import NotFoundPage from 'app/views/NotFoundPage/NotFoundPage';
 
 export interface BoardPageProps extends RouteComponentProps<{ id: string }> {}
 

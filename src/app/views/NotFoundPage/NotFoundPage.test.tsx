@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
-import translations from 'app/localization/data';
+import translations from 'localization/data';
 import NotFoundPage from './NotFoundPage';
 
 describe('Test Not found page component', () => {

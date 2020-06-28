@@ -1,0 +1,103 @@
+@import '../../utils';
+
+.site-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: $site-header-height;
+  width: 100%;
+  // Enables Hardware acceleration so others elements with it
+  // couldn't overlap header
+  opacity: 1;
+  transition: 0.2s ease;
+
+  @include for-light-theme {
+    @include window;
+  }
+
+  @include for-dark-theme {
+    @include window(0.1);
+  }
+}
+
+.site-header__placeholder,
+.site-header__menu {
+  min-width: 200px;
+}
+
+.site-header__navigation {
+  flex: 1;
+}
+
+.site-header__navigation-list {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-header__navigation-link {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 0.75rem 0.25rem;
+  border-bottom: 2px solid transparent;
+  font-size: 1.25rem;
+  line-height: 1;
+  text-decoration: none;
+  transition: 0.2s ease;
+
+  @include for-light-theme {
+    color: get-color(dark);
+  }
+
+  @include for-dark-theme {
+    color: get-color(light);
+  }
+
+  &:hover,
+  &:focus {
+    @include accent;
+  }
+
+  &:hover,
+  &:focus,
+  &.active {
+    @include for-light-theme {
+      border-color: get-color(accent-light);
+    }
+
+    @include for-dark-theme {
+      border-color: get-color(accent-dark);
+    }
+  }
+}
+
+@include for-big-phone {
+  .site-header__placeholder,
+  .site-header__menu {
+    min-width: auto;
+    flex: 1;
+  }
+
+  .site-header__menu--expand {
+    flex: 1;
+  }
+}
+
+@include for-phone {
+  .site-header__menu--expand {
+    position: absolute;
+    right: 0;
+    width: 100vw;
+  }
+}
+
+@include for-small-phone {
+  .site-header__navigation {
+    flex: 0;
+  }
+}

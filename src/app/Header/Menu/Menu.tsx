@@ -1,6 +1,7 @@
 import React, { FC, useRef } from 'react';
 import { useIntl } from 'react-intl';
 import { useToggle, useCallbackOnExternalAction } from 'utils';
+import './Menu.scss';
 import SelectLanguage from './SelectLanguage';
 import ThemeToggle from './ThemeToggle';
 

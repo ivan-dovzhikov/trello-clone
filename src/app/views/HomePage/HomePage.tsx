@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Button } from 'shared';
-import './styles.scss';
+import './HomePage.scss';
 
 const HomePage: FC = () => {
   const intl = useIntl();

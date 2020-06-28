@@ -1,0 +1,37 @@
+@import '../../../utils/';
+
+.language-select {
+  width: 100%;
+  margin: 0;
+  margin: 0.5rem 0;
+  padding: 0 0.5rem;
+  background-color: get-color(dark);
+  border: 1px solid get-color(dark);
+  outline: none;
+  outline: none;
+  line-height: 2;
+  text-transform: capitalize;
+  color: get-color(light);
+  cursor: pointer;
+
+  appearance: none;
+
+  &:focus,
+  &:hover {
+    border-color: get-color(accent-light);
+    outline: none;
+  }
+
+  .language-option {
+    border: 1px solid get-color(dark);
+    line-height: 2;
+    text-transform: capitalize;
+    cursor: pointer;
+
+    &:focus,
+    &:hover {
+      border-color: get-color(accent-light);
+      outline: none;
+    }
+  }
+}

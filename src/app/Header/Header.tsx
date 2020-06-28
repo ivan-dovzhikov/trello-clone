@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useIntl } from 'react-intl';
-import './styles.scss';
-import Menu from './Components/Menu';
+import './Header.scss';
+import Menu from './Menu/Menu';
 
 const Header: FC = () => {
   const intl = useIntl();

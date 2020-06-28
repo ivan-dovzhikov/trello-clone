@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from 'utils';
-import { toggleTheme as toggleThemeActionCreator } from 'app/ThemeToggle/actions';
+import { toggleTheme as toggleThemeActionCreator } from 'themes/actions';
 import { Toggle } from 'shared';
+import './ThemeToggle.scss';
 
 const ThemeToggle: FC = () => {
   const dispatch = useDispatch();

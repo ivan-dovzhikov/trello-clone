@@ -1,9 +1,10 @@
 import React, { FC, ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
-import { setLanguage } from 'app/localization/actions';
-import translations from 'app/localization/data';
 import { AppState, useStateWithCallback } from 'utils';
+import { setLanguage } from 'localization/actions';
+import translations from 'localization/data';
+import './SelectLanguage.scss';
 
 const SelectLanguage: FC = () => {
   const intl = useIntl();
