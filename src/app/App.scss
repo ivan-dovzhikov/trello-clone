@@ -79,20 +79,6 @@ body,
   color: get-color(light);
 }
 
-.app__photo-signature {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  margin: 1rem;
-  text-shadow: 0 0 2px get-color(dark);
-  font-size: 0.75rem;
-  color: get-color(light);
-
-  @include for-dark-theme {
-    color: get-color(light, 0.8);
-  }
-}
-
 #draggable {
   position: absolute;
   top: 0;
