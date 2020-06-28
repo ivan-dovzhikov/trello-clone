@@ -1,3 +1,5 @@
+import themesData from './themesData.json';
+
 export enum ThemeActionTypes {
   TOGGLE_THEME = 'TOGGLE_THEME',
 }
@@ -11,5 +13,11 @@ export interface ToggleThemeAction {
 export type ThemeActions = ToggleThemeAction;
 
 export interface ThemeState {
-  theme: string;
+  theme: keyof typeof themesData;
+  data: {
+    bgAuthor: string;
+    bgAuthorLink: string;
+    bgSource: string;
+    bgSourceLink: string;
+  };
 }

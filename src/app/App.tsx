@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import 'normalize.css';
 import './App.scss';
 import { AppState } from 'utils';
+import { ThemeState } from './ThemeToggle/types';
 import translations from './localization/data';
 import Header from './Header/Header';
 import HomePage from './HomePage/HomePage';
@@ -56,29 +57,32 @@ const PageNotFound: FC = () => {
 
 const PhotoSignature: FC = () => {
   const intl = useIntl();
+  const themeData = useSelector<AppState, ThemeState['data']>(
+    ({ theme }) => theme.data
+  );
 
   return (
     <span className="app__photo-signature">
       {intl.formatMessage({ id: 'app/photo-by', defaultMessage: 'Photo by' })}{' '}
       <a
         className="app__photo-signature-link"
-        href="https://www.pexels.com/@splitshire"
+        href={themeData.bgAuthorLink}
         target="_blank"
         rel="noopener noreferrer"
       >
-        SplitShire
+        {themeData.bgAuthor}
       </a>{' '}
       {intl.formatMessage({
         id: 'app/downloaded-from',
-        defaultMessage: 'Downloaded from',
+        defaultMessage: 'from',
       })}{' '}
       <a
         className="app__photo-signature-link"
-        href="https://www.pexels.com/"
+        href={themeData.bgSourceLink}
         target="_blank"
         rel="noopener noreferrer"
       >
-        Pexels.com
+        {themeData.bgSource}
       </a>
     </span>
   );

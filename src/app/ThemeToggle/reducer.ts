@@ -1,3 +1,4 @@
+import themesData from './themesData.json';
 import { Reducer } from 'redux';
 import { ThemeActionTypes, ThemeActions, ThemeState } from './types';
 
@@ -5,6 +6,7 @@ const { TOGGLE_THEME } = ThemeActionTypes;
 
 const initialState: ThemeState = {
   theme: 'light',
+  data: themesData.light,
 };
 
 const themeReducer: Reducer<ThemeState, ThemeActions> = (
@@ -13,8 +15,12 @@ const themeReducer: Reducer<ThemeState, ThemeActions> = (
 ) => {
   switch (type) {
     case TOGGLE_THEME: {
-      if (state.theme === 'light') return { ...state, theme: 'dark' };
-      return { ...state, theme: 'light' };
+      const newTheme = state.theme === 'light' ? 'dark' : 'light';
+      return {
+        ...state,
+        theme: newTheme,
+        data: themesData[newTheme],
+      };
     }
 
     default: {

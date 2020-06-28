@@ -1,0 +1,14 @@
+{
+  "light": {
+    "bgAuthor": "SplitShire",
+    "bgAuthorLink": "https://www.pexels.com/@splitshire",
+    "bgSource": "Pexels.com",
+    "bgSourceLink": "https://www.pexels.com/"
+  },
+  "dark": {
+    "bgAuthor": "eberhard grossgasteiger",
+    "bgAuthorLink": "https://www.pexels.com/@eberhardgross",
+    "bgSource": "Pexels.com",
+    "bgSourceLink": "https://www.pexels.com/"
+  }
+}
