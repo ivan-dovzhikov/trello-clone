@@ -1,5 +1,5 @@
 import React, { forwardRef, ComponentProps } from 'react';
-import './styles.scss';
+import './Button.scss';
 
 export interface ButtonProps extends ComponentProps<'button'> {
   styleType?: 'accent' | 'plain';

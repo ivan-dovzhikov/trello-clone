@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
-import { Toggle, ToggleProps } from '.';
+import { Toggle, ToggleProps } from './Toggle';
 
 describe('Test Toggle component', () => {
   const setup = (derivedProps?: ToggleProps) => {

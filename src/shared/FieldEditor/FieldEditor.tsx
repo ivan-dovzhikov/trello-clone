@@ -21,7 +21,7 @@ import {
   DoneRounded as SubmitIcon,
   CloseRounded as CancelIcon,
 } from '@material-ui/icons';
-import './styles.scss';
+import './FieldEditor.scss';
 
 interface Titles {
   submit?: string;

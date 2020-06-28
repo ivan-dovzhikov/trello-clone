@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
-import { Button, ButtonProps } from '.';
+import { Button, ButtonProps } from './Button';
 
 describe('Test button component', () => {
   const setup = (derivedProps?: ButtonProps) => {

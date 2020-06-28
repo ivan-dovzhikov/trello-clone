@@ -1,5 +1,5 @@
 import React, { FC, ComponentProps } from 'react';
-import './styles.scss';
+import './Toggle.scss';
 
 export interface ToggleProps extends ComponentProps<'input'> {}
 

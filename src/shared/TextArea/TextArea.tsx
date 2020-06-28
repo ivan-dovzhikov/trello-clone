@@ -1,6 +1,6 @@
 import React, { useState, forwardRef, useEffect } from 'react';
 import { TextareaAutosize, TextareaAutosizeProps } from '@material-ui/core';
-import './styles.scss';
+import './TextArea.scss';
 
 export interface TextAreaProps extends TextareaAutosizeProps {
   labelValue?: string;

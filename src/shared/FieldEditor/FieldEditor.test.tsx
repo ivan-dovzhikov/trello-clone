@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import translations from 'localization/data';
-import { FieldEditor, FieldEditorProps } from '.';
+import { FieldEditor, FieldEditorProps } from './FieldEditor';
 
 describe('Test FieldEditor component', () => {
   const setup = (initialEditMode: boolean) => {
