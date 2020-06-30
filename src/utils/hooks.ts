@@ -31,16 +31,25 @@ export const useToggle = (initialState: boolean) => {
   return [state, toggleState] as [boolean, () => void];
 };
 
+export type ElementType = HTMLElement | null | undefined;
+
 export const useCallbackOnExternalAction = (
-  element: HTMLElement | null,
+  elements: ElementType | ElementType[],
   callback: () => any,
   condition?: boolean
 ) => {
   useEffect(() => {
-    if (!condition || !element) return;
+    if (!condition || !elements) return;
+
+    const clearedArray = Array.isArray(elements)
+      ? elements.reduce<HTMLElement[]>((arr, element) => {
+          if (element) arr.push(element);
+          return arr;
+        }, [])
+      : elements;
 
     const handler = ({ target }: Event) => {
-      if (!closestByReference(target as HTMLElement, element)) callback();
+      if (!closestByReference(target as HTMLElement, clearedArray)) callback();
     };
 
     document.addEventListener('click', handler);
@@ -49,5 +58,5 @@ export const useCallbackOnExternalAction = (
       document.removeEventListener('click', handler);
       document.removeEventListener('focusin', handler);
     };
-  }, [element, callback, condition]);
+  }, [elements, callback, condition]);
 };
