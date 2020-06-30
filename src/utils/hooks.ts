@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { closestByReference } from './lib';
 
 export const useStateWithCallback = <S>(
@@ -47,7 +47,7 @@ export const useCallbackOnExternalAction = (
   callback: () => any,
   condition?: boolean
 ) => {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!condition || !elements) return;
 
     const clearedArray = Array.isArray(elements)
