@@ -4,7 +4,7 @@ import { closestByReference } from './lib';
 export const useStateWithCallback = <S>(
   initialState: S,
   callback?: (state: S) => any
-) => {
+): [S, (value: S) => void] => {
   const [state, setState] = useState(initialState);
   return [
     state,
@@ -12,23 +12,32 @@ export const useStateWithCallback = <S>(
       if (callback) callback(value);
       setState(value);
     },
-  ] as [S, (value: S) => void];
+  ];
+};
+
+export const useSwitch = (
+  initialState: boolean
+): [boolean, () => void, () => void] => {
+  const [state, setState] = useState(initialState);
+  const enable = () => setState(true);
+  const disable = () => setState(false);
+  return [state, enable, disable];
 };
 
 export const useSwitchWithCallback = (
   initialState: boolean,
   callback?: (state: boolean) => any
-) => {
+): [boolean, () => void, () => void] => {
   const [state, setState] = useStateWithCallback(initialState, callback);
   const enable = () => setState(true);
   const disable = () => setState(false);
-  return [state, enable, disable] as [boolean, () => void, () => void];
+  return [state, enable, disable];
 };
 
-export const useToggle = (initialState: boolean) => {
+export const useToggle = (initialState: boolean): [boolean, () => void] => {
   const [state, setState] = useState(initialState);
   const toggleState = () => setState(!state);
-  return [state, toggleState] as [boolean, () => void];
+  return [state, toggleState];
 };
 
 export type ElementType = HTMLElement | null | undefined;
