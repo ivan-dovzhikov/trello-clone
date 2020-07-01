@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8416142db0eae0fb69016ea36d861939",
+    "revision": "bb4922d215be54b5a9142131532953aa",
     "url": "/trello-clone/index.html"
   },
   {
-    "revision": "c6b013844f795a4e1c4d",
+    "revision": "9678ac2c2dab152b9934",
     "url": "/trello-clone/static/css/2.764ccc25.chunk.css"
   },
   {
-    "revision": "9d7ea86bdd392815bc59",
-    "url": "/trello-clone/static/css/main.692b84fb.chunk.css"
+    "revision": "83a78cd919f27a7cb4b9",
+    "url": "/trello-clone/static/css/main.9fe7c45a.chunk.css"
   },
   {
-    "revision": "c6b013844f795a4e1c4d",
-    "url": "/trello-clone/static/js/2.a82aaa25.chunk.js"
+    "revision": "9678ac2c2dab152b9934",
+    "url": "/trello-clone/static/js/2.3ebbecbd.chunk.js"
   },
   {
     "revision": "0749163b59fbee32225059cb60c18af6",
-    "url": "/trello-clone/static/js/2.a82aaa25.chunk.js.LICENSE.txt"
+    "url": "/trello-clone/static/js/2.3ebbecbd.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9d7ea86bdd392815bc59",
-    "url": "/trello-clone/static/js/main.74fa7d30.chunk.js"
+    "revision": "83a78cd919f27a7cb4b9",
+    "url": "/trello-clone/static/js/main.d81776f9.chunk.js"
   },
   {
     "revision": "d8bd4e74a827c24ccec2",
