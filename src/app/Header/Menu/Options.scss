@@ -10,18 +10,18 @@
   &:focus,
   &:hover {
     @include for-light-theme {
-      border-color: get-color(accent-light);
+      border-color: get-color(light);
 
       .site-menu__options-legend {
-        color: get-color(accent-light);
+        color: get-color(light);
       }
     }
 
     @include for-dark-theme {
-      border-color: get-color(accent-dark);
+      border-color: get-color(light);
 
       .site-menu__options-legend {
-        color: get-color(accent-dark);
+        color: get-color(light);
       }
     }
   }
@@ -31,5 +31,33 @@
   margin: 0 auto 0.5rem;
   padding: 0 0.25rem;
   font-size: 1rem;
+  color: get-color(light, 0.5);
   transition: 0.2s ease;
+}
+
+.site-menu__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.site-menu__option-label {
+  display: block;
+  width: 50%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.site-menu__options-field {
+  width: 50%;
+}
+
+.site-menu__language-select {
+  text-transform: capitalize;
 }

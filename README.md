@@ -29,8 +29,7 @@ A simple SPA <a href="https://trello.com/" target="_blank">Trello</a> clone writ
 * Horizontal auto scroll on card dragging doesn't work since React beautiful dnd doesn't support it at the moment;
 * Custom horizontal scroll on wheel is in lack of smoothing, and it might scroll slowly on some browsers (in Firefox for sure);
 * Custom scrollbar and backdrop-filter might not work on some browsers (Firefox), but site still should be useable;
-* Mobile version wasn't in priority so its design might be wonky;
-* Native select styling in menu isn't any good. It needs to be replaced by custom select.
+* Mobile version wasn't in priority so its design might be wonky.
 
 ## Credits:
 

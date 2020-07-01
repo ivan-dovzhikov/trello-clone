@@ -44,7 +44,7 @@
 
 .site-menu--expand {
   @extend .site-menu;
-  min-width: 25%;
+  min-width: 400px;
 
   .site-menu__toggle {
     background-color: get-color(dark, 1);
