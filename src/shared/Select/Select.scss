@@ -1,0 +1,103 @@
+@import '../../utils/';
+
+$border-radius: 0.25em;
+$border-width: 2px;
+
+.select {
+  z-index: 1;
+  position: relative;
+  display: inline-block;
+}
+
+.select__select {
+  display: flex;
+  align-items: center;
+  padding: 0.5em 2em 0.5em 0.5em;
+  border: $border-width solid get-color(light);
+  border-radius: $border-radius;
+  background-color: get-color(dark);
+  cursor: pointer;
+
+  &:focus,
+  &:hover {
+    @include accent;
+  }
+}
+
+.select__arrow-container {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%) rotateX(0deg);
+  transition: all 0.2s ease;
+}
+
+.select__native-select {
+  z-index: -1;
+  display: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.select__display {
+  line-height: 100%;
+}
+
+.select__options-container {
+  z-index: -1;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin-top: -$border-radius;
+  padding-top: $border-radius;
+  overflow: hidden;
+
+  border: $border-width solid get-color(light);
+  border-top-width: 0;
+  border-bottom-width: 0;
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+}
+
+.select__options {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  transition: 0.2s ease;
+  background-color: get-color(dark);
+}
+
+.select__option {
+  width: 100%;
+  margin: 0;
+  padding: 0.75em 0.5em;
+  word-wrap: break-word;
+  line-height: 100%;
+  list-style: none;
+  cursor: pointer;
+
+  &:focus,
+  &:hover {
+    @include accent;
+  }
+}
+
+.select--expand {
+  @extend .select;
+
+  .select__arrow-container {
+    transform: translateY(-50%) rotateX(180deg);
+  }
+
+  .select__options-container {
+    border-bottom-width: $border-width;
+  }
+
+  .select__options {
+    overflow-y: auto;
+    @include scrollbar(get-color(light, 0.6));
+  }
+}
